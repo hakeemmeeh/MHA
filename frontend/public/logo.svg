@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56" fill="none" role="img" aria-label="MHA logo">
+  <rect width="200" height="56" rx="8" fill="#1A3D6B"/>
+  <circle cx="36" cy="28" r="14" fill="#4CAF50" opacity="0.9"/>
+  <path d="M28 34c4-8 12-12 16-12s8 4 12 12" stroke="#F5F5F0" stroke-width="2" stroke-linecap="round"/>
+  <text x="58" y="24" fill="#F5F5F0" font-family="Georgia,serif" font-size="14" font-weight="700">MHA</text>
+  <text x="58" y="40" fill="#D4A574" font-family="system-ui,sans-serif" font-size="8" letter-spacing="0.08em">MOBILE HUMANITARIAN AGENCY</text>
+</svg>
