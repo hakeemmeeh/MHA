@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingScrollReveal } from "@/components/layout/MarketingScrollReveal";
 import { PageHero } from "@/components/ui/PageHero";
@@ -6,12 +5,15 @@ import { StatsBar } from "@/components/sections/StatsBar";
 import { TransparencyProjectLog } from "@/components/sections/TransparencyProjectLog";
 import { WhereWeWork } from "@/components/sections/WhereWeWork";
 import { fieldStories, partnershipTransparency, projectHighlights } from "@/lib/content";
+import { marketingPageMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
+export const metadata = marketingPageMetadata({
   title: "Impact & transparency",
   description:
     "MHA impact across South Sudan — coverage, representative project activities, and transparency for partners and donors.",
-};
+  pathname: "/impact",
+  image: "/images/hero/home-hero.jpg",
+});
 
 const heroImg = "/images/hero/home-hero.jpg";
 

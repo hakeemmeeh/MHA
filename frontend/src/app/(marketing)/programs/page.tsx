@@ -1,15 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingScrollReveal } from "@/components/layout/MarketingScrollReveal";
 import { PageHero } from "@/components/ui/PageHero";
 import { ThematicCard } from "@/components/ui/ThematicCard";
 import { thematicAreas } from "@/lib/content";
+import { marketingPageMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
+export const metadata = marketingPageMetadata({
   title: "Programs",
   description:
-    "Explore MHA thematic programs across protection, GBV, child protection, HLP, youth engagement, and more in South Sudan.",
-};
+    "Explore MHA thematic programs across protection, GBV, child protection, community engagement, HLP & justice, shelter & NFIs, youth, WASH, livelihoods, and more in South Sudan.",
+  pathname: "/programs",
+  image: "/images/stories/listening-posts-leer.jpg",
+});
 
 const heroImg = "/images/stories/listening-posts-leer.jpg";
 
@@ -20,7 +22,7 @@ export default function ProgramsPage() {
       <PageHero
         animate
         title="Our Programs"
-        subtitle="Twelve interconnected thematic areas — from frontline protection to logistics that keep teams moving."
+        subtitle="Fourteen interconnected thematic areas — from frontline protection and community engagement to shelter, NFIs, and logistics that keep teams moving."
         image={heroImg}
       />
       <MarketingScrollReveal>

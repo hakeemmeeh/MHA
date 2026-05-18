@@ -7,6 +7,7 @@ export function PartnersStrip() {
 
   return (
     <section
+      id="partners"
       className="relative overflow-hidden border-y border-border bg-cream py-14 md:py-16"
       aria-labelledby="partners-strip-heading"
     >

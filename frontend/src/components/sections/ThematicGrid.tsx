@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { thematicAreas } from "@/lib/content";
+import { thematicAreas, thematicCrossCutting, thematicSectionIntro } from "@/lib/content";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { ThematicCard } from "@/components/ui/ThematicCard";
 
@@ -36,25 +37,45 @@ export function ThematicGrid() {
     return () => ctx.revert();
   }, []);
 
-  const [first, second, ...rest] = thematicAreas;
+  const [first, second, ...restAll] = thematicAreas;
+  const rest = restAll.slice(0, 4);
 
   return (
-    <section className="bg-navy-light py-24">
+    <section id="programs" className="bg-navy-light py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <SectionEyebrow>Our Work</SectionEyebrow>
-        <h2 className="font-playfair text-3xl font-bold text-text-dark md:text-[44px] md:leading-[1.15]">
-          Thematic Areas of Focus
-        </h2>
-        <p className="mt-4 max-w-2xl font-inter text-text-mid">
-          MHA operates across 12 interconnected thematic areas — from frontline
-          protection to youth empowerment.
-        </p>
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <SectionEyebrow>Our Work</SectionEyebrow>
+            <h2 className="font-playfair text-3xl font-bold text-text-dark md:text-[44px] md:leading-[1.15]">
+              Thematic Areas of Focus
+            </h2>
+            <p className="mt-4 max-w-2xl font-inter text-text-mid">
+              {thematicSectionIntro}
+            </p>
+            <p className="mt-3 max-w-3xl font-inter text-sm leading-relaxed text-text-muted md:text-[15px]">
+              {thematicCrossCutting}
+            </p>
+            <p className="mt-2 max-w-3xl font-inter text-xs text-text-muted md:text-[13px]">
+              This page highlights six areas;{" "}
+              <Link href="/programs" className="font-semibold text-navy underline-offset-2 hover:underline">
+                all fourteen programs
+              </Link>{" "}
+              are listed on the programs page.
+            </p>
+          </div>
+          <Link
+            href="/programs"
+            className="inline-flex shrink-0 items-center gap-1 font-inter text-sm font-semibold text-navy underline-offset-4 hover:text-green hover:underline"
+          >
+            View all programs →
+          </Link>
+        </div>
         <div
           ref={grid}
           className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2"
         >
           {[first, second].map((area) => (
-            <div key={area.slug} data-card>
+            <div key={area.slug} data-card className="md:col-span-2">
               <ThematicCard area={area} featured />
             </div>
           ))}

@@ -6,7 +6,7 @@ export const siteMetadata: Metadata = {
     default: "MHA — Humanitarian Response in South Sudan",
   },
   description:
-    "Mobile Humanitarian Agency (MHA) is a nonprofit NGO in South Sudan delivering protection, GBV response, child protection, and youth engagement services to displaced communities since 2017.",
+    "MHA is a South Sudanese NGO (NGOs Act 2016) serving IDPs, returnees, refugees, and host communities with protection, GBV, child protection, youth, WASH, livelihoods, and more—field-led since 2017.",
   keywords: [
     "MHA",
     "Mobile Humanitarian Agency",
@@ -15,6 +15,7 @@ export const siteMetadata: Metadata = {
     "protection",
     "GBV",
     "child protection",
+    "IDPs",
     "Juba",
     "displacement",
   ],
@@ -26,9 +27,15 @@ export const siteMetadata: Metadata = {
     siteName: "Mobile Humanitarian Agency",
     title: "MHA — Humanitarian Response in South Sudan",
     description:
-      "Delivering life-saving assistance to displaced communities across South Sudan since 2017.",
+      "Registered under South Sudan’s NGOs Act (2016), MHA delivers principled, field-led humanitarian assistance—including protection, GBV, child protection, and youth programming—for displaced people and host communities.",
     images: [{ url: "/og-image.svg", width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: "MHA — Humanitarian Response in South Sudan",
+    description:
+      "Registered under South Sudan’s NGOs Act (2016), MHA delivers principled, field-led humanitarian assistance—including protection, GBV, child protection, and youth programming—for displaced people and host communities.",
+    images: ["/og-image.svg"],
+  },
   robots: { index: true, follow: true },
 };

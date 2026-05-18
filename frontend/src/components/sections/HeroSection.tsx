@@ -116,13 +116,14 @@ export function HeroSection() {
           alt="Community engagement in South Sudan — MHA field presence"
           fill
           priority
-          className="object-cover"
+          quality={80}
+          className="object-cover photo-brighten photo-focal"
           sizes="100vw"
         />
       </div>
       <div
         ref={overlay}
-        className="absolute inset-0 bg-gradient-to-b from-navy-dark/70 to-navy-dark/85 opacity-0"
+        className="absolute inset-0 bg-gradient-to-b from-navy-dark/38 to-navy-dark/55 opacity-0"
         aria-hidden
       />
       <div
@@ -152,16 +153,16 @@ export function HeroSection() {
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <Link
-            href="/programs"
+            href="/get-involved"
             className="inline-flex rounded-full bg-green px-8 py-3 font-inter text-sm font-semibold text-white transition hover:bg-green-dark"
           >
-            Our Programs
+            Get Involved
           </Link>
           <Link
-            href="/get-involved"
+            href="/programs"
             className="inline-flex rounded-full border-2 border-white px-8 py-3 font-inter text-sm font-semibold text-white transition hover:bg-white/10"
           >
-            Get Involved
+            Our Programs
           </Link>
         </div>
         <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-white/50">

@@ -38,7 +38,7 @@ export function CoreValuesSection() {
   }, []);
 
   return (
-    <section ref={root} className="bg-navy py-16">
+    <section ref={root} id="values" className="bg-navy py-16">
       <div className="mx-auto grid max-w-7xl divide-y divide-white/15 px-6 md:grid-cols-3 md:divide-x md:divide-y-0">
         {coreValues.map((v, i) => {
           const Icon = icons[i] ?? ShieldCheck;

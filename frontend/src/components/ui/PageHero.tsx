@@ -120,7 +120,8 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
                 alt={`${title} — header image`}
                 fill
                 priority
-                className="object-cover"
+                quality={92}
+                className="object-cover photo-brighten photo-focal"
                 sizes="100vw"
               />
             </div>
@@ -128,7 +129,7 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
           <div
             ref={overlayRef}
             className={cn(
-              "pointer-events-none absolute inset-0 bg-gradient-to-b from-navy-dark/75 to-navy-dark/90",
+              "pointer-events-none absolute inset-0 bg-gradient-to-b from-navy-dark/38 to-navy-dark/55",
               animate && "opacity-0",
             )}
             aria-hidden
@@ -142,11 +143,12 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
             alt={`${title} — header image`}
             fill
             priority
-            className="object-cover"
+            quality={92}
+            className="object-cover photo-brighten photo-focal"
             sizes="100vw"
           />
           <div
-            className="absolute inset-0 bg-gradient-to-b from-navy-dark/75 to-navy-dark/90"
+            className="absolute inset-0 bg-gradient-to-b from-navy-dark/38 to-navy-dark/55"
             aria-hidden
           />
         </div>

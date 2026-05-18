@@ -79,7 +79,7 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section ref={root} className="bg-cream py-24">
+    <section ref={root} id="about" className="bg-cream py-24">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-16">
         <div ref={imgRef} className="relative overflow-hidden rounded-2xl shadow-2xl">
           <Image
@@ -87,14 +87,15 @@ export function AboutSection() {
             alt="MHA field team supporting displaced communities in South Sudan"
             width={900}
             height={640}
-            className="h-auto w-full object-cover"
+            quality={92}
+            className="photo-brighten photo-focal h-auto w-full object-cover"
           />
           <div className="absolute bottom-4 right-4 rounded-2xl bg-navy p-4 text-white shadow-lg">
             <p className="font-playfair text-2xl font-bold">Est. 2017</p>
             <p className="font-inter text-sm text-white/60">South Sudan</p>
           </div>
         </div>
-        <div ref={textRef}>
+        <div ref={textRef} className="max-w-prose lg:max-w-none">
           <div data-about-item>
             <SectionEyebrow>About MHA</SectionEyebrow>
           </div>

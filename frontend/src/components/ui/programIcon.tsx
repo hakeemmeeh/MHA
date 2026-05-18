@@ -8,9 +8,11 @@ import {
   Handshake,
   Heart,
   Home,
+  Package,
   Shield,
   Stethoscope,
   Truck,
+  Users,
   Wheat,
 } from "lucide-react";
 
@@ -27,6 +29,8 @@ export const PROGRAM_ICONS: Record<string, LucideIcon> = {
   "book-open": BookOpen,
   handshake: Handshake,
   truck: Truck,
+  users: Users,
+  package: Package,
 };
 
 export function programIcon(name: string): LucideIcon {

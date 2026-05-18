@@ -24,7 +24,8 @@ export function EditorialContinueStripStory({ currentSlug }: { currentSlug: stri
               alt=""
               fill
               role="presentation"
-              className="object-cover transition duration-500 group-hover:scale-105"
+              quality={92}
+              className="object-cover photo-brighten photo-focal transition duration-500 group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, 160px"
             />
           </div>
@@ -64,7 +65,8 @@ export function EditorialContinueStripProgram({ currentSlug }: { currentSlug: st
               alt=""
               fill
               role="presentation"
-              className="object-cover transition duration-500 group-hover:scale-105"
+              quality={92}
+              className="object-cover photo-brighten photo-focal transition duration-500 group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, 160px"
             />
           </div>

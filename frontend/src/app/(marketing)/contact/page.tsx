@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
 import { MapPin } from "lucide-react";
 import { MarketingScrollReveal } from "@/components/layout/MarketingScrollReveal";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { coverage, site } from "@/lib/content";
+import { marketingPageMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
+export const metadata = marketingPageMetadata({
   title: "Contact",
-  description: `Reach MHA in Juba and field offices — ${site.phone}, ${site.email}`,
-};
+  description: `Reach MHA in Juba and field offices — feedback, complaints, partnerships: ${site.phone}, ${site.email}.`,
+  pathname: "/contact",
+  image: "/images/programs/logistics.jpg",
+});
 
 const heroImg = "/images/programs/logistics.jpg";
 
@@ -61,6 +63,29 @@ export default function ContactPage() {
                   </li>
                 ))}
               </ul>
+              <div
+                id="feedback-complaints"
+                className="mt-10 scroll-mt-28 rounded-xl border border-green/25 bg-green-light/40 p-6"
+              >
+                <h3 className="font-playfair text-lg font-bold text-navy">
+                  Community feedback &amp; complaints
+                </h3>
+                <p className="mt-2 font-inter text-sm text-text-mid">
+                  For questions about assistance, timelines, or eligibility—or to share feedback or
+                  raise a complaint—please use the same email or phone numbers. Messages are routed
+                  to the appropriate focal point; include location and a safe way to reply where
+                  possible.
+                </p>
+                <p className="mt-3 font-inter text-sm text-text-mid">
+                  <a href={`mailto:${site.email}`} className="font-semibold text-navy underline">
+                    {site.email}
+                  </a>{" "}
+                  ·{" "}
+                  <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="font-semibold text-navy underline">
+                    {site.phone}
+                  </a>
+                </p>
+              </div>
               <div className="mt-10 rounded-xl border border-border bg-navy-light/50 p-6">
                 <h3 className="font-playfair text-lg font-bold text-navy">
                   Case manager / partner referral

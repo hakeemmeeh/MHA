@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
 import { MarketingScrollReveal } from "@/components/layout/MarketingScrollReveal";
 import { StoriesGrid } from "@/components/sections/StoriesGrid";
 import { PageHero } from "@/components/ui/PageHero";
+import { marketingPageMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
+export const metadata = marketingPageMetadata({
   title: "Stories",
-  description: "Field stories from MHA teams across Unity and Jonglei states.",
-};
+  description:
+    "Field stories from MHA teams across South Sudan — protection, child protection, youth engagement, logistics, and community-led response.",
+  pathname: "/stories",
+  image: "/images/stories/safe-space-mayiandit.jpg",
+});
 
 const heroImg = "/images/stories/safe-space-mayiandit.jpg";
 

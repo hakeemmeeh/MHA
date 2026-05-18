@@ -38,6 +38,13 @@ Open [http://localhost:3000](http://localhost:3000).
 
 See `frontend/.env.example`. Production hosts (e.g. Vercel) should define the same keys in the project environment settings.
 
+## Website releases & content ownership
+
+- **Preview:** Use Vercel (or your host) **Preview** deployments for each pull request so staff can review copy and images before merge.
+- **Production:** Merge to the default branch only after a quick smoke test (home, programs, one story, contact form).
+- **Ownership:** Name a **content owner** (e.g. communications lead) who updates `frontend/src/lib/content.ts` and hero images in `frontend/public/images/` when programs or stories change.
+- **Checks:** From `frontend/`, run `npm run lint` and `npm run build` before opening a PR; CI should mirror the same commands.
+
 ## Contributing
 
 1. Create a branch from `main`.

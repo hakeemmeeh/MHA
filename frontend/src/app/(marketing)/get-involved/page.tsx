@@ -1,14 +1,17 @@
-import type { Metadata } from "next";
 import { Handshake, Heart, Users } from "lucide-react";
 import Link from "next/link";
 import { MarketingScrollReveal } from "@/components/layout/MarketingScrollReveal";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactForm } from "@/components/ui/ContactForm";
+import { marketingPageMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
+export const metadata = marketingPageMetadata({
   title: "Get Involved",
-  description: "Donate, partner, or volunteer with MHA in South Sudan.",
-};
+  description:
+    "Donate, partner, or volunteer with MHA in South Sudan — fund operations, co-design programs, or share professional skills.",
+  pathname: "/get-involved",
+  image: "/images/stories/youth-skills-dukor.jpg",
+});
 
 const heroImg = "/images/stories/youth-skills-dukor.jpg";
 

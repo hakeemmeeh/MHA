@@ -20,6 +20,8 @@ export type FieldStory = {
   slug: string;
   title: string;
   excerpt: string;
+  /** One plain-language outcome line for cards and detail intros */
+  outcome?: string;
   location: string;
   image: string;
   thematicSlug: string;

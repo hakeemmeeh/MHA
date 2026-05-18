@@ -28,6 +28,15 @@ export function Navbar() {
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
+
   const transparent = !scrolled;
 
   return (
@@ -132,13 +141,22 @@ export function Navbar() {
 
           <button
             type="button"
-            className="relative z-[60] rounded-lg p-2 lg:hidden"
+            className={cn(
+              "relative z-[60] rounded-lg p-2 lg:hidden",
+              mobileOpen && !transparent && "ring-2 ring-navy/15",
+            )}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
+            aria-controls="primary-mobile-navigation"
             onClick={() => setMobileOpen((o) => !o)}
           >
             {mobileOpen ? (
-              <X className="h-7 w-7 text-white" />
+              <X
+                className={cn(
+                  "h-7 w-7",
+                  transparent ? "text-white" : "text-navy",
+                )}
+              />
             ) : (
               <Menu
                 className={cn(
@@ -156,6 +174,10 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="primary-mobile-navigation"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Main navigation"
             initial={{ clipPath: "circle(0% at calc(100% - 2rem) 2rem)" }}
             animate={{ clipPath: "circle(150% at calc(100% - 2rem) 2rem)" }}
             exit={{ clipPath: "circle(0% at calc(100% - 2rem) 2rem)" }}
@@ -163,16 +185,6 @@ export function Navbar() {
             className="fixed inset-0 z-40 bg-navy-dark lg:hidden"
           >
             <div className="flex h-full flex-col px-8 pb-12 pt-24">
-              <Image
-                src="/images/mha-logo.png"
-                alt=""
-                width={535}
-                height={378}
-                quality={95}
-                sizes="280px"
-                className={cn("mb-10 h-16 w-auto", mhaLogoOnDarkClass)}
-                aria-hidden
-              />
               <nav className="flex flex-1 flex-col gap-6 overflow-y-auto">
                 {nav.map((item, i) => (
                   <motion.div

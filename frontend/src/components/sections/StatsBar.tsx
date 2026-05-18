@@ -38,7 +38,7 @@ export function StatsBar() {
   }, []);
 
   return (
-    <section ref={root} className="bg-navy py-12">
+    <section ref={root} id="impact-stats" className="bg-navy py-12">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 md:grid-cols-3 lg:grid-cols-6 lg:gap-0 lg:px-6">
         {stats.map((s, i) => (
           <div

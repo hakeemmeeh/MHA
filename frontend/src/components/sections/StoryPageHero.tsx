@@ -109,14 +109,15 @@ export function StoryPageHero({ story, thematic }: StoryPageHeroProps) {
             alt={story.title}
             fill
             priority
-            className="object-cover"
+            quality={92}
+            className="object-cover photo-brighten photo-focal"
             sizes="100vw"
           />
         </div>
       </div>
       <div
         ref={overlayRef}
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-dark via-navy-dark/70 to-navy-dark/30 opacity-0"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-dark/58 via-navy-dark/32 to-navy-dark/10 opacity-0"
         aria-hidden
       />
       <div className="relative z-10 mx-auto flex max-w-3xl flex-col justify-end px-6 pb-12 pt-32">

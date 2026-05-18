@@ -58,7 +58,7 @@ export function CTABand() {
   }, []);
 
   return (
-    <section ref={root} className="relative overflow-hidden bg-navy-dark py-20">
+    <section ref={root} id="take-action" className="relative overflow-hidden bg-navy-dark py-20">
       <div
         className="pointer-events-none absolute -right-24 -top-24 h-[400px] w-[400px] rounded-full bg-white/5"
         aria-hidden
@@ -80,16 +80,6 @@ export function CTABand() {
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
-          <div
-            data-cta-r
-            className="rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-sm"
-          >
-            <span className="inline-flex rounded-xl bg-green p-3 text-white">
-              <Phone className="h-5 w-5" aria-hidden />
-            </span>
-            <p className="mt-4 font-inter text-sm text-white/60">Call Us</p>
-            <p className="font-playfair text-xl font-bold text-white">{site.phone}</p>
-          </div>
           <div data-cta-r className="rounded-3xl bg-green p-6">
             <span className="inline-flex rounded-xl bg-white/20 p-3 text-white">
               <Mail className="h-5 w-5" aria-hidden />
@@ -101,6 +91,16 @@ export function CTABand() {
             >
               Contact Us Today
             </Link>
+          </div>
+          <div
+            data-cta-r
+            className="rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-sm"
+          >
+            <span className="inline-flex rounded-xl bg-green p-3 text-white">
+              <Phone className="h-5 w-5" aria-hidden />
+            </span>
+            <p className="mt-4 font-inter text-sm text-white/60">Call Us</p>
+            <p className="font-playfair text-xl font-bold text-white">{site.phone}</p>
           </div>
         </div>
       </div>

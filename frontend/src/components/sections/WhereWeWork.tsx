@@ -80,12 +80,30 @@ export function WhereWeWork() {
   }, []);
 
   return (
-    <section ref={root} className="bg-cream py-24">
+    <section ref={root} id="presence" className="bg-cream py-24">
       <div className="mx-auto max-w-7xl px-6">
         <SectionEyebrow>Our Presence</SectionEyebrow>
         <h2 className="font-playfair text-3xl font-bold text-text-dark md:text-[44px]">
           Where We Work in South Sudan
         </h2>
+        <p className="mt-3 max-w-2xl font-inter text-sm text-text-mid">
+          Active counties at a glance — full detail alongside the map.
+        </p>
+        <ul
+          className="mt-6 flex flex-wrap gap-2"
+          aria-label="Counties where MHA is active"
+        >
+          {coverage.states.flatMap((st) =>
+            st.counties.map((c) => (
+              <li key={`${st.name}-${c}`}>
+                <span className="inline-flex rounded-full border border-border bg-white px-3 py-1 font-inter text-xs font-medium text-navy shadow-sm">
+                  {c}
+                  <span className="sr-only">{`, ${st.name}`}</span>
+                </span>
+              </li>
+            )),
+          )}
+        </ul>
         <div className="mt-12 grid gap-12 lg:grid-cols-5">
           <div className="rounded-2xl border border-border bg-white p-6 shadow-sm lg:col-span-3">
             <svg

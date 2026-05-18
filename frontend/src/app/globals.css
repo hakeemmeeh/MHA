@@ -52,6 +52,16 @@ body {
   line-height: 1.75;
 }
 
+/** Subtle lift for documentary / field photos (apply only where photos are intended, not logos). */
+.photo-brighten {
+  filter: brightness(1.08) saturate(1.05);
+}
+
+/** Wider crops: bias toward upper-middle so faces stay visible in 16:9 and card layouts. */
+.photo-focal {
+  object-position: center 26%;
+}
+
 h1 {
   font-family: var(--font-fraunces), ui-serif, Georgia, serif;
 }

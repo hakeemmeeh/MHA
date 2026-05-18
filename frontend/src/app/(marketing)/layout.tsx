@@ -9,7 +9,7 @@ export default function MarketingLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      <main className="relative isolate flex flex-1 flex-col shadow-[inset_0_0_140px_rgba(13,26,46,0.09)] motion-reduce:shadow-none">
+      <main className="relative isolate flex min-h-0 flex-1 flex-col shadow-[inset_0_0_140px_rgba(13,26,46,0.09)] motion-reduce:shadow-none">
         {children}
       </main>
       <Footer />

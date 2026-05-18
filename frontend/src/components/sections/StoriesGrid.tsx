@@ -45,7 +45,8 @@ export function StoriesGrid() {
                 src={s.image}
                 alt={s.title}
                 fill
-                className="object-cover"
+                quality={92}
+                className="object-cover photo-brighten photo-focal"
                 sizes="(max-width:768px) 100vw, 33vw"
               />
             </Link>

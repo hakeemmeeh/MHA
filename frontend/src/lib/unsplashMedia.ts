@@ -4,7 +4,7 @@
  * `public/images/stories/`. License: https://unsplash.com/license
  */
 const unsplash = (photoId: string) =>
-  `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=1600&q=80`;
+  `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=2400&q=90`;
 
 /** Thematic slugs that use Unsplash instead of local MHA JPEGs */
 const UNSPLASH_THEMATIC_SLUGS = new Set([
@@ -13,6 +13,8 @@ const UNSPLASH_THEMATIC_SLUGS = new Set([
   "youth-engagement",
   "food-security-livelihoods",
   "nutrition",
+  "community-engagement",
+  "shelter-nfis",
 ]);
 
 /** Program card / hero imagery for those slugs only */
@@ -22,6 +24,8 @@ const PROGRAM_UNSPLASH: Record<string, string> = {
   "youth-engagement": unsplash("1523240795612-9a054b0db644"), // students / learning
   "food-security-livelihoods": unsplash("1464226184884-fa280b87c399"), // produce / farming
   nutrition: unsplash("1490645935967-10de6ba17061"), // healthy meal
+  "community-engagement": unsplash("1522071820081-009f0129c71c"), // collaboration / community
+  "shelter-nfis": unsplash("1516738901171-8eb4fc13bd20"), // humanitarian supplies / distribution
 };
 
 /** When multiple stories share an Unsplash thematic, override per slug */

@@ -66,7 +66,7 @@ export function FieldStories() {
   }, []);
 
   return (
-    <section ref={root} className="bg-navy-dark py-24">
+    <section ref={root} id="stories" className="bg-navy-dark py-24">
       <div className="mx-auto max-w-7xl px-6">
         <SectionEyebrow className="text-green [&::before]:bg-green">
           From the Field
@@ -93,18 +93,23 @@ export function FieldStories() {
           role="region"
           aria-label="Featured field stories"
         >
-          {FEATURED_STORIES.map((s) => (
+          {FEATURED_STORIES.map((s, index) => (
             <article
               key={s.slug}
               data-story-card
-              className="shrink-0 rounded-xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-black/15 md:w-[min(720px,85vw)] md:snap-center md:p-6 lg:flex lg:min-h-0 lg:gap-8"
+              className={`shrink-0 rounded-xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-black/15 md:snap-center md:p-6 lg:flex lg:min-h-0 lg:gap-8 ${
+                index === 0
+                  ? "md:w-[min(920px,92vw)] lg:min-h-[280px]"
+                  : "md:w-[min(640px,82vw)]"
+              }`}
             >
               <div className="relative mx-auto aspect-[16/10] w-full max-w-xl overflow-hidden rounded-lg lg:mx-0 lg:aspect-auto lg:h-full lg:min-h-[240px] lg:w-96 lg:max-w-none lg:shrink-0">
                 <Image
                   src={s.image}
                   alt={`Field story: ${s.title}`}
                   fill
-                  className="object-cover"
+                  quality={80}
+                  className="object-cover photo-brighten photo-focal"
                   sizes="(max-width:768px) 100vw, 384px"
                 />
               </div>
@@ -113,6 +118,11 @@ export function FieldStories() {
                   {s.location}
                 </p>
                 <h3 className="mt-2 font-playfair text-xl text-white md:text-2xl">{s.title}</h3>
+                {s.outcome ? (
+                  <p className="mt-2 font-inter text-sm font-semibold leading-snug text-green">
+                    {s.outcome}
+                  </p>
+                ) : null}
                 <p className="mt-3 line-clamp-3 font-inter text-sm leading-relaxed text-white/70">
                   {s.excerpt}
                 </p>

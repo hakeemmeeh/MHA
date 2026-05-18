@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
 import { CTABand } from "@/components/sections/CTABand";
 import { AboutBody } from "@/components/sections/AboutBody";
 import { PageHero } from "@/components/ui/PageHero";
 import { site } from "@/lib/content";
+import { marketingPageMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
+export const metadata = marketingPageMetadata({
   title: "About",
   description: site.description,
-};
+  pathname: "/about",
+  image: "/images/hero/home-hero.jpg",
+});
 
 const heroImg = "/images/hero/home-hero.jpg";
 
