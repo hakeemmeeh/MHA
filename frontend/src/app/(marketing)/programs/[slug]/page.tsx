@@ -64,7 +64,7 @@ export default async function ProgramDetailPage({ params }: Props) {
                 src={area.image}
                 alt={`${area.title} — program`}
                 fill
-                quality={92}
+                quality={85}
                 className="object-cover photo-brighten photo-focal"
                 sizes="(max-width: 768px) 100vw, 42rem"
               />
@@ -118,7 +118,7 @@ export default async function ProgramDetailPage({ params }: Props) {
                         src={s.image}
                         alt={s.title}
                         fill
-                        quality={92}
+                        quality={85}
                         className="object-cover photo-brighten photo-focal transition group-hover:scale-105"
                         sizes="(max-width:768px) 100vw, 33vw"
                       />

@@ -11,8 +11,16 @@ export function StatsBar() {
   const root = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
-    const els = root.current?.querySelectorAll<HTMLElement>("[data-stat]");
-    if (!els?.length) return;
+    const section = root.current;
+    const els = section?.querySelectorAll<HTMLElement>("[data-stat]");
+    if (!section || !els?.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      els.forEach((el) => {
+        const target = parseInt(el.dataset.target || "0", 10);
+        el.textContent = String(target);
+      });
+      return;
+    }
     const ctx = gsap.context(() => {
       els.forEach((el, i) => {
         const target = parseInt(el.dataset.target || "0", 10);
@@ -21,25 +29,26 @@ export function StatsBar() {
           { textContent: 0 },
           {
             textContent: target,
-            duration: 2,
-            delay: i * 0.1,
-            ease: "power1.out",
+            duration: 2.35,
+            delay: i * 0.14,
+            ease: "power2.out",
             snap: { textContent: 1 },
             scrollTrigger: {
-              trigger: root.current,
-              start: "top 85%",
+              trigger: section,
+              start: "top 82%",
               toggleActions: "play none none none",
+              once: true,
             },
           },
         );
       });
-    }, root);
+    }, section);
     return () => ctx.revert();
   }, []);
 
   return (
     <section ref={root} id="impact-stats" className="bg-navy py-12">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 md:grid-cols-3 lg:grid-cols-6 lg:gap-0 lg:px-6">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 sm:gap-8 sm:px-6 md:grid-cols-3 lg:grid-cols-6 lg:gap-0 lg:px-8">
         {stats.map((s, i) => (
           <div
             key={s.label}

@@ -14,57 +14,51 @@ export function CTABand() {
   const root = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
-    const left = root.current?.querySelectorAll("[data-cta-l]");
-    const right = root.current?.querySelectorAll("[data-cta-r]");
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+    const section = root.current;
+    const left = section?.querySelectorAll("[data-cta-l]");
+    const right = section?.querySelectorAll("[data-cta-r]");
+    if (!section || (!left?.length && !right?.length)) return;
+
     const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 78%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      });
       if (left?.length) {
-        gsap.fromTo(
+        tl.fromTo(
           left,
-          { y: 36, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.65,
-            stagger: 0.12,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: root.current,
-              start: "top 82%",
-              toggleActions: "play none none none",
-            },
-          },
+          { y: 32, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.78, stagger: 0.14, ease: "power3.out" },
+          0,
         );
       }
       if (right?.length) {
-        gsap.fromTo(
+        tl.fromTo(
           right,
-          { scale: 0.92, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.55,
-            stagger: 0.2,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: root.current,
-              start: "top 78%",
-              toggleActions: "play none none none",
-            },
-          },
+          { scale: 0.94, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.72, stagger: 0.2, ease: "power3.out" },
+          "+=0.35",
         );
       }
-    }, root);
+    }, section);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={root} id="take-action" className="relative overflow-hidden bg-navy-dark py-20">
+    <section ref={root} id="take-action" className="relative overflow-hidden bg-navy-dark py-16 sm:py-20 lg:py-24">
       <div
         className="pointer-events-none absolute -right-24 -top-24 h-[400px] w-[400px] rounded-full bg-white/5"
         aria-hidden
       />
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:items-center">
-        <div>
+      <div className="relative mx-auto grid min-w-0 max-w-7xl gap-10 px-4 sm:gap-12 sm:px-6 lg:grid-cols-2 lg:items-center">
+        <div className="min-w-0">
           <div data-cta-l>
             <SectionEyebrow className="text-green [&::before]:bg-green">Take Action</SectionEyebrow>
           </div>
@@ -79,7 +73,7 @@ export function CTABand() {
             change lives.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid min-w-0 gap-4 sm:grid-cols-2">
           <div data-cta-r className="rounded-3xl bg-green p-6">
             <span className="inline-flex rounded-xl bg-white/20 p-3 text-white">
               <Mail className="h-5 w-5" aria-hidden />

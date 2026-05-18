@@ -21,11 +21,18 @@ export function FieldStories() {
   useLayoutEffect(() => {
     const track = trackRef.current;
     const cards = track?.querySelectorAll<HTMLElement>("[data-story-card]");
-    if (!track || !cards?.length || !root.current) return;
+    const rootEl = root.current;
+    if (!track || !cards?.length || !rootEl) return;
 
     const isMd = window.matchMedia("(min-width: 768px)").matches;
 
+    const intros = rootEl.querySelectorAll<HTMLElement>("[data-mh-intro]");
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (intros.length) gsap.set(intros, { y: 0, opacity: 1 });
+      gsap.set(track, { opacity: 1 });
+      gsap.set(cards, { x: 0, y: 0, opacity: 1 });
+      if (quote.current) gsap.set(quote.current, { opacity: 1, y: 0 });
       return;
     }
 
@@ -35,46 +42,70 @@ export function FieldStories() {
       if (quote.current) {
         gsap.set(quote.current, { opacity: 0, y: 28 });
       }
+      if (intros.length) {
+        gsap.set(intros, { y: 32, opacity: 0 });
+      }
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: track,
-          start: "top 72%",
+          trigger: rootEl,
+          start: "top 74%",
           toggleActions: "play none none none",
+          once: true,
         },
         defaults: { ease: "power2.out" },
       });
 
-      tl.fromTo(track, { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0).fromTo(
+      if (intros.length) {
+        tl.fromTo(
+          intros,
+          { y: 32, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.78, stagger: 0.14, ease: "power3.out" },
+          0,
+        );
+      }
+
+      tl.fromTo(
+        track,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.55 },
+        intros.length ? ">+=0.08" : 0,
+      );
+      tl.fromTo(
         cards,
         isMd ? { x: 56, opacity: 0 } : { y: 48, opacity: 0 },
-        { x: 0, y: 0, opacity: 1, duration: 0.7, stagger: 0.2 },
-        0.08,
+        { x: 0, y: 0, opacity: 1, duration: 0.88, stagger: 0.26 },
+        intros.length ? "<0.45" : 0.1,
       );
 
       if (quote.current) {
         tl.fromTo(
           quote.current,
           { y: 28, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.85 },
-          "+=0.8",
+          { y: 0, opacity: 1, duration: 0.95 },
+          "+=1.0",
         );
       }
-    }, root);
+    }, rootEl);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={root} id="stories" className="bg-navy-dark py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionEyebrow className="text-green [&::before]:bg-green">
-          From the Field
-        </SectionEyebrow>
-        <h2 className="font-playfair text-3xl font-bold text-white md:text-[44px]">
+    <section ref={root} id="stories" className="bg-navy-dark py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div data-mh-intro>
+          <SectionEyebrow className="text-green [&::before]:bg-green">
+            From the Field
+          </SectionEyebrow>
+        </div>
+        <h2
+          data-mh-intro
+          className="font-playfair text-3xl font-bold text-white md:text-[44px]"
+        >
           Stories of Impact
         </h2>
-        <p className="mt-4 max-w-2xl font-inter text-sm text-white/65">
+        <p data-mh-intro className="mt-4 max-w-2xl font-inter text-sm text-white/65">
           A sample of field narratives. For every story and the public activity log for partners,
           see{" "}
           <Link href="/stories" className="font-semibold text-green underline">
@@ -89,7 +120,7 @@ export function FieldStories() {
 
         <div
           ref={trackRef}
-          className="mt-12 flex flex-col gap-10 md:flex-row md:snap-x md:snap-mandatory md:gap-8 md:overflow-x-auto md:overflow-y-visible md:pb-4 md:[scrollbar-width:thin]"
+          className="mt-10 flex min-w-0 flex-col gap-10 sm:mt-12 md:-mx-2 md:flex-row md:snap-x md:snap-mandatory md:gap-8 md:overflow-x-auto md:overflow-y-visible md:px-2 md:pb-4 md:[scrollbar-width:thin]"
           role="region"
           aria-label="Featured field stories"
         >
@@ -108,7 +139,7 @@ export function FieldStories() {
                   src={s.image}
                   alt={`Field story: ${s.title}`}
                   fill
-                  quality={80}
+                  quality={85}
                   className="object-cover photo-brighten photo-focal"
                   sizes="(max-width:768px) 100vw, 384px"
                 />

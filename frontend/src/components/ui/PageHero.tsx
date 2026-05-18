@@ -71,8 +71,8 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
         subtitlePrep = prepareLineReveal(subtitleRef.current);
       }
 
+      const titleLineInners = titlePrep.lineInners;
       const lineAxis = getLineRevealAxis(h1);
-      const lineInners = [...titlePrep.lineInners, ...(subtitlePrep?.lineInners ?? [])];
 
       ctx = gsap.context(() => {
         if (image && maskRef.current && imageLayerRef.current) {
@@ -80,11 +80,19 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
             maskEl: maskRef.current,
             imageLayerEl: imageLayerRef.current,
             overlayEl: overlayRef.current,
-            lineInners,
+            lineInners: titleLineInners,
+            secondaryLineInners: subtitlePrep?.lineInners,
+            lineSecondaryDelay: 0.38,
+            extraFadeEls: [],
             lineAxis,
           });
         } else {
-          playEditorialTextReveal({ lineInners, lineAxis });
+          playEditorialTextReveal({
+            lineInners: titleLineInners,
+            secondaryLineInners: subtitlePrep?.lineInners,
+            lineSecondaryDelay: 0.38,
+            lineAxis,
+          });
         }
       }, rootEl);
     });
@@ -103,7 +111,8 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
     <section
       ref={root}
       id={id}
-      className="relative -mt-[72px] min-h-[42vh] overflow-hidden pt-[72px] pb-16 lg:-mt-[120px] lg:min-h-[48vh] lg:pt-[120px]"
+      data-mha-scroll-hero
+      className="relative -mt-[72px] min-h-[42vh] overflow-hidden bg-navy-dark pt-[72px] pb-16 lg:-mt-[120px] lg:min-h-[48vh] lg:pt-[120px]"
     >
       {image && showMaskedImage && (
         <>
@@ -113,15 +122,15 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
           >
             <div
               ref={imageLayerRef}
-              className="absolute inset-0 scale-[1.14] transform-gpu will-change-transform"
+              className="absolute inset-x-0 top-0 min-h-[118%] w-full scale-[1.18] transform-gpu will-change-transform"
             >
               <Image
                 src={image}
                 alt={`${title} — header image`}
                 fill
                 priority
-                quality={92}
-                className="object-cover photo-brighten photo-focal"
+                quality={85}
+                className="size-full min-h-full min-w-full object-cover object-center photo-brighten photo-focal"
                 sizes="100vw"
               />
             </div>
@@ -137,14 +146,14 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
         </>
       )}
       {image && !showMaskedImage && (
-        <div className="absolute inset-0">
+        <div className="absolute inset-x-0 top-0 min-h-[118%] w-full">
           <Image
             src={image}
             alt={`${title} — header image`}
             fill
             priority
-            quality={92}
-            className="object-cover photo-brighten photo-focal"
+            quality={85}
+            className="size-full min-h-full min-w-full object-cover object-center photo-brighten photo-focal"
             sizes="100vw"
           />
           <div

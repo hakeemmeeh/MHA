@@ -27,7 +27,7 @@ export function MidPageCTA({
       id={id}
       className="border-y border-border bg-gradient-to-r from-navy/5 via-cream to-navy/5 py-12"
     >
-      <div className="mx-auto max-w-3xl px-6 text-center">
+      <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
         <p className="font-inter text-xs font-semibold uppercase tracking-wider text-green">{eyebrow}</p>
         <h2 className="mt-2 font-playfair text-2xl font-bold text-navy md:text-3xl">{title}</h2>
         <p className="mt-3 font-inter text-sm text-text-mid md:text-base">{body}</p>

@@ -22,7 +22,7 @@ export function Footer() {
             alt="Mobile Humanitarian Agency"
             width={535}
             height={378}
-            quality={95}
+            quality={85}
             sizes="(max-width: 768px) 260px, 320px"
             className={cn("h-16 w-auto sm:h-[4.5rem]", mhaLogoOnDarkClass)}
           />

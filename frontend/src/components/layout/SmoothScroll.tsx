@@ -1,17 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { startTransition, useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { LenisContext } from "@/components/layout/lenis-context";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
+  const [lenis, setLenis] = useState<Lenis | null>(null);
   const tickerFn = useRef<((time: number) => void) | null>(null);
 
   useEffect(() => {
-    const lenis = new Lenis({
+    const instance = new Lenis({
       /** Shorter than default (1.2) so scroll — especially scrubbed hero motion — feels responsive, not “behind” the wheel. */
       duration: 0.55,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -19,22 +21,31 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       smoothWheel: true,
     });
 
-    lenis.on("scroll", ScrollTrigger.update);
+    startTransition(() => {
+      setLenis(instance);
+    });
+
+    instance.on("scroll", ScrollTrigger.update);
 
     const fn = (time: number) => {
-      lenis.raf(time * 1000);
+      instance.raf(time * 1000);
     };
     tickerFn.current = fn;
     gsap.ticker.add(fn);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      startTransition(() => {
+        setLenis(null);
+      });
       if (tickerFn.current) {
         gsap.ticker.remove(tickerFn.current);
       }
-      lenis.destroy();
+      instance.destroy();
     };
   }, []);
 
-  return <>{children}</>;
+  return (
+    <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>
+  );
 }

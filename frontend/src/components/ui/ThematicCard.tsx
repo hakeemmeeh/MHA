@@ -50,7 +50,7 @@ export function ThematicCard({
               src={area.image}
               alt={`${area.title} — MHA program`}
               fill
-              quality={92}
+              quality={85}
               className="object-cover photo-brighten photo-focal transition duration-700 ease-out group-hover:scale-105"
               sizes={featured ? "(max-width:768px) 100vw, 66vw" : "(max-width:768px) 100vw, 50vw"}
             />

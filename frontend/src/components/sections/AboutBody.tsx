@@ -30,17 +30,18 @@ function fadeUpBlock(
   if (!arr.length) return;
   gsap.fromTo(
     arr,
-    { y: opts?.y ?? 40, opacity: 0 },
+    { y: opts?.y ?? 36, opacity: 0 },
     {
       y: 0,
       opacity: 1,
-      duration: 0.68,
-      stagger: opts?.stagger ?? 0.1,
-      ease: "power2.out",
+      duration: 0.82,
+      stagger: opts?.stagger ?? 0.14,
+      ease: "power3.out",
       scrollTrigger: {
         trigger: block,
-        start: opts?.start ?? "top 86%",
+        start: opts?.start ?? "top 82%",
         toggleActions: "play none none none",
+        once: true,
       },
     },
   );
@@ -73,13 +74,14 @@ export function AboutBody() {
             y: 0,
             opacity: 1,
             scale: 1,
-            duration: 0.78,
-            stagger: 0.18,
+            duration: 0.88,
+            stagger: 0.22,
             ease: "power3.out",
             scrollTrigger: {
               trigger: missionGrid,
-              start: "top 80%",
+              start: "top 78%",
               toggleActions: "play none none none",
+              once: true,
             },
           },
         );
@@ -94,13 +96,14 @@ export function AboutBody() {
           {
             y: 0,
             opacity: 1,
-            duration: 0.65,
-            stagger: 0.14,
-            ease: "power2.out",
+            duration: 0.78,
+            stagger: 0.18,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: valuesGrid,
-              start: "top 82%",
+              start: "top 78%",
               toggleActions: "play none none none",
+              once: true,
             },
           },
         );
@@ -109,13 +112,13 @@ export function AboutBody() {
       const policyList = el.querySelector("[data-about-policies]");
       if (policyList) {
         const lis = policyList.querySelectorAll("li");
-        fadeUpBlock(policyList, lis, { stagger: 0.04, y: 22, start: "top 88%" });
+        fadeUpBlock(policyList, lis, { stagger: 0.06, y: 22, start: "top 86%" });
       }
 
       const affiliationsList = el.querySelector("[data-about-affiliations]");
       if (affiliationsList) {
         const lis = affiliationsList.querySelectorAll("li");
-        fadeUpBlock(affiliationsList, lis, { stagger: 0.07, y: 28, start: "top 86%" });
+        fadeUpBlock(affiliationsList, lis, { stagger: 0.09, y: 26, start: "top 84%" });
       }
     }, el);
 

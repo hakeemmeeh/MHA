@@ -20,10 +20,14 @@
 
 .font-playfair {
   font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  text-rendering: geometricPrecision;
+  font-synthesis: none;
 }
 
 .font-bodoni-display {
   font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  text-rendering: geometricPrecision;
+  font-synthesis: none;
 }
 
 .font-inter {
@@ -32,6 +36,7 @@
 
 html {
   scroll-behavior: auto;
+  text-rendering: optimizeLegibility;
 }
 
 /* Editorial hero: image mask before GSAP runs; full frame when user prefers reduced motion */
@@ -54,7 +59,9 @@ body {
 
 /** Subtle lift for documentary / field photos (apply only where photos are intended, not logos). */
 .photo-brighten {
-  filter: brightness(1.08) saturate(1.05);
+  filter: brightness(1.06) contrast(1.03) saturate(1.06);
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /** Wider crops: bias toward upper-middle so faces stay visible in 16:9 and card layouts. */
@@ -64,11 +71,15 @@ body {
 
 h1 {
   font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  text-rendering: geometricPrecision;
+  font-synthesis: none;
 }
 
 h2,
 h3 {
   font-family: var(--font-fraunces);
+  text-rendering: geometricPrecision;
+  font-synthesis: none;
 }
 
 .eyebrow {
@@ -82,6 +93,7 @@ h3 {
   letter-spacing: 0.14em;
   color: var(--color-green);
   margin-bottom: 16px;
+  text-rendering: geometricPrecision;
 }
 
 .eyebrow::before {
@@ -117,4 +129,26 @@ h3 {
 
 .animate-bounce-scroll {
   animation: bounce-scroll 1.5s ease-in-out infinite;
+}
+
+/* --- View Transitions (marketing `template.tsx`) --- */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --mha-view-transition-duration: 320ms;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: var(--mha-view-transition-duration);
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 1ms !important;
+    animation-delay: 0s !important;
+  }
 }

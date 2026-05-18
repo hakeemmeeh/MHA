@@ -14,32 +14,39 @@ export function CoreValuesSection() {
   const root = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
-    const items = root.current?.querySelectorAll("[data-value]");
+    const scope = root.current;
+    if (!scope) return;
+    const items = scope.querySelectorAll("[data-value]");
     if (!items?.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set(items, { y: 0, opacity: 1 });
+      return;
+    }
     const ctx = gsap.context(() => {
       gsap.fromTo(
         items,
-        { y: 40, opacity: 0 },
+        { y: 36, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.6,
-          stagger: 0.15,
-          ease: "power2.out",
+          duration: 0.82,
+          stagger: 0.22,
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: root.current,
-            start: "top 80%",
+            trigger: scope,
+            start: "top 76%",
             toggleActions: "play none none none",
+            once: true,
           },
         },
       );
-    }, root);
+    }, scope);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={root} id="values" className="bg-navy py-16">
-      <div className="mx-auto grid max-w-7xl divide-y divide-white/15 px-6 md:grid-cols-3 md:divide-x md:divide-y-0">
+    <section ref={root} id="values" className="bg-navy py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto grid min-w-0 max-w-7xl divide-y divide-white/15 px-4 sm:px-6 md:grid-cols-3 md:divide-x md:divide-y-0">
         {coreValues.map((v, i) => {
           const Icon = icons[i] ?? ShieldCheck;
           return (

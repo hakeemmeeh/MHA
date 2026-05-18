@@ -4,7 +4,7 @@
  * `public/images/stories/`. License: https://unsplash.com/license
  */
 const unsplash = (photoId: string) =>
-  `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=2400&q=90`;
+  `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=3840&q=92`;
 
 /** Thematic slugs that use Unsplash instead of local MHA JPEGs */
 const UNSPLASH_THEMATIC_SLUGS = new Set([

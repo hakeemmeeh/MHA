@@ -22,12 +22,8 @@ export default function StoriesPage() {
         subtitle="Voices and moments from the communities we serve — with dignity and consent at the center."
         image={heroImg}
       />
-      <MarketingScrollReveal>
-        <section className="bg-cream py-16">
-          <div className="mx-auto max-w-7xl px-6">
-            <StoriesGrid />
-          </div>
-        </section>
+      <MarketingScrollReveal className="bg-cream">
+        <StoriesGrid />
       </MarketingScrollReveal>
     </>
   );

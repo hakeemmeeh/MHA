@@ -2,24 +2,99 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { gsap } from "gsap";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { mhaLogoOnDarkClass } from "@/lib/brand";
 import { nav, site } from "@/lib/content";
 import { cn } from "@/lib/utils";
+import { useLenis } from "@/components/layout/lenis-context";
+
+/** Dark full-bleed hero sits under the fixed nav (negative top margin). Elsewhere keep solid bar + navy text. */
+function normalizePathname(p: string) {
+  if (!p) return "/";
+  const t = p.endsWith("/") && p.length > 1 ? p.slice(0, -1) : p;
+  return t === "" ? "/" : t;
+}
+
+function hasFullBleedHero(pathname: string) {
+  const path = normalizePathname(pathname);
+  if (path === "/") return true;
+  const roots = [
+    "/about",
+    "/programs",
+    "/stories",
+    "/contact",
+    "/get-involved",
+    "/impact",
+  ];
+  return roots.some((root) => path === root || path.startsWith(`${root}/`));
+}
+
+/** Matches hero `pt` / negative margin: utility bar + main nav. */
+function navHeroOverlapPx(): number {
+  if (typeof window === "undefined") return 72;
+  return window.matchMedia("(min-width: 1024px)").matches ? 120 : 72;
+}
+
+/**
+ * Lenis + native scroll can disagree at “resting top”, so `scrollY > 100` stays true and the bar
+ * stays solid white. Use the hero block’s viewport position when present — it matches what you see.
+ */
+function readScrolledPastHeroFold(): boolean | null {
+  const el = document.querySelector<HTMLElement>("[data-mha-scroll-hero]");
+  if (!el) return null;
+  const top = el.getBoundingClientRect().top;
+  const band = navHeroOverlapPx() + 100;
+  return top <= -band;
+}
 
 export function Navbar() {
+  const pathname = usePathname();
+  const lenis = useLenis();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 100);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const bucketRef = { current: null as boolean | null };
+    const readY = () => {
+      if (lenis) {
+        /** `lenis.scroll` is smoothed and can lag or sit high; `actualScroll` tracks native position for bar state. */
+        return Math.max(0, lenis.actualScroll);
+      }
+      return Math.max(
+        0,
+        window.scrollY || document.documentElement.scrollTop || 0,
+      );
+    };
+    const sync = () => {
+      const fromHero =
+        hasFullBleedHero(pathname) ? readScrolledPastHeroFold() : null;
+      const over =
+        fromHero !== null ? fromHero : readY() > 100;
+      if (bucketRef.current !== over) {
+        bucketRef.current = over;
+        setScrolled(over);
+      }
+    };
+    bucketRef.current = null;
+    sync();
+
+    const cleanups: (() => void)[] = [];
+    window.addEventListener("scroll", sync, { passive: true });
+    cleanups.push(() => window.removeEventListener("scroll", sync));
+    gsap.ticker.add(sync);
+    cleanups.push(() => gsap.ticker.remove(sync));
+    if (lenis) {
+      cleanups.push(lenis.on("scroll", sync));
+    }
+    return () => {
+      for (const fn of cleanups) fn();
+    };
+  }, [pathname, lenis]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -37,7 +112,7 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [mobileOpen]);
 
-  const transparent = !scrolled;
+  const transparent = !scrolled && hasFullBleedHero(pathname);
 
   return (
     <>

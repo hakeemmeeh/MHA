@@ -2,12 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { fieldStories, thematicAreas } from "@/lib/content";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ALL = "all";
 
 export function StoriesGrid() {
+  const gridRef = useRef<HTMLDivElement>(null);
   const [filter, setFilter] = useState<string>(ALL);
   const options = useMemo(
     () => [{ slug: ALL, title: "All areas" }, ...thematicAreas.map((t) => ({ slug: t.slug, title: t.title }))],
@@ -19,9 +24,66 @@ export function StoriesGrid() {
     [filter],
   );
 
+  const filteredSlugs = useMemo(() => filtered.map((s) => s.slug).join(), [filtered]);
+
+  useLayoutEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const cards = grid.querySelectorAll<HTMLElement>(":scope > article");
+    if (!cards.length) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set(cards, { y: 0, opacity: 1 });
+      cards.forEach((card) => {
+        const heading = card.querySelector<HTMLElement>("h2");
+        if (heading) gsap.set(heading, { y: 0, opacity: 1 });
+      });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      cards.forEach((card) => {
+        const heading = card.querySelector<HTMLElement>("h2");
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: card,
+            start: "top 88%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        });
+        tl.fromTo(
+          card,
+          { y: 32, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.72, ease: "power2.out" },
+          0,
+        );
+        if (heading) {
+          tl.fromTo(
+            heading,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
+            0.14,
+          );
+        }
+      });
+    }, grid);
+
+    return () => ctx.revert();
+  }, [filteredSlugs]);
+
   return (
-    <div>
-      <div className="mb-10 flex flex-wrap gap-2">
+    <>
+      {/**
+       * Filter row: `data-marketing-reveal` must be a direct child of `MarketingScrollReveal`
+       * so ScrollTrigger staggers the chips when that row enters the viewport.
+       * Story cards: each `article` uses a small timeline (card fade-up, then `h2` fade-up)
+       * with its own ScrollTrigger so rows reveal as you scroll.
+       */}
+      <div
+        data-marketing-reveal
+        className="mx-auto flex max-w-7xl flex-wrap gap-2 px-4 pt-12 pb-8 sm:px-6 sm:pt-16 sm:pb-10"
+      >
         {options.map((o) => (
           <button
             key={o.slug}
@@ -37,15 +99,21 @@ export function StoriesGrid() {
           </button>
         ))}
       </div>
-      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      <div
+        ref={gridRef}
+        className="mx-auto grid max-w-7xl gap-8 px-4 pb-12 sm:gap-10 sm:px-6 sm:pb-16 md:grid-cols-2 lg:grid-cols-3"
+      >
         {filtered.map((s) => (
-          <article key={s.slug} className="flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+          <article
+            key={s.slug}
+            className="flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm"
+          >
             <Link href={`/stories/${s.slug}`} className="relative aspect-[16/10]">
               <Image
                 src={s.image}
                 alt={s.title}
                 fill
-                quality={92}
+                quality={85}
                 className="object-cover photo-brighten photo-focal"
                 sizes="(max-width:768px) 100vw, 33vw"
               />
@@ -71,12 +139,12 @@ export function StoriesGrid() {
             </div>
           </article>
         ))}
+        {filtered.length === 0 ? (
+          <p className="col-span-full py-12 text-center font-inter text-text-muted">
+            No stories in this thematic area yet.
+          </p>
+        ) : null}
       </div>
-      {filtered.length === 0 && (
-        <p className="py-12 text-center font-inter text-text-muted">
-          No stories in this thematic area yet.
-        </p>
-      )}
-    </div>
+    </>
   );
 }

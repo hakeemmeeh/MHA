@@ -10,6 +10,7 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-fraunces",
   display: "swap",
+  adjustFontFallback: true,
 });
 
 /** Body, UI, nav — `font-inter` utility still maps here for minimal churn. */
@@ -18,6 +19,7 @@ const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-sans",
   weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = siteMetadata;

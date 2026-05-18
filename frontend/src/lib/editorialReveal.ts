@@ -154,7 +154,7 @@ function animateLineInners(
   tl: gsap.core.Timeline,
   lineInners: HTMLElement[],
   axis: LineRevealAxis,
-  at: number,
+  at: number | string,
   opts: { duration: number; stagger: number; ease: string },
 ): void {
   if (!lineInners.length) return;
@@ -187,8 +187,12 @@ type HeroRevealMotion = {
   maskEl: HTMLElement;
   imageLayerEl: HTMLElement;
   overlayEl: HTMLElement | null;
-  /** Prepared line-inner nodes (already in DOM). */
+  /** Primary prepared line-inner nodes (e.g. page title or story location). */
   lineInners: HTMLElement[];
+  /** Second typography wave after `lineSecondaryDelay` (e.g. subtitle after title, story title after location). */
+  secondaryLineInners?: HTMLElement[];
+  /** Seconds after primary lines before secondary lines animate (Take Action–style beat). */
+  lineSecondaryDelay?: number;
   /** Extra blocks to fade up (e.g. eyebrow, CTA row) — optional. */
   extraFadeEls?: HTMLElement[];
   /** From computed alignment: left/right = horizontal mask, center = vertical. */
@@ -200,6 +204,8 @@ export function playEditorialHeroReveal({
   imageLayerEl,
   overlayEl,
   lineInners,
+  secondaryLineInners,
+  lineSecondaryDelay = 0.38,
   extraFadeEls = [],
   lineAxis = "vertical",
 }: HeroRevealMotion): gsap.core.Timeline {
@@ -208,33 +214,43 @@ export function playEditorialHeroReveal({
   tl.fromTo(
     maskEl,
     { clipPath: "inset(40% 0% 40% 0%)" },
-    { clipPath: "inset(0% 0% 0% 0%)", duration: 1.05, ease: "power3.inOut" },
+    { clipPath: "inset(0% 0% 0% 0%)", duration: 1.22, ease: "power3.inOut" },
     0,
   ).fromTo(
     imageLayerEl,
     { scale: 1.14 },
-    { scale: 1, duration: 1.25, ease: "power2.out" },
+    { scale: 1, duration: 1.38, ease: "power2.out" },
     0,
   );
 
   if (overlayEl) {
-    tl.fromTo(overlayEl, { opacity: 0 }, { opacity: 1, duration: 0.75, ease: "power1.out" }, 0.08);
+    tl.fromTo(overlayEl, { opacity: 0 }, { opacity: 1, duration: 0.88, ease: "power1.out" }, 0.08);
   }
 
   if (lineInners.length) {
-    animateLineInners(tl, lineInners, lineAxis, 0.28, {
-      duration: 1,
-      stagger: 0.12,
+    animateLineInners(tl, lineInners, lineAxis, 0.32, {
+      duration: 1.12,
+      stagger: 0.16,
+      ease: "power3.out",
+    });
+  }
+
+  if (secondaryLineInners?.length) {
+    animateLineInners(tl, secondaryLineInners, lineAxis, `+=${lineSecondaryDelay}`, {
+      duration: 1.02,
+      stagger: 0.14,
       ease: "power3.out",
     });
   }
 
   if (extraFadeEls.length) {
     gsap.set(extraFadeEls, { y: 28, opacity: 0 });
+    const fadePos =
+      secondaryLineInners?.length || lineInners.length ? "+=0.24" : 0.5;
     tl.to(
       extraFadeEls,
-      { y: 0, opacity: 1, duration: 0.58, stagger: 0.1, ease: "power2.out" },
-      0.45,
+      { y: 0, opacity: 1, duration: 0.68, stagger: 0.12, ease: "power2.out" },
+      fadePos,
     );
   }
 
@@ -246,36 +262,55 @@ export function setEditorialHeroFinalState({
   imageLayerEl,
   overlayEl,
   lineInners,
+  secondaryLineInners = [],
   extraFadeEls = [],
 }: HeroRevealMotion): void {
   gsap.set(maskEl, { clipPath: "inset(0% 0% 0% 0%)" });
   gsap.set(imageLayerEl, { scale: 1 });
   if (overlayEl) gsap.set(overlayEl, { opacity: 1 });
-  gsap.set(lineInners, { xPercent: 0, yPercent: 0, opacity: 1 });
+  const allLines = [...lineInners, ...secondaryLineInners];
+  if (allLines.length) gsap.set(allLines, { xPercent: 0, yPercent: 0, opacity: 1 });
   if (extraFadeEls.length) gsap.set(extraFadeEls, { y: 0, opacity: 1 });
 }
 
 /** Hero with no photo: typography-only editorial reveal. */
 export function playEditorialTextReveal(params: {
   lineInners: HTMLElement[];
+  secondaryLineInners?: HTMLElement[];
+  lineSecondaryDelay?: number;
   extraFadeEls?: HTMLElement[];
   lineAxis?: LineRevealAxis;
 }): gsap.core.Timeline {
-  const { lineInners, extraFadeEls = [], lineAxis = "vertical" } = params;
+  const {
+    lineInners,
+    secondaryLineInners,
+    lineSecondaryDelay = 0.38,
+    extraFadeEls = [],
+    lineAxis = "vertical",
+  } = params;
   const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
   if (lineInners.length) {
-    animateLineInners(tl, lineInners, lineAxis, 0.18, {
-      duration: 0.95,
-      stagger: 0.12,
+    animateLineInners(tl, lineInners, lineAxis, 0.22, {
+      duration: 1.08,
+      stagger: 0.16,
+      ease: "power3.out",
+    });
+  }
+  if (secondaryLineInners?.length) {
+    animateLineInners(tl, secondaryLineInners, lineAxis, `+=${lineSecondaryDelay}`, {
+      duration: 1.02,
+      stagger: 0.14,
       ease: "power3.out",
     });
   }
   if (extraFadeEls.length) {
     gsap.set(extraFadeEls, { y: 22, opacity: 0 });
+    const fadePos =
+      secondaryLineInners?.length || lineInners.length ? "+=0.24" : 0.42;
     tl.to(
       extraFadeEls,
-      { y: 0, opacity: 1, duration: 0.52, stagger: 0.08, ease: "power2.out" },
-      0.35,
+      { y: 0, opacity: 1, duration: 0.62, stagger: 0.1, ease: "power2.out" },
+      fadePos,
     );
   }
   return tl;
@@ -283,10 +318,12 @@ export function playEditorialTextReveal(params: {
 
 export function setEditorialTextFinalState(params: {
   lineInners: HTMLElement[];
+  secondaryLineInners?: HTMLElement[];
   extraFadeEls?: HTMLElement[];
 }): void {
-  const { lineInners, extraFadeEls = [] } = params;
-  gsap.set(lineInners, { xPercent: 0, yPercent: 0, opacity: 1 });
+  const { lineInners, secondaryLineInners = [], extraFadeEls = [] } = params;
+  const allLines = [...lineInners, ...secondaryLineInners];
+  if (allLines.length) gsap.set(allLines, { xPercent: 0, yPercent: 0, opacity: 1 });
   if (extraFadeEls.length) gsap.set(extraFadeEls, { y: 0, opacity: 1 });
 }
 
@@ -320,17 +357,18 @@ export function attachEditorialScrollReveals(
         trigger: mask,
         start: options.start,
         toggleActions: "play none none none",
+        once: true,
       },
     });
     tl.fromTo(
       mask,
       { clipPath: "inset(38% 0% 38% 0%)" },
-      { clipPath: "inset(0% 0% 0% 0%)", duration: 0.88, ease: "power3.inOut" },
+      { clipPath: "inset(0% 0% 0% 0%)", duration: 1.08, ease: "power3.inOut" },
       0,
     ).fromTo(
       inner,
       { scale: 1.12 },
-      { scale: 1, duration: 0.98, ease: "power2.out" },
+      { scale: 1, duration: 1.18, ease: "power2.out" },
       0,
     );
   });
@@ -346,11 +384,12 @@ export function attachEditorialScrollReveals(
         trigger: heading,
         start: options.start,
         toggleActions: "play none none none",
+        once: true,
       },
     });
     animateLineInners(tl, prep.lineInners, axis, 0, {
-      duration: 0.82,
-      stagger: 0.1,
+      duration: 0.98,
+      stagger: 0.14,
       ease: "power3.out",
     });
   });

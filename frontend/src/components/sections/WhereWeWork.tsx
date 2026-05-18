@@ -1,28 +1,110 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useReducedMotion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MapPin } from "lucide-react";
 import { coverage } from "@/lib/content";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
+import { AnimatedList } from "@/components/ui/animated-list";
 
 gsap.registerPlugin(ScrollTrigger);
+
+function useMinWidthLg() {
+  return useSyncExternalStore(
+    (onStoreChange) => {
+      const mq = window.matchMedia("(min-width: 1024px)");
+      mq.addEventListener("change", onStoreChange);
+      return () => mq.removeEventListener("change", onStoreChange);
+    },
+    () => window.matchMedia("(min-width: 1024px)").matches,
+    () => false,
+  );
+}
+
+function OfficeRow({
+  name,
+  subtitle,
+}: {
+  name: string;
+  subtitle: string;
+}) {
+  return (
+    <div className="flex items-start gap-3 rounded-xl border border-border bg-white p-4">
+      <span className="rounded-lg bg-green/15 p-2 text-green">
+        <MapPin className="h-4 w-4 shrink-0" aria-hidden />
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className="font-inter font-semibold text-text-dark">{name}</p>
+        <p className="font-inter text-xs uppercase tracking-wide text-text-muted">{subtitle}</p>
+      </div>
+    </div>
+  );
+}
 
 /** Stylized map — county labels; not a geographic survey */
 export function WhereWeWork() {
   const root = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const mapPanelRef = useRef<HTMLDivElement>(null);
+  const sidebarRevealRef = useRef<HTMLDivElement>(null);
+  const stateRegionsRef = useRef<HTMLDivElement>(null);
+  const officesHeadingRef = useRef<HTMLHeadingElement>(null);
+  const [playOfficesList, setPlayOfficesList] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+  const isLg = useMinWidthLg();
 
   useLayoutEffect(() => {
+    const scope = root.current;
+    const mapPanel = mapPanelRef.current;
+    const sidebarReveal = sidebarRevealRef.current;
+    const stateRegions = stateRegionsRef.current;
+    const officesHeading = officesHeadingRef.current;
+    if (!scope) return;
+
+    const intros = scope.querySelectorAll<HTMLElement>("[data-mh-intro]");
     const paths = svgRef.current?.querySelectorAll("path[data-county]");
-    const cards = root.current?.querySelectorAll("[data-office]");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const desktop = window.matchMedia("(min-width: 1024px)").matches;
+
     const ctx = gsap.context(() => {
-      if (paths?.length && svgRef.current) {
-        paths.forEach((node, i) => {
+      if (reduce) {
+        if (intros.length) gsap.set(intros, { y: 0, opacity: 1 });
+        if (mapPanel) gsap.set(mapPanel, { y: 0, opacity: 1 });
+        if (sidebarReveal) gsap.set(sidebarReveal, { y: 0, opacity: 1 });
+        if (stateRegions) gsap.set(stateRegions, { y: 0, opacity: 1 });
+        if (officesHeading) gsap.set(officesHeading, { y: 0, opacity: 1 });
+        setPlayOfficesList(true);
+        if (paths?.length) {
+          paths.forEach((node) => {
+            const p = node as SVGGeometryElement;
+            const targetFill = p.getAttribute("data-fill") || "#1A3D6B";
+            gsap.set(p, {
+              fill: targetFill,
+              stroke: "#ffffff",
+              strokeWidth: 2,
+              strokeDasharray: "none",
+              strokeDashoffset: 0,
+            });
+          });
+        }
+        return;
+      }
+
+      if (intros.length) gsap.set(intros, { y: 32, opacity: 0 });
+      if (mapPanel) gsap.set(mapPanel, { y: 28, opacity: 0 });
+      if (desktop && sidebarReveal) {
+        gsap.set(sidebarReveal, { y: 28, opacity: 0 });
+      } else {
+        if (stateRegions) gsap.set(stateRegions, { y: 28, opacity: 0 });
+        if (officesHeading) gsap.set(officesHeading, { y: 18, opacity: 0 });
+      }
+
+      if (paths?.length) {
+        paths.forEach((node) => {
           const p = node as SVGGeometryElement;
           const len = p.getTotalLength();
-          const targetFill = p.getAttribute("data-fill") || "#1A3D6B";
           gsap.set(p, {
             fill: "none",
             stroke: "#1a3d6b",
@@ -30,18 +112,48 @@ export function WhereWeWork() {
             strokeDasharray: len,
             strokeDashoffset: len,
           });
-          const pathTl = gsap.timeline({
-            scrollTrigger: {
-              trigger: svgRef.current,
-              start: "top 75%",
-              toggleActions: "play none none none",
-            },
-            delay: i * 0.12,
-          });
+        });
+      }
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: scope,
+          start: "top 74%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+        defaults: { ease: "power2.out" },
+      });
+
+      if (intros.length) {
+        tl.fromTo(
+          intros,
+          { y: 32, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.78, stagger: 0.14, ease: "power3.out" },
+          0,
+        );
+      }
+
+      if (mapPanel) {
+        tl.fromTo(
+          mapPanel,
+          { y: 28, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.68, ease: "power3.out" },
+          intros.length ? ">+=0.12" : 0,
+        );
+      }
+
+      if (paths?.length) {
+        /** Overlap path draws (original used `delay: i * 0.18` per path) — much faster than sequential `+=`. */
+        tl.addLabel("countyPaths", mapPanel ? ">+=0.02" : ">+=0");
+        paths.forEach((node, i) => {
+          const p = node as SVGGeometryElement;
+          const targetFill = p.getAttribute("data-fill") || "#1A3D6B";
+          const pathTl = gsap.timeline();
           pathTl
             .to(p, {
               strokeDashoffset: 0,
-              duration: 1.1,
+              duration: 0.72,
               ease: "power2.inOut",
             })
             .to(
@@ -50,62 +162,92 @@ export function WhereWeWork() {
                 fill: targetFill,
                 stroke: "#ffffff",
                 strokeWidth: 2,
-                duration: 0.45,
+                duration: 0.36,
                 ease: "power1.out",
               },
               "-=0.12",
             );
+          tl.add(pathTl, `countyPaths+=${i * 0.16}`);
         });
       }
-      if (cards?.length) {
-        gsap.fromTo(
-          cards,
-          { y: 36, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.55,
-            stagger: 0.12,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: root.current,
-              start: "top 78%",
-              toggleActions: "play none none none",
-            },
-          },
+
+      const afterPathsOrMap =
+        paths?.length ? ">+=0.2" : mapPanel ? ">+=0.24" : intros.length ? ">+=0.2" : 0;
+
+      if (desktop && sidebarReveal) {
+        tl.fromTo(
+          sidebarReveal,
+          { y: 28, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.78, ease: "power3.out" },
+          afterPathsOrMap,
         );
+        tl.add(() => {
+          setPlayOfficesList(true);
+        }, ">+=0.12");
+      } else {
+        if (stateRegions) {
+          tl.fromTo(
+            stateRegions,
+            { y: 28, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.72, ease: "power3.out" },
+            afterPathsOrMap,
+          );
+        }
+
+        if (officesHeading) {
+          tl.fromTo(
+            officesHeading,
+            { y: 18, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.58, ease: "power3.out" },
+            stateRegions ? ">+=0.14" : paths?.length ? ">+=0.2" : 0,
+          );
+        }
+
+        tl.add(() => {
+          setPlayOfficesList(true);
+        }, officesHeading ? ">+=0.12" : stateRegions ? ">+=0.18" : ">+=0.2");
       }
-    }, root);
+    }, scope);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={root} id="presence" className="bg-cream py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionEyebrow>Our Presence</SectionEyebrow>
-        <h2 className="font-playfair text-3xl font-bold text-text-dark md:text-[44px]">
+    <section ref={root} id="presence" className="bg-cream py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div data-mh-intro>
+          <SectionEyebrow>Our Presence</SectionEyebrow>
+        </div>
+        <h2
+          data-mh-intro
+          className="font-playfair text-3xl font-bold text-text-dark md:text-[44px]"
+        >
           Where We Work in South Sudan
         </h2>
-        <p className="mt-3 max-w-2xl font-inter text-sm text-text-mid">
+        <p data-mh-intro className="mt-3 max-w-2xl font-inter text-sm text-text-mid">
           Active counties at a glance — full detail alongside the map.
         </p>
-        <ul
-          className="mt-6 flex flex-wrap gap-2"
-          aria-label="Counties where MHA is active"
-        >
-          {coverage.states.flatMap((st) =>
-            st.counties.map((c) => (
-              <li key={`${st.name}-${c}`}>
-                <span className="inline-flex rounded-full border border-border bg-white px-3 py-1 font-inter text-xs font-medium text-navy shadow-sm">
-                  {c}
-                  <span className="sr-only">{`, ${st.name}`}</span>
-                </span>
-              </li>
-            )),
-          )}
-        </ul>
-        <div className="mt-12 grid gap-12 lg:grid-cols-5">
-          <div className="rounded-2xl border border-border bg-white p-6 shadow-sm lg:col-span-3">
+        <div data-mh-intro className="mt-6">
+          <ul
+            className="flex flex-wrap gap-2"
+            aria-label="Counties where MHA is active"
+          >
+            {coverage.states.flatMap((st) =>
+              st.counties.map((c) => (
+                <li key={`${st.name}-${c}`}>
+                  <span className="inline-flex rounded-full border border-border bg-white px-3 py-1 font-inter text-xs font-medium text-navy shadow-sm">
+                    {c}
+                    <span className="sr-only">{`, ${st.name}`}</span>
+                  </span>
+                </li>
+              )),
+            )}
+          </ul>
+        </div>
+        <div className="mt-10 grid min-w-0 gap-10 sm:mt-12 sm:gap-12 lg:grid-cols-5">
+          <div
+            ref={mapPanelRef}
+            className="min-w-0 rounded-2xl border border-border bg-white p-4 shadow-sm sm:p-6 lg:col-span-3"
+          >
             <svg
               ref={svgRef}
               viewBox="0 0 400 420"
@@ -257,41 +399,64 @@ export function WhereWeWork() {
               name + “MHA Active”.
             </p>
           </div>
-          <div className="space-y-8 lg:col-span-2">
-            {coverage.states.map((st) => (
-              <div
-                key={st.name}
-                className="rounded-2xl border border-border bg-navy-light/60 p-6"
+          <div ref={sidebarRevealRef} className="min-w-0 space-y-8 lg:col-span-2">
+            <div ref={stateRegionsRef} className="space-y-8">
+              {coverage.states.map((st) => (
+                <div
+                  key={st.name}
+                  className="rounded-2xl border border-border bg-navy-light/60 p-6"
+                >
+                  <h3 className="font-playfair text-xl font-bold text-navy">{st.name}</h3>
+                  <ul className="mt-3 list-inside list-disc font-inter text-sm text-text-mid">
+                    {st.counties.map((c) => (
+                      <li key={c}>{c}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <div>
+              <h3
+                ref={officesHeadingRef}
+                className="font-playfair text-lg font-bold text-navy"
               >
-                <h3 className="font-playfair text-xl font-bold text-navy">{st.name}</h3>
-                <ul className="mt-3 list-inside list-disc font-inter text-sm text-text-mid">
-                  {st.counties.map((c) => (
-                    <li key={c}>{c}</li>
+                Offices
+              </h3>
+              {prefersReducedMotion ? (
+                <ul className="mt-4 space-y-3" role="list">
+                  {coverage.offices.map((o) => (
+                    <li key={o.name} className="[list-style:none]">
+                      <OfficeRow
+                        name={o.name}
+                        subtitle={
+                          o.type === "headquarters"
+                            ? "Headquarters"
+                            : `Field · ${"state" in o ? o.state : ""}`
+                        }
+                      />
+                    </li>
                   ))}
                 </ul>
-              </div>
-            ))}
-            <div>
-              <h3 className="font-playfair text-lg font-bold text-navy">Offices</h3>
-              <ul className="mt-4 space-y-3">
-                {coverage.offices.map((o) => (
-                  <li
-                    key={o.name}
-                    data-office
-                    className="flex items-start gap-3 rounded-xl border border-border bg-white p-4"
-                  >
-                    <span className="rounded-lg bg-green/15 p-2 text-green">
-                      <MapPin className="h-4 w-4" aria-hidden />
-                    </span>
-                    <div>
-                      <p className="font-inter font-semibold text-text-dark">{o.name}</p>
-                      <p className="font-inter text-xs uppercase tracking-wide text-text-muted">
-                        {o.type === "headquarters" ? "Headquarters" : `Field · ${"state" in o ? o.state : ""}`}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              ) : (
+                <AnimatedList
+                  className="mt-4"
+                  delay={380}
+                  enabled={playOfficesList}
+                  revealAll={isLg}
+                >
+                  {coverage.offices.map((o) => (
+                    <OfficeRow
+                      key={o.name}
+                      name={o.name}
+                      subtitle={
+                        o.type === "headquarters"
+                          ? "Headquarters"
+                          : `Field · ${"state" in o ? o.state : ""}`
+                      }
+                    />
+                  ))}
+                </AnimatedList>
+              )}
             </div>
           </div>
         </div>

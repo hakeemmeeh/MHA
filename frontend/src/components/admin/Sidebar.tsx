@@ -29,7 +29,7 @@ export function AdminSidebar() {
           alt="MHA"
           width={535}
           height={378}
-          quality={95}
+          quality={85}
           sizes="240px"
           className={cn("h-12 w-auto", mhaLogoOnDarkClass)}
         />

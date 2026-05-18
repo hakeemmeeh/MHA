@@ -49,11 +49,11 @@ export function MarketingScrollReveal({
       return;
     }
 
-    const y = subtle ? 22 : 40;
-    const stagger = subtle ? 0.06 : 0.1;
-    const duration = subtle ? 0.52 : 0.68;
-    const start = subtle ? "top 90%" : "top 88%";
-    const editorialStart = subtle ? "top 92%" : "top 86%";
+    const y = subtle ? 18 : 30;
+    const stagger = subtle ? 0.09 : 0.15;
+    const duration = subtle ? 0.62 : 0.86;
+    const start = subtle ? "top 88%" : "top 82%";
+    const editorialStart = subtle ? "top 90%" : "top 84%";
 
     let detachEditorial: (() => void) | undefined;
     let ctx: gsap.Context | null = null;
@@ -65,26 +65,55 @@ export function MarketingScrollReveal({
           ":scope > section, :scope > article, :scope > [data-marketing-reveal]",
         );
         blocks.forEach((block) => {
-          const kids = Array.from(block.children).filter(
+          const blockEl = block as HTMLElement;
+          const kids = Array.from(blockEl.children).filter(
             (c): c is HTMLElement => c instanceof HTMLElement && !skipDefaultStagger(c),
           );
           if (!kids.length) return;
-          gsap.fromTo(
-            kids,
-            { y, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration,
-              stagger,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: block,
-                start,
-                toggleActions: "play none none none",
-              },
+
+          const headings = Array.from(blockEl.querySelectorAll<HTMLElement>("h1, h2"));
+          if (headings.length) {
+            gsap.set(headings, { y, opacity: 0 });
+          }
+
+          const otherKids = kids.filter((c) => !c.matches("h1,h2"));
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: blockEl,
+              start,
+              toggleActions: "play none none none",
+              once: true,
             },
-          );
+          });
+
+          if (otherKids.length) {
+            tl.fromTo(
+              otherKids,
+              { y, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration,
+                stagger,
+                ease: "power2.out",
+              },
+              0,
+            );
+          }
+
+          if (headings.length) {
+            tl.to(
+              headings,
+              {
+                y: 0,
+                opacity: 1,
+                duration: duration * 1.05,
+                stagger: Math.min(stagger * 1.25, 0.18),
+                ease: "power3.out",
+              },
+              otherKids.length ? "+=0.38" : 0.38,
+            );
+          }
         });
 
         detachEditorial = attachEditorialScrollReveals(el, { start: editorialStart });

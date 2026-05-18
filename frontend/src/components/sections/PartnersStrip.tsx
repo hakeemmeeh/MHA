@@ -8,10 +8,10 @@ export function PartnersStrip() {
   return (
     <section
       id="partners"
-      className="relative overflow-hidden border-y border-border bg-cream py-14 md:py-16"
+      className="relative overflow-hidden border-y border-border bg-cream py-12 sm:py-16 md:py-20"
       aria-labelledby="partners-strip-heading"
     >
-      <div className="relative z-[1] mx-auto max-w-7xl px-6 text-center">
+      <div className="relative z-[1] mx-auto max-w-7xl px-4 text-center sm:px-6">
         <SectionEyebrow className="justify-center">Partners &amp; donors</SectionEyebrow>
         <h2
           id="partners-strip-heading"
@@ -26,7 +26,7 @@ export function PartnersStrip() {
 
       <div className="relative z-[1] mt-10 md:mt-12">
         {/* Reduced motion: static logo row */}
-        <div className="hidden flex-wrap items-center justify-center gap-6 px-6 motion-reduce:flex md:gap-8">
+        <div className="hidden flex-wrap items-center justify-center gap-4 px-4 motion-reduce:flex sm:gap-6 sm:px-6 md:gap-8">
           {partners.map((p) => (
             <div
               key={p.name}
@@ -37,6 +37,7 @@ export function PartnersStrip() {
                 alt={`${p.name} logo`}
                 width={320}
                 height={80}
+                quality={85}
                 className="h-11 w-auto max-w-[min(100%,280px)] object-contain md:h-12"
               />
             </div>
@@ -55,7 +56,7 @@ export function PartnersStrip() {
           />
 
           <div className="overflow-hidden">
-            <div className="flex w-max animate-marquee items-center gap-14 px-6 md:gap-24 md:px-10">
+            <div className="flex w-max animate-marquee items-center gap-10 px-4 sm:gap-14 sm:px-6 md:gap-24 md:px-10">
               {row.map((p, i) => (
                 <div
                   key={`${p.name}-${i}`}
@@ -66,6 +67,7 @@ export function PartnersStrip() {
                     alt={`${p.name} logo`}
                     width={320}
                     height={80}
+                    quality={85}
                     className="h-11 w-auto max-w-[min(100%,280px)] object-contain md:h-12"
                   />
                 </div>

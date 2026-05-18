@@ -17,13 +17,16 @@ export function HeroSection() {
   const content = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    const scope = root.current;
+    if (!scope) return;
+
     const reduceMotion =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const ctx = gsap.context(() => {
       if (reduceMotion) {
-        if (bg.current) gsap.set(bg.current, { scale: 1, yPercent: 0, force3D: true });
+        if (bg.current) gsap.set(bg.current, { scale: 1.08, yPercent: 0, force3D: true });
         if (overlay.current) gsap.set(overlay.current, { opacity: 1 });
         const reducedTargets = content.current?.querySelectorAll(
           "[data-hero-eyebrow],[data-hero-line],[data-hero-sub],[data-hero-ctas]",
@@ -35,15 +38,15 @@ export function HeroSection() {
       if (bg.current) {
         gsap.fromTo(
           bg.current,
-          { scale: 1.1 },
-          { scale: 1, duration: 1.5, ease: "power2.out", force3D: true },
+          { scale: 1.18 },
+          { scale: 1.08, duration: 1.75, ease: "power2.out", force3D: true },
         );
       }
       if (overlay.current) {
         gsap.fromTo(
           overlay.current,
           { opacity: 0 },
-          { opacity: 1, duration: 0.8, ease: "power1.out" },
+          { opacity: 1, duration: 0.95, ease: "power1.out" },
         );
       }
       const eyebrow = content.current?.querySelector("[data-hero-eyebrow]");
@@ -56,68 +59,69 @@ export function HeroSection() {
         tl.fromTo(
           eyebrow,
           { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.55 },
-          0.4,
+          { y: 0, opacity: 1, duration: 0.62 },
+          0.48,
         );
       }
       if (titleLines?.length) {
         tl.fromTo(
           titleLines,
           { yPercent: 110, opacity: 1 },
-          { yPercent: 0, opacity: 1, duration: 0.95, stagger: 0.12, ease: "power3.out" },
-          0.6,
+          { yPercent: 0, opacity: 1, duration: 1.08, stagger: 0.18, ease: "power3.out" },
+          0.78,
         );
       }
       if (subtext) {
         tl.fromTo(
           subtext,
           { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.65 },
-          1.0,
+          { y: 0, opacity: 1, duration: 0.72 },
+          1.12,
         );
       }
       if (ctas) {
         tl.fromTo(
           ctas,
           { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.55 },
-          1.2,
+          { y: 0, opacity: 1, duration: 0.62 },
+          1.38,
         );
       }
-      if (bg.current && root.current) {
+      if (bg.current && scope) {
         /** Slight scrub smoothing + GPU layer: avoids 1:1 scrub jitter with Lenis while staying subtle. */
         gsap.to(bg.current, {
-          yPercent: -6,
+          yPercent: -3,
           ease: "none",
           force3D: true,
           scrollTrigger: {
-            trigger: root.current,
+            trigger: scope,
             start: "top top",
             end: "bottom top",
-            scrub: 0.12,
+            scrub: 0.22,
           },
         });
       }
-    }, root);
+    }, scope);
     return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={root}
-      className="relative -mt-[72px] min-h-screen overflow-hidden pt-[72px] lg:-mt-[120px] lg:pt-[120px]"
+      data-mha-scroll-hero
+      className="relative -mt-[72px] min-h-[100dvh] w-full overflow-hidden bg-navy-dark pt-[72px] lg:-mt-[120px] lg:pt-[120px]"
     >
       <div
         ref={bg}
-        className="absolute inset-0 transform-gpu will-change-transform"
+        className="absolute inset-x-0 top-0 min-h-[118%] w-full transform-gpu will-change-transform"
       >
         <Image
           src={hero.image}
           alt="Community engagement in South Sudan — MHA field presence"
           fill
           priority
-          quality={80}
-          className="object-cover photo-brighten photo-focal"
+          quality={85}
+          className="size-full min-h-full min-w-full object-cover object-center photo-brighten"
           sizes="100vw"
         />
       </div>
@@ -128,7 +132,7 @@ export function HeroSection() {
       />
       <div
         ref={content}
-        className="relative z-10 mx-auto flex min-h-[calc(100vh-72px)] max-w-5xl flex-col items-center justify-center px-6 pb-16 text-center lg:min-h-[calc(100vh-120px)]"
+        className="relative z-10 mx-auto flex min-h-[calc(100dvh-72px)] max-w-5xl flex-col items-center justify-center px-4 pb-16 text-center sm:px-6 lg:min-h-[calc(100dvh-120px)]"
       >
         <p data-hero-eyebrow className="eyebrow justify-center text-green">
           {hero.eyebrow}

@@ -67,7 +67,7 @@ export function StoryPageHero({ story, thematic }: StoryPageHeroProps) {
         locPrep = prepareLineReveal(locationRef.current);
       }
 
-      const lineInners = [...(locPrep?.lineInners ?? []), ...titlePrep.lineInners];
+      const titleLineInners = titlePrep.lineInners;
       const extras = thematicWrapRef.current ? [thematicWrapRef.current] : [];
       const lineAxis = getLineRevealAxis(titleEl);
 
@@ -76,7 +76,9 @@ export function StoryPageHero({ story, thematic }: StoryPageHeroProps) {
           maskEl: mask,
           imageLayerEl: imageLayer,
           overlayEl: overlay,
-          lineInners,
+          lineInners: locPrep?.lineInners ?? titleLineInners,
+          secondaryLineInners: locPrep ? titleLineInners : undefined,
+          lineSecondaryDelay: 0.38,
           extraFadeEls: extras,
           lineAxis,
         });
@@ -94,7 +96,8 @@ export function StoryPageHero({ story, thematic }: StoryPageHeroProps) {
   return (
     <header
       ref={root}
-      className="relative -mt-[72px] min-h-[50vh] pt-[72px] lg:-mt-[120px] lg:pt-[120px]"
+      data-mha-scroll-hero
+      className="relative -mt-[72px] min-h-[50vh] overflow-hidden bg-navy-dark pt-[72px] lg:-mt-[120px] lg:pt-[120px]"
     >
       <div
         ref={maskRef}
@@ -102,15 +105,15 @@ export function StoryPageHero({ story, thematic }: StoryPageHeroProps) {
       >
         <div
           ref={imageLayerRef}
-          className="absolute inset-0 scale-[1.14] transform-gpu will-change-transform"
+          className="absolute inset-x-0 top-0 min-h-[118%] w-full scale-[1.18] transform-gpu will-change-transform"
         >
           <Image
             src={story.image}
             alt={story.title}
             fill
             priority
-            quality={92}
-            className="object-cover photo-brighten photo-focal"
+            quality={85}
+            className="size-full min-h-full min-w-full object-cover object-center photo-brighten photo-focal"
             sizes="100vw"
           />
         </div>

@@ -11,12 +11,13 @@ export function initTextReveal(selector: string) {
       {
         y: 0,
         opacity: 1,
-        duration: 0.8,
+        duration: 0.92,
         ease: "power3.out",
         scrollTrigger: {
           trigger: el,
-          start: "top 85%",
+          start: "top 82%",
           toggleActions: "play none none none",
+          once: true,
         },
       },
     );
@@ -32,7 +33,7 @@ export function initParallax(selector: string, speed = 0.3) {
         trigger: el,
         start: "top bottom",
         end: "bottom top",
-        scrub: true,
+        scrub: 0.35,
       },
     });
   });
@@ -51,7 +52,7 @@ export function initCardImageParallax(
       trigger: cardEl,
       start: "top bottom",
       end: "bottom top",
-      scrub: true,
+      scrub: 0.35,
     },
   });
 }
@@ -68,13 +69,14 @@ export function initStaggerFadeUp(
       {
         y: 0,
         opacity: 1,
-        duration: 0.6,
-        stagger: 0.12,
-        ease: "power2.out",
+        duration: 0.78,
+        stagger: 0.18,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: container,
-          start: "top 80%",
+          start: "top 78%",
           toggleActions: "play none none none",
+          once: true,
         },
       },
     );

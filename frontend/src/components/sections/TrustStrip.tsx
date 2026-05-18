@@ -8,7 +8,7 @@ export function TrustStrip() {
       className="border-b border-border bg-white py-6"
       aria-labelledby="trust-strip-heading"
     >
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto flex max-w-7xl min-w-0 flex-col gap-4 px-4 sm:px-6 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
           <span className="rounded-lg bg-navy/10 p-2 text-navy" aria-hidden>
             <Shield className="h-5 w-5" />
