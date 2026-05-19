@@ -11,6 +11,7 @@ import { mhaLogoOnDarkClass } from "@/lib/brand";
 import { nav, site } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { useLenis } from "@/components/layout/lenis-context";
+import type Lenis from "lenis";
 
 /** Dark full-bleed hero sits under the fixed nav (negative top margin). Elsewhere keep solid bar + navy text. */
 function normalizePathname(p: string) {
@@ -39,16 +40,31 @@ function navHeroOverlapPx(): number {
   return window.matchMedia("(min-width: 1024px)").matches ? 120 : 72;
 }
 
+/** True when scroll position is effectively at the document top (Lenis can leave a small offset). */
+function isDocumentAtTop(lenis: Lenis | null): boolean {
+  const y = Math.max(
+    0,
+    window.scrollY || 0,
+    document.documentElement.scrollTop || 0,
+    lenis?.actualScroll ?? 0,
+    lenis?.scroll ?? 0,
+  );
+  return y < 12;
+}
+
 /**
- * Lenis + native scroll can disagree at “resting top”, so `scrollY > 100` stays true and the bar
- * stays solid white. Use the hero block’s viewport position when present — it matches what you see.
+ * Solid bar when the hero no longer sits behind the fixed nav. Geometry beats scroll pixels with Lenis.
  */
-function readScrolledPastHeroFold(): boolean | null {
+function isPastHeroNavZone(lenis: Lenis | null): boolean {
+  if (isDocumentAtTop(lenis)) return false;
+
   const el = document.querySelector<HTMLElement>("[data-mha-scroll-hero]");
-  if (!el) return null;
-  const top = el.getBoundingClientRect().top;
-  const band = navHeroOverlapPx() + 100;
-  return top <= -band;
+  if (!el) return false;
+
+  const { top, bottom } = el.getBoundingClientRect();
+  const navH = navHeroOverlapPx();
+  const heroStillBehindNav = top <= navH + 8 && bottom > navH + 40;
+  return !heroStillBehindNav;
 }
 
 export function Navbar() {
@@ -60,32 +76,32 @@ export function Navbar() {
 
   useEffect(() => {
     const bucketRef = { current: null as boolean | null };
-    const readY = () => {
-      if (lenis) {
-        /** `lenis.scroll` is smoothed and can lag or sit high; `actualScroll` tracks native position for bar state. */
-        return Math.max(0, lenis.actualScroll);
-      }
-      return Math.max(
-        0,
-        window.scrollY || document.documentElement.scrollTop || 0,
-      );
-    };
+    const onHeroRoute = hasFullBleedHero(pathname);
+
     const sync = () => {
-      const fromHero =
-        hasFullBleedHero(pathname) ? readScrolledPastHeroFold() : null;
-      const over =
-        fromHero !== null ? fromHero : readY() > 100;
+      const over = onHeroRoute
+        ? isPastHeroNavZone(lenis)
+        : Math.max(
+            0,
+            window.scrollY || document.documentElement.scrollTop || 0,
+            lenis?.actualScroll ?? 0,
+          ) > 100;
+
       if (bucketRef.current !== over) {
         bucketRef.current = over;
         setScrolled(over);
       }
     };
+
     bucketRef.current = null;
     sync();
+    const raf = requestAnimationFrame(sync);
 
-    const cleanups: (() => void)[] = [];
+    const cleanups: (() => void)[] = [() => cancelAnimationFrame(raf)];
     window.addEventListener("scroll", sync, { passive: true });
     cleanups.push(() => window.removeEventListener("scroll", sync));
+    window.addEventListener("scrollend", sync, { passive: true });
+    cleanups.push(() => window.removeEventListener("scrollend", sync));
     gsap.ticker.add(sync);
     cleanups.push(() => gsap.ticker.remove(sync));
     if (lenis) {
