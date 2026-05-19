@@ -33,10 +33,14 @@ See `.env.example`. On Vercel, add the same keys under **Settings → Environmen
 
 ## Deploy on Vercel
 
-1. Import the GitHub repo; leave **Root Directory** empty (repository root).
-2. **Framework Preset:** Next.js · **Node.js:** 20.x
-3. **Install:** `npm ci` · **Build:** `npm run build` (defaults)
-4. Redeploy after connecting the repo.
+Repo on GitHub: **`hakeemmeeh/MHA`** · branch **`main`** · app at **repository root** (not `frontend/`).
+
+1. [vercel.com/new](https://vercel.com/new) → Import **`hakeemmeeh/MHA`** (or reconnect Git in project **Settings → Git**).
+2. **Root Directory:** leave **empty**. If it still says `frontend`, click **Edit**, clear it, save — otherwise every deploy 404s.
+3. **Framework:** Next.js · **Node.js:** 20.x · **Build:** `npm run build` · **Install:** `npm ci` (also in root `vercel.json`).
+4. **Deployments** → latest → **Redeploy** (or push to `main` to auto-deploy).
+
+If nothing deploys after a push: **Settings → Git** → **Disconnect** → connect **`hakeemmeeh/MHA`** again, branch **`main`**, then redeploy.
 
 ## Website releases & content ownership
 
