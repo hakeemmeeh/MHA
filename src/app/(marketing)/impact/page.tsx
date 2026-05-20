@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MarketingScrollReveal } from "@/components/layout/MarketingScrollReveal";
 import { PageHero } from "@/components/ui/PageHero";
+import { ImpactDashboard } from "@/components/sections/ImpactDashboard";
 import { StatsBar } from "@/components/sections/StatsBar";
 import { TransparencyProjectLog } from "@/components/sections/TransparencyProjectLog";
 import { WhereWeWork } from "@/components/sections/WhereWeWork";
@@ -47,6 +48,7 @@ export default function ImpactPage() {
         </div>
       </section>
       <StatsBar />
+      <ImpactDashboard />
       <section className="bg-white py-20">
         <div className="mx-auto max-w-4xl px-6">
           <h2 className="font-playfair text-3xl font-bold text-navy">At a glance</h2>
@@ -62,11 +64,15 @@ export default function ImpactPage() {
               (see activity log).
             </li>
             <li>
-              <strong className="text-navy">Stories:</strong>{" "}
+              <strong className="text-navy">Field stories:</strong>{" "}
               <Link href="/stories" className="font-semibold text-green underline">
-                {fieldStories.length} field narratives
+                {fieldStories.length} consent-led narratives
+              </Link>
+              {" · "}
+              <Link href="/news" className="font-semibold text-green underline">
+                news
               </Link>{" "}
-              — consent-led, updated as communities agree to share outcomes.
+              for organizational announcements only.
             </li>
           </ul>
         </div>

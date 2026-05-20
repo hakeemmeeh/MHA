@@ -7,6 +7,8 @@ import type {
   NavItem,
   NewsItem,
   ProjectHighlight,
+  ImpactChartItem,
+  MediaVideo,
   PublicDocument,
   Stat,
   ThematicArea,
@@ -610,74 +612,45 @@ export const donationMethods: DonationMethod[] = [
   },
 ];
 
+/** Org announcements only — field milestones live on /stories, not duplicated here. */
 export const newsItems: NewsItem[] = [
   {
-    slug: "youth-training-launch-leer-2023",
-    title: "Youth engagement training launches in Leer County",
-    date: "2023-06-16",
-    category: "programme",
-    excerpt:
-      "MHA launched youth engagement training in Leer under the USAID Youth Engagement Project, with volunteer trainers supporting structured activities.",
-    image: "/images/stories/youth-launch-leer-june-2023.jpg",
-    storySlug: "youth-launch-leer-june-2023",
-    body: [
-      "The launch brought together young people, community leaders, and programme staff to align on safe, structured engagement activities.",
-      "Training modules cover life skills, referral awareness, and coordination with protection actors where risks are identified.",
-      "Partners and donors can follow related field reporting on the Stories and Impact pages.",
-    ],
-  },
-  {
-    slug: "cbp-centre-pigi-canal-opens",
-    title: "Community-based protection centre supported in Pigi/Canal",
-    date: "2023-05-01",
-    category: "field",
-    excerpt:
-      "Infrastructure and facilitation support for a community-based protection centre strengthening local networks in Jonglei State.",
-    image: "/images/stories/cbp-centre-pigi-canal-jonglei.jpg",
-    storySlug: "cbp-centre-pigi-canal-jonglei",
-    body: [
-      "The centre provides a focal point for dialogue, documentation, and referral coordination aligned with national cluster standards.",
-      "MHA teams work with community-based protection members on roles, reporting, and safe referral practice.",
-    ],
-  },
-  {
-    slug: "nfi-distribution-torit-unhcr",
-    title: "NFI distribution completed in Torit with UNHCR",
-    date: "2023-04-12",
-    category: "partnership",
-    excerpt:
-      "Households in Torit, Eastern Equatoria received agreed non-food item kits with verification coordinated alongside UNHCR.",
-    image: "/images/stories/nfi-torit-eastern-equatoria-unhcr.jpg",
-    storySlug: "nfi-torit-eastern-equatoria-unhcr",
-    body: [
-      "Distributions followed beneficiary communication and verification steps agreed with UNHCR and local authorities.",
-      "Logistics and Shelter/NFI teams coordinated last-mile delivery and accountability messaging.",
-    ],
-  },
-  {
-    slug: "listening-posts-leer-expanded",
-    title: "Listening posts expand community reporting in Leer",
-    date: "2023-03-20",
-    category: "field",
-    excerpt:
-      "Weekly listening posts help families report protection risks faster, with volunteers trained alongside MHA protection teams.",
-    image: "/images/stories/listening-posts-leer.jpg",
-    storySlug: "listening-posts-leer",
-    body: [
-      "Community-owned tools shorten the path from incident awareness to coordinated response.",
-      "Escalation pathways were agreed with local leaders for sensitive cases requiring specialized services.",
-    ],
-  },
-  {
     slug: "website-transparency-resources",
-    title: "MHA publishes transparency resources for partners",
+    title: "Transparency resources now published online",
     date: "2026-05-01",
     category: "announcement",
     excerpt:
-      "Governance documents, activity reporting, and due-diligence materials are now easier to find on mha-ss.org.",
+      "Governance documents and due-diligence materials are easier to find for partners and donors.",
+    image: "/og-image.svg",
     body: [
       "The Resources page lists policies and financial documents available on request while direct PDF uploads are finalized.",
       "Partners seeking formal packs should contact the Juba headquarters or use the contact form with a due-diligence inquiry.",
+    ],
+  },
+  {
+    slug: "impact-dashboard-published",
+    title: "Interactive impact dashboard added",
+    date: "2026-05-01",
+    category: "announcement",
+    excerpt:
+      "The Impact page now includes charts summarizing geography, programme portfolio, and public activity lines.",
+    image: "/images/hero/home-hero.jpg",
+    body: [
+      "The dashboard is representative of published MHA data — not a live operational database.",
+      "Detailed activity lines remain in the public project log on the Impact page.",
+    ],
+  },
+  {
+    slug: "film-media-hub-launched",
+    title: "Film & media hub launched",
+    date: "2026-05-01",
+    category: "announcement",
+    excerpt:
+      "A dedicated space for documentary and programme video is live — footage will be added as it is cleared for publication.",
+    image: "/images/stories/capacity-building-cbp-leaders.jpg",
+    body: [
+      "Visit the Media page for featured films and field clips.",
+      "Full written narratives from the same programmes remain on Field stories.",
     ],
   },
 ];
@@ -773,8 +746,16 @@ export const nav: NavItem[] = [
     ],
   },
   { label: "Impact", href: "/impact" },
+  {
+    label: "Stories",
+    href: "/stories",
+    children: [
+      { label: "Field narratives", href: "/stories" },
+      { label: "Insights (blog)", href: "/blog" },
+      { label: "Film & media", href: "/media" },
+    ],
+  },
   { label: "News", href: "/news" },
-  { label: "Stories", href: "/stories" },
   {
     label: "Get Involved",
     href: "/get-involved",
@@ -820,6 +801,77 @@ export const impactPageStats: Stat[] = [
   { value: 82, label: "Staff", suffix: "+" },
   { value: 7, label: "Years of service", suffix: "+" },
   { value: 14, label: "Thematic areas", suffix: "" },
+];
+
+/** Data for interactive impact dashboard charts on /impact */
+export const impactDashboardCharts = {
+  headlineMetrics: [
+    { label: "Field-based workforce", value: 85, hint: "% of staff deployed outside Juba" },
+    { label: "Counties with active programming", value: 8, hint: "Unity & Jonglei core footprint" },
+    { label: "Documented activity log entries", value: 9, hint: "Representative public milestones" },
+    { label: "Field narratives published", value: 10, hint: "Consent-led stories on this site" },
+  ] satisfies ImpactChartItem[],
+  countiesByState: [
+    { label: "Unity State", value: 3, hint: "Leer, Mayiandit, Panyijiar" },
+    { label: "Jonglei State", value: 5, hint: "Akobo, Uror, Duk, Pigi/Canal" },
+  ] satisfies ImpactChartItem[],
+  activityByRegion: [
+    { label: "Unity State", value: 5 },
+    { label: "Jonglei State", value: 3 },
+    { label: "Partner-funded (other states)", value: 1 },
+  ] satisfies ImpactChartItem[],
+  programmePortfolio: [
+    { label: "Protection, GBV & child protection", value: 3 },
+    { label: "Community engagement & HLP", value: 2 },
+    { label: "WASH, shelter & NFIs", value: 2 },
+    { label: "Livelihoods, food & nutrition", value: 3 },
+    { label: "Health, education & peacebuilding", value: 2 },
+    { label: "Logistics & field operations", value: 2 },
+  ] satisfies ImpactChartItem[],
+};
+
+export const mediaHubIntro = {
+  title: "Film & field media",
+  subtitle:
+    "Documentary-style footage and programme clips from MHA teams — add YouTube IDs in content.ts when videos are ready.",
+};
+
+/** Documentary / video hub — set `youtubeId` when uploads are public */
+export const mediaVideos: MediaVideo[] = [
+  {
+    slug: "field-presence-reel",
+    title: "MHA field presence — South Sudan",
+    description:
+      "Overview of how teams reach remote counties, coordinate with clusters, and deliver principled assistance.",
+    posterImage: "/images/hero/home-hero.jpg",
+    durationLabel: "Coming soon",
+    featured: true,
+    location: "Unity & Jonglei states",
+  },
+  {
+    slug: "youth-engagement-leer",
+    title: "Youth engagement training — Leer",
+    description: "Launch activities under the USAID Youth Engagement Project.",
+    posterImage: "/images/stories/youth-launch-leer-june-2023.jpg",
+    durationLabel: "Coming soon",
+    location: "Leer County, Unity State",
+  },
+  {
+    slug: "community-protection-networks",
+    title: "Community-based protection networks",
+    description: "How listening posts and safe spaces connect communities to response.",
+    posterImage: "/images/stories/listening-posts-leer.jpg",
+    durationLabel: "Coming soon",
+    location: "Unity & Jonglei",
+  },
+  {
+    slug: "nfi-distribution-behind-scenes",
+    title: "Last-mile NFI delivery",
+    description: "Coordination with UNHCR and local authorities during distributions.",
+    posterImage: "/images/stories/nfi-torit-eastern-equatoria-unhcr.jpg",
+    durationLabel: "Coming soon",
+    location: "Torit, Eastern Equatoria",
+  },
 ];
 
 export const fieldStories: FieldStory[] = [

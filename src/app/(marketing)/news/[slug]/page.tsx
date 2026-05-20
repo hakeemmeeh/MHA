@@ -71,17 +71,11 @@ export default async function NewsArticlePage({ params }: Props) {
               <p key={para.slice(0, 32)}>{para}</p>
             ))}
           </div>
-          {item.storySlug && (
-            <p className="mt-10">
-              <Link
-                href={`/stories/${item.storySlug}`}
-                className="font-inter font-semibold text-green hover:text-green-dark"
-              >
-                Read related field story →
-              </Link>
-            </p>
-          )}
-          <p className="mt-8 border-t border-border pt-8">
+          <p className="mt-10 border-t border-border pt-8">
+            <Link href="/stories" className="font-inter text-sm font-semibold text-green hover:text-green-dark">
+              Field stories →
+            </Link>
+            <span className="mx-2 text-text-muted">·</span>
             <Link href="/news" className="font-inter text-sm font-semibold text-navy hover:underline">
               ← All news
             </Link>

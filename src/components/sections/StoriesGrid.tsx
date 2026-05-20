@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ContentWayfinder } from "@/components/ui/ContentWayfinder";
 import { fieldStories, thematicAreas } from "@/lib/content";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -80,9 +81,12 @@ export function StoriesGrid() {
        * Story cards: each `article` uses a small timeline (card fade-up, then `h2` fade-up)
        * with its own ScrollTrigger so rows reveal as you scroll.
        */}
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 pt-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
+        <ContentWayfinder current="stories" className="order-2 lg:order-2 lg:col-start-2 lg:row-start-1" />
+        <div className="order-1 min-w-0 lg:col-start-1 lg:row-start-1 lg:row-span-2">
       <div
         data-marketing-reveal
-        className="mx-auto flex max-w-7xl flex-wrap gap-2 px-4 pt-12 pb-8 sm:px-6 sm:pt-16 sm:pb-10"
+        className="flex flex-wrap gap-2 pb-8 sm:pb-10"
       >
         {options.map((o) => (
           <button
@@ -101,7 +105,7 @@ export function StoriesGrid() {
       </div>
       <div
         ref={gridRef}
-        className="mx-auto grid max-w-7xl gap-8 px-4 pb-12 sm:gap-10 sm:px-6 sm:pb-16 md:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-8 pb-12 sm:gap-10 sm:pb-16 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3"
       >
         {filtered.map((s) => (
           <article
@@ -144,6 +148,8 @@ export function StoriesGrid() {
             No stories in this thematic area yet.
           </p>
         ) : null}
+      </div>
+        </div>
       </div>
     </>
   );

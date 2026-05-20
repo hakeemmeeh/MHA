@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getBlogPosts } from "@/lib/blog";
 import { fieldStories, newsItems, thematicAreas } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -9,7 +10,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/programs",
     "/impact",
     "/news",
+    "/blog",
     "/stories",
+    "/media",
     "/donate",
     "/get-involved",
     "/careers",
@@ -46,6 +49,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(n.date),
       changeFrequency: "monthly",
       priority: 0.55,
+    });
+  });
+  getBlogPosts().forEach((p) => {
+    entries.push({
+      url: `${base}/blog/${p.slug}`,
+      lastModified: new Date(p.publishedAt),
+      changeFrequency: "monthly",
+      priority: 0.5,
     });
   });
   return entries;

@@ -95,3 +95,34 @@ export type DonationMethod = {
   description: string;
   details: string[];
 };
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  publishedAt: string;
+  category: "field-reflection" | "programme" | "partnership" | "editorial";
+  image: string;
+  body: string[];
+  /** When set, full narrative lives on /stories/[slug] */
+  storySlug?: string;
+  author?: string;
+};
+
+export type ImpactChartItem = {
+  label: string;
+  value: number;
+  hint?: string;
+};
+
+export type MediaVideo = {
+  slug: string;
+  title: string;
+  description: string;
+  /** YouTube video ID — leave empty to show “coming soon” placeholder */
+  youtubeId?: string;
+  posterImage: string;
+  durationLabel?: string;
+  featured?: boolean;
+  location?: string;
+};

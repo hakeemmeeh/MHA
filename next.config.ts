@@ -1,6 +1,14 @@
 import type { NextConfig } from "next";
+import { legacyBlogStoryRedirects } from "./src/lib/blog";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return Object.entries(legacyBlogStoryRedirects).map(([slug, destination]) => ({
+      source: `/blog/${slug}`,
+      destination,
+      permanent: true,
+    }));
+  },
   experimental: {
     viewTransition: true,
   },

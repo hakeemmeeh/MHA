@@ -5,9 +5,9 @@ import { marketingPageMetadata } from "@/lib/social-metadata";
 export const metadata = marketingPageMetadata({
   title: "News & updates",
   description:
-    "Latest field updates, programme launches, and announcements from MHA across South Sudan.",
+    "Organizational announcements from MHA — site updates and partnership notes. Field reporting is on Stories.",
   pathname: "/news",
-  image: "/images/stories/youth-launch-leer-june-2023.jpg",
+  image: "/og-image.svg",
 });
 
 export default function NewsPage() {
@@ -15,9 +15,9 @@ export default function NewsPage() {
     <>
       <PageHero
         animate
-        title="News & updates"
-        subtitle="Programme launches, partnership milestones, and field reporting from our teams."
-        image="/images/stories/youth-launch-leer-june-2023.jpg"
+        title="News"
+        subtitle="Brief organizational announcements — not duplicate field narratives."
+        image="/og-image.svg"
       />
       <NewsGrid />
     </>

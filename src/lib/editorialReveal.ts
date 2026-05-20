@@ -224,7 +224,7 @@ export function playEditorialHeroReveal({
   );
 
   if (overlayEl) {
-    tl.fromTo(overlayEl, { opacity: 0 }, { opacity: 1, duration: 0.88, ease: "power1.out" }, 0.08);
+    tl.fromTo(overlayEl, { opacity: 0.55 }, { opacity: 1, duration: 0.88, ease: "power1.out" }, 0.08);
   }
 
   if (lineInners.length) {

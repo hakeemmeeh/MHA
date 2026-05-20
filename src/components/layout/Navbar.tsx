@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { mhaLogoOnDarkClass } from "@/lib/brand";
@@ -51,18 +51,17 @@ function isDocumentAtTop(lenis: Lenis | null): boolean {
 }
 
 /**
- * Solid bar when the hero no longer sits behind the fixed nav. Geometry beats scroll pixels with Lenis.
+ * True when a marked full-bleed hero still sits behind the fixed nav (scrim bar + light text).
  */
-function isPastHeroNavZone(lenis: Lenis | null): boolean {
-  if (isDocumentAtTop(lenis)) return false;
-
+function isHeroBehindNav(lenis: Lenis | null): boolean {
   const el = document.querySelector<HTMLElement>("[data-mha-scroll-hero]");
   if (!el) return false;
 
+  if (isDocumentAtTop(lenis)) return true;
+
   const { top, bottom } = el.getBoundingClientRect();
   const navH = navHeroOverlapPx();
-  const heroStillBehindNav = top <= navH + 8 && bottom > navH + 40;
-  return !heroStillBehindNav;
+  return top <= navH + 8 && bottom > navH + 40;
 }
 
 export function Navbar() {
@@ -72,13 +71,25 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
-  useEffect(() => {
-    const bucketRef = { current: null as boolean | null };
-    const onHeroRoute = hasFullBleedHero(pathname);
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    lenis?.scrollTo(0, { immediate: true });
 
+    const onHeroRoute = hasFullBleedHero(pathname);
+    setScrolled(
+      onHeroRoute
+        ? false
+        : Math.max(
+            0,
+            window.scrollY || document.documentElement.scrollTop || 0,
+            lenis?.actualScroll ?? 0,
+          ) > 100,
+    );
+
+    const bucketRef = { current: null as boolean | null };
     const sync = () => {
       const over = onHeroRoute
-        ? isPastHeroNavZone(lenis)
+        ? !isHeroBehindNav(lenis)
         : Math.max(
             0,
             window.scrollY || document.documentElement.scrollTop || 0,
@@ -124,17 +135,13 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [mobileOpen]);
 
-  const transparent = !scrolled && hasFullBleedHero(pathname);
+  /** Over a dark hero: light text on a navy scrim (readable during hero load / view transitions). */
+  const overHero = !scrolled && hasFullBleedHero(pathname);
 
   return (
     <>
       <div className="fixed top-0 z-50 w-full overflow-visible">
-        <div
-          className={cn(
-            "hidden bg-navy-dark text-white lg:block",
-            transparent && "bg-navy-dark/95",
-          )}
-        >
+        <div className="hidden bg-navy-dark text-white lg:block">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 font-inter text-sm">
             <a
               href={`tel:${site.phone.replace(/\s/g, "")}`}
@@ -153,9 +160,9 @@ export function Navbar() {
 
         <nav
           className={cn(
-            "mx-auto flex max-w-7xl items-center justify-between gap-4 overflow-visible px-4 py-4 transition-all duration-500 ease-out md:px-6",
-            transparent
-              ? "bg-transparent text-white lg:bg-transparent"
+            "mx-auto flex max-w-7xl items-center justify-between gap-4 overflow-visible px-4 py-4 transition-[background-color,box-shadow] duration-500 ease-out md:px-6",
+            overHero
+              ? "bg-navy-dark/90 text-white shadow-sm backdrop-blur-sm supports-[backdrop-filter]:bg-navy-dark/80"
               : "bg-white text-navy shadow-md",
           )}
         >
@@ -174,7 +181,7 @@ export function Navbar() {
               sizes="(max-width: 768px) 220px, 280px"
               className={cn(
                 "h-[52px] w-auto transition-[filter] duration-500 ease-out md:h-16",
-                transparent && mhaLogoOnDarkClass,
+                overHero && mhaLogoOnDarkClass,
               )}
             />
           </Link>
@@ -230,7 +237,7 @@ export function Navbar() {
             type="button"
             className={cn(
               "relative z-[60] rounded-lg p-2 lg:hidden",
-              mobileOpen && !transparent && "ring-2 ring-navy/15",
+              mobileOpen && !overHero && "ring-2 ring-navy/15",
             )}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -241,14 +248,14 @@ export function Navbar() {
               <X
                 className={cn(
                   "h-7 w-7",
-                  transparent ? "text-white" : "text-navy",
+                  overHero ? "text-white" : "text-navy",
                 )}
               />
             ) : (
               <Menu
                 className={cn(
                   "h-7 w-7",
-                  transparent ? "text-white" : "text-navy",
+                  overHero ? "text-white" : "text-navy",
                 )}
               />
             )}

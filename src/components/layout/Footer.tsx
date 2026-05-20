@@ -16,6 +16,7 @@ const moreLinks = [
   { label: "Donate", href: "/donate" },
   { label: "Resources", href: "/resources" },
   { label: "News", href: "/news" },
+  { label: "Insights", href: "/blog" },
   { label: "Careers", href: "/careers" },
 ];
 

@@ -138,8 +138,8 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
           <div
             ref={overlayRef}
             className={cn(
-              "pointer-events-none absolute inset-0 bg-gradient-to-b from-navy-dark/38 to-navy-dark/55",
-              animate && "opacity-0",
+              "pointer-events-none absolute inset-0 bg-gradient-to-b from-navy-dark/45 to-navy-dark/60",
+              animate && "opacity-[0.55]",
             )}
             aria-hidden
           />
