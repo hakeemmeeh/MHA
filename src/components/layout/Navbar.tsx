@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { gsap } from "gsap";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { mhaLogoOnDarkClass } from "@/lib/brand";
@@ -22,7 +21,6 @@ function normalizePathname(p: string) {
 
 function hasFullBleedHero(pathname: string) {
   const path = normalizePathname(pathname);
-  if (path === "/") return true;
   const roots = [
     "/about",
     "/programs",
@@ -102,8 +100,6 @@ export function Navbar() {
     cleanups.push(() => window.removeEventListener("scroll", sync));
     window.addEventListener("scrollend", sync, { passive: true });
     cleanups.push(() => window.removeEventListener("scrollend", sync));
-    gsap.ticker.add(sync);
-    cleanups.push(() => gsap.ticker.remove(sync));
     if (lenis) {
       cleanups.push(lenis.on("scroll", sync));
     }

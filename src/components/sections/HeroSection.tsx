@@ -4,176 +4,207 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ChevronDown } from "lucide-react";
-import { hero } from "@/lib/content";
+import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
+import { fieldStories, hero, site } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
-gsap.registerPlugin(ScrollTrigger);
+const featuredStory = fieldStories[0];
 
 export function HeroSection() {
   const root = useRef<HTMLElement>(null);
-  const bg = useRef<HTMLDivElement>(null);
-  const overlay = useRef<HTMLDivElement>(null);
-  const content = useRef<HTMLDivElement>(null);
+  const copyCol = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const scope = root.current;
-    if (!scope) return;
+    const copy = copyCol.current;
+    if (!scope || !copy) return;
 
-    const reduceMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const eyebrow = copy.querySelector<HTMLElement>("[data-hero-eyebrow]");
+    const titleLines = copy.querySelectorAll<HTMLElement>("[data-hero-line]");
+    const subtext = copy.querySelector<HTMLElement>("[data-hero-sub]");
+    const ctas = copy.querySelector<HTMLElement>("[data-hero-ctas]");
+    const mainImage = scope.querySelector<HTMLElement>("[data-hero-bento-main]");
+    const secondaryTiles = scope.querySelectorAll<HTMLElement>(
+      "[data-hero-bento-tile]:not([data-hero-bento-main])",
+    );
+
+    if (reduceMotion) {
+      const textEls = [eyebrow, ...titleLines, subtext, ctas].filter(Boolean);
+      gsap.set(textEls, { y: 0, opacity: 1, yPercent: 0 });
+      if (mainImage) gsap.set(mainImage, { opacity: 1, x: 0, y: 0 });
+      if (secondaryTiles.length) gsap.set(secondaryTiles, { opacity: 1, y: 0 });
+      return;
+    }
 
     const ctx = gsap.context(() => {
-      if (reduceMotion) {
-        if (bg.current) gsap.set(bg.current, { scale: 1.08, yPercent: 0, force3D: true });
-        if (overlay.current) gsap.set(overlay.current, { opacity: 1 });
-        const reducedTargets = content.current?.querySelectorAll(
-          "[data-hero-eyebrow],[data-hero-line],[data-hero-sub],[data-hero-ctas]",
-        );
-        if (reducedTargets?.length) gsap.set(reducedTargets, { y: 0, opacity: 1 });
-        return;
-      }
+      if (mainImage) gsap.set(mainImage, { opacity: 0, x: 72 });
+      if (secondaryTiles.length) gsap.set(secondaryTiles, { opacity: 0, y: 36 });
 
-      if (bg.current) {
-        gsap.fromTo(
-          bg.current,
-          { scale: 1.18 },
-          { scale: 1.08, duration: 1.75, ease: "power2.out", force3D: true },
-        );
-      }
-      if (overlay.current) {
-        gsap.fromTo(
-          overlay.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.95, ease: "power1.out" },
-        );
-      }
-      const eyebrow = content.current?.querySelector("[data-hero-eyebrow]");
-      const titleLines = content.current?.querySelectorAll("[data-hero-line]");
-      const subtext = content.current?.querySelector("[data-hero-sub]");
-      const ctas = content.current?.querySelector("[data-hero-ctas]");
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
+      if (mainImage) {
+        tl.fromTo(
+          mainImage,
+          { opacity: 0, x: 72 },
+          { opacity: 1, x: 0, duration: 1.15, ease: "power3.out" },
+          0.12,
+        );
+      }
+
+      if (secondaryTiles.length) {
+        tl.to(
+          secondaryTiles,
+          { opacity: 1, y: 0, duration: 0.92, stagger: 0.11, ease: "power3.out" },
+          0.28,
+        );
+      }
+
       if (eyebrow) {
+        gsap.set(eyebrow, { y: 28, opacity: 0 });
         tl.fromTo(
           eyebrow,
-          { y: 30, opacity: 0 },
+          { y: 28, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.62 },
-          0.48,
+          0.42,
         );
       }
-      if (titleLines?.length) {
+
+      if (titleLines.length) {
+        gsap.set(titleLines, { yPercent: 110 });
         tl.fromTo(
           titleLines,
-          { yPercent: 110, opacity: 1 },
-          { yPercent: 0, opacity: 1, duration: 1.08, stagger: 0.18, ease: "power3.out" },
-          0.78,
+          { yPercent: 110 },
+          { yPercent: 0, duration: 1.08, stagger: 0.18, ease: "power3.out" },
+          0.72,
         );
       }
+
       if (subtext) {
+        gsap.set(subtext, { y: 28, opacity: 0 });
         tl.fromTo(
           subtext,
-          { y: 30, opacity: 0 },
+          { y: 28, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.72 },
-          1.12,
+          1.08,
         );
       }
+
       if (ctas) {
+        gsap.set(ctas, { y: 22, opacity: 0 });
         tl.fromTo(
           ctas,
-          { y: 20, opacity: 0 },
+          { y: 22, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.62 },
-          1.38,
+          1.32,
         );
       }
-      if (bg.current && scope) {
-        /** Slight scrub smoothing + GPU layer: avoids 1:1 scrub jitter with Lenis while staying subtle. */
-        gsap.to(bg.current, {
-          yPercent: -3,
-          ease: "none",
-          force3D: true,
-          scrollTrigger: {
-            trigger: scope,
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.22,
-          },
-        });
-      }
     }, scope);
+
     return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={root}
-      data-mha-scroll-hero
-      className="relative -mt-[72px] min-h-[100dvh] w-full overflow-hidden bg-navy-dark pt-[72px] lg:-mt-[120px] lg:pt-[120px]"
+      className="bg-cream px-4 py-10 sm:px-6 sm:py-14 lg:py-16"
+      aria-label="Introduction"
     >
-      <div
-        ref={bg}
-        className="absolute inset-x-0 top-0 min-h-[118%] w-full transform-gpu will-change-transform"
-      >
-        <Image
-          src={hero.image}
-          alt="Community engagement in South Sudan — MHA field presence"
-          fill
-          priority
-          quality={85}
-          className="size-full min-h-full min-w-full object-cover object-center photo-brighten"
-          sizes="100vw"
-        />
-      </div>
-      <div
-        ref={overlay}
-        className="absolute inset-0 bg-gradient-to-b from-navy-dark/38 to-navy-dark/55 opacity-0"
-        aria-hidden
-      />
-      <div
-        ref={content}
-        className="relative z-10 mx-auto flex min-h-[calc(100dvh-72px)] max-w-5xl flex-col items-center justify-center px-4 pb-16 text-center sm:px-6 lg:min-h-[calc(100dvh-120px)]"
-      >
-        <p data-hero-eyebrow className="eyebrow justify-center text-green">
-          {hero.eyebrow}
-        </p>
-        <h1 className="font-bodoni-display text-4xl font-bold leading-tight text-white md:text-6xl md:leading-[1.1]">
-          {hero.titleLines.map((line) => (
-            <span key={line} className="block overflow-hidden">
-              <span data-hero-line className="block">
-                {line}
-              </span>
-            </span>
-          ))}
-        </h1>
-        <p
-          data-hero-sub
-          className="mt-6 max-w-xl font-inter text-base text-white/80 md:text-lg"
-        >
-          {hero.subtext}
-        </p>
-        <div
-          data-hero-ctas
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
-        >
-          <Link
-            href="/get-involved"
-            className="inline-flex rounded-full bg-green px-8 py-3 font-inter text-sm font-semibold text-white transition hover:bg-green-dark"
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-4 lg:grid-cols-12 lg:grid-rows-2 lg:gap-5 lg:min-h-[min(72vh,720px)]">
+          <div
+            ref={copyCol}
+            className="flex flex-col justify-center lg:col-span-5 lg:row-span-2 lg:pr-2"
           >
-            Get Involved
-          </Link>
-          <Link
-            href="/programs"
-            className="inline-flex rounded-full border-2 border-white px-8 py-3 font-inter text-sm font-semibold text-white transition hover:bg-white/10"
+            <p data-hero-eyebrow className="opacity-0">
+              <SectionEyebrow>{hero.eyebrow}</SectionEyebrow>
+            </p>
+            <h1 className="mt-4 font-playfair text-3xl font-bold leading-tight text-text-dark md:text-4xl lg:text-[2.75rem] lg:leading-[1.12]">
+              {hero.titleLines.map((line, i) => (
+                <span key={line} className="block overflow-hidden">
+                  <span
+                    data-hero-line
+                    className={cn("block", i === 1 && "text-navy-mid")}
+                  >
+                    {line}
+                  </span>
+                </span>
+              ))}
+            </h1>
+            <p
+              data-hero-sub
+              className="mt-4 max-w-lg font-inter text-base text-text-mid opacity-0 md:text-lg"
+            >
+              {hero.subtext}
+            </p>
+            <div
+              data-hero-ctas
+              className="mt-8 flex flex-wrap gap-3 opacity-0"
+            >
+              <Link
+                href="/get-involved"
+                className="inline-flex rounded-full bg-green px-7 py-2.5 font-inter text-sm font-semibold text-white transition hover:bg-green-dark"
+              >
+                Get Involved
+              </Link>
+              <Link
+                href="/programs"
+                className="inline-flex rounded-full border-2 border-navy px-7 py-2.5 font-inter text-sm font-semibold text-navy transition hover:bg-navy-light"
+              >
+                Our Programs
+              </Link>
+            </div>
+          </div>
+
+          <div
+            data-hero-bento-main
+            data-hero-bento-tile
+            className="relative min-h-[min(52vw,280px)] overflow-hidden rounded-2xl opacity-0 shadow-md lg:col-span-7 lg:row-span-2 lg:min-h-0"
           >
-            Our Programs
+            <Image
+              src={hero.image}
+              alt="Community engagement in South Sudan — MHA field presence"
+              fill
+              priority
+              quality={85}
+              className="object-cover object-center photo-brighten"
+              sizes="(max-width: 1024px) 100vw, 58vw"
+            />
+          </div>
+
+          <Link
+            href={`/stories/${featuredStory.slug}`}
+            data-hero-bento-tile
+            className="group relative min-h-[200px] overflow-hidden rounded-2xl opacity-0 shadow-sm transition hover:shadow-md lg:col-span-4 lg:min-h-[200px]"
+          >
+            <Image
+              src={featuredStory.image}
+              alt={featuredStory.title}
+              fill
+              className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
+              sizes="(max-width: 1024px) 100vw, 33vw"
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-navy-dark/75 via-navy-dark/20 to-transparent"
+              aria-hidden
+            />
+            <p className="absolute bottom-4 left-4 right-4 font-inter text-sm font-semibold text-white">
+              {featuredStory.location}
+            </p>
           </Link>
-        </div>
-        <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-white/50">
-          <span className="font-inter text-xs uppercase tracking-widest">
-            Scroll
-          </span>
-          <ChevronDown className="h-6 w-6 animate-bounce-scroll" aria-hidden />
+
+          <div
+            data-hero-bento-tile
+            className="flex flex-col justify-center rounded-2xl bg-navy px-6 py-8 text-white opacity-0 lg:col-span-3"
+          >
+            <p className="font-playfair text-4xl font-bold">{site.established}</p>
+            <p className="mt-1 font-inter text-sm text-white/80">
+              Established · NGOs Act 2016
+            </p>
+            <p className="mt-5 font-inter text-xs font-semibold uppercase tracking-widest text-green">
+              8 counties · 14 thematic areas
+            </p>
+          </div>
         </div>
       </div>
     </section>

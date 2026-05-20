@@ -13,12 +13,19 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const tickerFn = useRef<((time: number) => void) | null>(null);
 
   useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduceMotion) return;
+
+    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
     const instance = new Lenis({
-      /** Shorter than default (1.2) so scroll — especially scrubbed hero motion — feels responsive, not “behind” the wheel. */
-      duration: 0.55,
+      /** Shorter than default (1.2) — wheel should track input, not lag behind it. */
+      duration: 0.5,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
-      smoothWheel: true,
+      /** Native touch momentum feels lighter than smoothed touch on phones/tablets. */
+      smoothWheel: !coarsePointer,
     });
 
     startTransition(() => {

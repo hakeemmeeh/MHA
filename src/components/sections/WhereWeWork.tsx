@@ -399,12 +399,15 @@ export function WhereWeWork() {
               name + “MHA Active”.
             </p>
           </div>
-          <div ref={sidebarRevealRef} className="min-w-0 space-y-8 lg:col-span-2">
-            <div ref={stateRegionsRef} className="space-y-8">
+          <div
+            ref={sidebarRevealRef}
+            className="min-w-0 lg:col-span-2 lg:rounded-2xl lg:border lg:border-border lg:bg-white lg:p-6 lg:shadow-sm"
+          >
+            <div ref={stateRegionsRef} className="space-y-6 lg:space-y-8">
               {coverage.states.map((st) => (
                 <div
                   key={st.name}
-                  className="rounded-2xl border border-border bg-navy-light/60 p-6"
+                  className="rounded-2xl border border-border bg-navy-light/60 p-6 lg:border-0 lg:bg-navy-light/50"
                 >
                   <h3 className="font-playfair text-xl font-bold text-navy">{st.name}</h3>
                   <ul className="mt-3 list-inside list-disc font-inter text-sm text-text-mid">
@@ -415,14 +418,14 @@ export function WhereWeWork() {
                 </div>
               ))}
             </div>
-            <div>
+            <div className="mt-8 border-t border-border pt-8">
               <h3
                 ref={officesHeadingRef}
                 className="font-playfair text-lg font-bold text-navy"
               >
                 Offices
               </h3>
-              {prefersReducedMotion ? (
+              {isLg || prefersReducedMotion ? (
                 <ul className="mt-4 space-y-3" role="list">
                   {coverage.offices.map((o) => (
                     <li key={o.name} className="[list-style:none]">
@@ -442,7 +445,6 @@ export function WhereWeWork() {
                   className="mt-4"
                   delay={380}
                   enabled={playOfficesList}
-                  revealAll={isLg}
                 >
                   {coverage.offices.map((o) => (
                     <OfficeRow
