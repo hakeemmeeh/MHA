@@ -20,9 +20,11 @@ type FormData = z.infer<typeof schema>;
 
 type Props = {
   simplified?: boolean;
+  /** Preset inquiry type when the simplified form hides the dropdown */
+  defaultInquiryType?: (typeof inquiryTypes)[number];
 };
 
-export function ContactForm({ simplified }: Props) {
+export function ContactForm({ simplified, defaultInquiryType }: Props) {
   const [status, setStatus] = useState<"idle" | "ok" | "err">("idle");
   const {
     register,
@@ -32,8 +34,8 @@ export function ContactForm({ simplified }: Props) {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: simplified
-      ? { inquiry_type: "General inquiry" }
-      : { inquiry_type: inquiryTypes[0] },
+      ? { inquiry_type: defaultInquiryType ?? "General inquiry" }
+      : { inquiry_type: defaultInquiryType ?? inquiryTypes[0] },
   });
 
   async function onSubmit(data: FormData) {
@@ -113,7 +115,9 @@ export function ContactForm({ simplified }: Props) {
           className="w-full rounded-xl border border-border bg-white px-4 py-3 font-inter text-sm transition focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
         />
       </div>
-      {!simplified && (
+      {simplified ? (
+        <input type="hidden" {...register("inquiry_type")} />
+      ) : (
         <div>
           <label
             htmlFor="cf-type"

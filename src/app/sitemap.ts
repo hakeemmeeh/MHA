@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { fieldStories, thematicAreas } from "@/lib/content";
+import { fieldStories, newsItems, thematicAreas } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://mha-ss.org";
@@ -8,9 +8,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/programs",
     "/impact",
+    "/news",
     "/stories",
+    "/donate",
     "/get-involved",
+    "/careers",
+    "/resources",
     "/contact",
+    "/privacy",
+    "/terms",
   ];
   const entries: MetadataRoute.Sitemap = staticPages.map((path) => ({
     url: `${base}${path}`,
@@ -32,6 +38,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
+    });
+  });
+  newsItems.forEach((n) => {
+    entries.push({
+      url: `${base}/news/${n.slug}`,
+      lastModified: new Date(n.date),
+      changeFrequency: "monthly",
+      priority: 0.55,
     });
   });
   return entries;

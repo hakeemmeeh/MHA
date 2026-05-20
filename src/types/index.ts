@@ -48,3 +48,50 @@ export type ProjectHighlight = {
   partner?: string;
   storySlug?: string;
 };
+
+export type PublicDocument = {
+  title: string;
+  category: "registration" | "governance" | "safeguarding" | "finance";
+  description: string;
+  year?: string;
+  /** Site-relative path under /documents/ when the file is uploaded */
+  href?: string;
+  /** When true, no file yet — visitors request via email */
+  onRequest?: boolean;
+};
+
+export type NewsItem = {
+  slug: string;
+  title: string;
+  date: string;
+  category: "field" | "partnership" | "programme" | "announcement";
+  excerpt: string;
+  body: string[];
+  image?: string;
+  storySlug?: string;
+};
+
+export type LeadershipMember = {
+  name: string;
+  role: string;
+  bio: string;
+  /** Board | management | technical */
+  group: "board" | "management" | "technical";
+};
+
+export type CareerVacancy = {
+  id: string;
+  title: string;
+  location: string;
+  type: "full-time" | "contract" | "consultancy";
+  closingLabel?: string;
+  summary: string;
+  responsibilities: string[];
+  requirements: string[];
+};
+
+export type DonationMethod = {
+  title: string;
+  description: string;
+  details: string[];
+};

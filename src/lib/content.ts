@@ -1,8 +1,13 @@
 import type {
   Affiliation,
+  CareerVacancy,
+  DonationMethod,
   FieldStory,
+  LeadershipMember,
   NavItem,
+  NewsItem,
   ProjectHighlight,
+  PublicDocument,
   Stat,
   ThematicArea,
 } from "@/types";
@@ -519,6 +524,228 @@ export const projectHighlights: ProjectHighlight[] = [
   },
 ];
 
+/** Public downloads — upload PDFs to `public/documents/` to enable direct download links. */
+export const publicDocuments: PublicDocument[] = [
+  {
+    title: "NGO Registration Certificate",
+    category: "registration",
+    description: "Proof of registration under South Sudan NGOs Act 2016.",
+    year: "2016",
+    onRequest: true,
+  },
+  {
+    title: "Organizational Profile",
+    category: "governance",
+    description: "Overview of mandate, thematic areas, geography, and governance.",
+    onRequest: true,
+  },
+  {
+    title: "Annual Report",
+    category: "finance",
+    description: "Summary of programmes, reach, and financial stewardship for the reporting year.",
+    onRequest: true,
+  },
+  {
+    title: "Audited Financial Statements",
+    category: "finance",
+    description: "Independent audit summary where available for partner due diligence.",
+    onRequest: true,
+  },
+  {
+    title: "Child Safeguarding Policy",
+    category: "safeguarding",
+    description: "Standards for working with children and reporting concerns.",
+    onRequest: true,
+  },
+  {
+    title: "PSEA Policy",
+    category: "safeguarding",
+    description: "Prevention of sexual exploitation, abuse, and harassment.",
+    onRequest: true,
+  },
+  {
+    title: "Anti-Fraud & Bribery Policy",
+    category: "governance",
+    description: "Financial integrity and reporting expectations for staff and partners.",
+    onRequest: true,
+  },
+  {
+    title: "Whistle-blowing Policy",
+    category: "governance",
+    description: "Confidential channels for reporting misconduct without retaliation.",
+    onRequest: true,
+  },
+];
+
+export const donationMethods: DonationMethod[] = [
+  {
+    title: "Bank transfer",
+    description: "Preferred for institutional donors and larger gifts.",
+    details: [
+      "Contact finance@mha-ss.org or mobilehumanitarianagency@gmail.com for official account details and payment reference instructions.",
+      "Include your name or organization in the transfer reference so we can acknowledge your gift.",
+    ],
+  },
+  {
+    title: "In-kind contributions",
+    description: "Goods and services aligned to active programmes.",
+    details: [
+      "NFIs, WASH items, and programme inputs may be accepted when they match field needs and quality standards.",
+      "Email us with item descriptions, quantities, and intended location before shipping.",
+    ],
+  },
+  {
+    title: "Partnership funding",
+    description: "Grants and co-funding through UN agencies, NGOs, and institutional donors.",
+    details: [
+      "MHA works with USAID, UNHCR, UNICEF, SSHF, and other partners — use the partner pathway for formal proposals.",
+    ],
+  },
+  {
+    title: "Online giving (coming soon)",
+    description: "Card and mobile-money options are being set up for smaller gifts.",
+    details: [
+      "Until live, start a conversation via the contact form — select “I want to donate” — and our team will guide you.",
+    ],
+  },
+];
+
+export const newsItems: NewsItem[] = [
+  {
+    slug: "youth-training-launch-leer-2023",
+    title: "Youth engagement training launches in Leer County",
+    date: "2023-06-16",
+    category: "programme",
+    excerpt:
+      "MHA launched youth engagement training in Leer under the USAID Youth Engagement Project, with volunteer trainers supporting structured activities.",
+    image: "/images/stories/youth-launch-leer-june-2023.jpg",
+    storySlug: "youth-launch-leer-june-2023",
+    body: [
+      "The launch brought together young people, community leaders, and programme staff to align on safe, structured engagement activities.",
+      "Training modules cover life skills, referral awareness, and coordination with protection actors where risks are identified.",
+      "Partners and donors can follow related field reporting on the Stories and Impact pages.",
+    ],
+  },
+  {
+    slug: "cbp-centre-pigi-canal-opens",
+    title: "Community-based protection centre supported in Pigi/Canal",
+    date: "2023-05-01",
+    category: "field",
+    excerpt:
+      "Infrastructure and facilitation support for a community-based protection centre strengthening local networks in Jonglei State.",
+    image: "/images/stories/cbp-centre-pigi-canal-jonglei.jpg",
+    storySlug: "cbp-centre-pigi-canal-jonglei",
+    body: [
+      "The centre provides a focal point for dialogue, documentation, and referral coordination aligned with national cluster standards.",
+      "MHA teams work with community-based protection members on roles, reporting, and safe referral practice.",
+    ],
+  },
+  {
+    slug: "nfi-distribution-torit-unhcr",
+    title: "NFI distribution completed in Torit with UNHCR",
+    date: "2023-04-12",
+    category: "partnership",
+    excerpt:
+      "Households in Torit, Eastern Equatoria received agreed non-food item kits with verification coordinated alongside UNHCR.",
+    image: "/images/stories/nfi-torit-eastern-equatoria-unhcr.jpg",
+    storySlug: "nfi-torit-eastern-equatoria-unhcr",
+    body: [
+      "Distributions followed beneficiary communication and verification steps agreed with UNHCR and local authorities.",
+      "Logistics and Shelter/NFI teams coordinated last-mile delivery and accountability messaging.",
+    ],
+  },
+  {
+    slug: "listening-posts-leer-expanded",
+    title: "Listening posts expand community reporting in Leer",
+    date: "2023-03-20",
+    category: "field",
+    excerpt:
+      "Weekly listening posts help families report protection risks faster, with volunteers trained alongside MHA protection teams.",
+    image: "/images/stories/listening-posts-leer.jpg",
+    storySlug: "listening-posts-leer",
+    body: [
+      "Community-owned tools shorten the path from incident awareness to coordinated response.",
+      "Escalation pathways were agreed with local leaders for sensitive cases requiring specialized services.",
+    ],
+  },
+  {
+    slug: "website-transparency-resources",
+    title: "MHA publishes transparency resources for partners",
+    date: "2026-05-01",
+    category: "announcement",
+    excerpt:
+      "Governance documents, activity reporting, and due-diligence materials are now easier to find on mha-ss.org.",
+    body: [
+      "The Resources page lists policies and financial documents available on request while direct PDF uploads are finalized.",
+      "Partners seeking formal packs should contact the Juba headquarters or use the contact form with a due-diligence inquiry.",
+    ],
+  },
+];
+
+export const leadershipTeam: LeadershipMember[] = [
+  {
+    name: "John Gatyiel Chuol",
+    role: "Executive Director · Board Member",
+    group: "management",
+    bio: "Leads day-to-day operations and programme delivery, linking field teams with governance oversight and partner coordination.",
+  },
+  {
+    name: "Board of Directors",
+    role: "5 members · Quarterly oversight",
+    group: "board",
+    bio: "Sets strategy, approves policies, and reviews performance. The Executive Director serves on the board to connect governance with operations.",
+  },
+  {
+    name: "Programme Management",
+    role: "Programme & Technical Managers",
+    group: "technical",
+    bio: "Leads thematic implementation across protection, GBV, child protection, WASH, shelter/NFI, livelihoods, and logistics — with Project Technical Managers as required.",
+  },
+  {
+    name: "Finance & Compliance",
+    role: "Financial Controller & accounting team",
+    group: "technical",
+    bio: "Maintains books, internal controls, and reporting aligned with MHA financial, anti-fraud, and whistle-blowing policies.",
+  },
+];
+
+export const careerVacancies: CareerVacancy[] = [
+  {
+    id: "prog-manager-protection",
+    title: "Programme Manager — Protection",
+    location: "Juba, South Sudan (with field travel)",
+    type: "full-time",
+    closingLabel: "Open until filled",
+    summary:
+      "Lead protection programming across Unity and Jonglei, including monitoring, community-based networks, and safe referrals.",
+    responsibilities: [
+      "Oversee protection assessments, monitoring tools, and reporting to clusters and donors.",
+      "Supervise field coordinators and community-based protection focal points.",
+      "Ensure safeguarding and PSEA standards are applied in all activities.",
+    ],
+    requirements: [
+      "5+ years humanitarian protection experience, preferably in South Sudan.",
+      "Strong coordination skills with UN/clusters and local authorities.",
+      "Fluent English; Arabic or local languages an asset.",
+    ],
+  },
+];
+
+export const careersIntro = {
+  title: "Careers at MHA",
+  paragraphs: [
+    "MHA recruits South Sudanese professionals and specialists who can work in remote, volatile contexts with integrity and community respect.",
+    "When no roles are listed below, we still welcome expressions of interest — especially for protection, GBV, child protection, logistics, and MEAL profiles.",
+  ],
+  applyEmail: "mobilehumanitarianagency@gmail.com",
+};
+
+/** Footer & site — replace with live profiles when available */
+export const socialLinks = {
+  website: "https://mha-ss.org",
+  email: "mobilehumanitarianagency@gmail.com",
+} as const;
+
 export const nav: NavItem[] = [
   { label: "Home", href: "/" },
   {
@@ -527,8 +754,9 @@ export const nav: NavItem[] = [
     children: [
       { label: "Our Story", href: "/about#story" },
       { label: "Transparency", href: "/about#transparency" },
-      { label: "Mission & Vision", href: "/about#mission" },
       { label: "Leadership", href: "/about#leadership" },
+      { label: "Resources", href: "/resources" },
+      { label: "Mission & Vision", href: "/about#mission" },
     ],
   },
   {
@@ -545,8 +773,18 @@ export const nav: NavItem[] = [
     ],
   },
   { label: "Impact", href: "/impact" },
+  { label: "News", href: "/news" },
   { label: "Stories", href: "/stories" },
-  { label: "Get Involved", href: "/get-involved" },
+  {
+    label: "Get Involved",
+    href: "/get-involved",
+    children: [
+      { label: "Donate", href: "/donate" },
+      { label: "Partner", href: "/contact" },
+      { label: "Volunteer", href: "/contact" },
+      { label: "Careers", href: "/careers" },
+    ],
+  },
   { label: "Contact", href: "/contact" },
 ];
 

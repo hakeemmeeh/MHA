@@ -20,14 +20,14 @@ const paths = [
     title: "Donate",
     desc: "Financial support helps us reach remote settlements, sustain protection monitoring, and keep field teams equipped.",
     icon: Heart,
-    href: "/contact",
-    cta: "Start a donation conversation",
+    href: "/donate",
+    cta: "How to donate",
   },
   {
     title: "Partner",
     desc: "UN agencies, NGOs, and community structures — we coordinate closely to align programs and accountability.",
     icon: Handshake,
-    href: "/contact",
+    href: "/contact?type=partner",
     cta: "Explore partnership",
   },
   {

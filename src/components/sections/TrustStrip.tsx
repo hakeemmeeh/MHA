@@ -33,8 +33,8 @@ export function TrustStrip() {
             </Link>
           </li>
           <li>
-            <Link href="/contact" className="text-navy underline-offset-4 hover:text-green hover:underline">
-              Due diligence &amp; reports
+            <Link href="/resources" className="text-navy underline-offset-4 hover:text-green hover:underline">
+              Resources &amp; documents
             </Link>
           </li>
         </ul>

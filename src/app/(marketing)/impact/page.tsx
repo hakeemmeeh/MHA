@@ -30,12 +30,20 @@ export default function ImpactPage() {
       <section className="bg-navy-light py-14">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <p className="font-inter text-text-mid">{partnershipTransparency.paragraphs[0]}</p>
-          <Link
-            href="/about#transparency"
-            className="mt-4 inline-block font-inter text-sm font-semibold text-navy underline hover:text-green-dark"
-          >
-            Read our transparency approach →
-          </Link>
+          <div className="mt-4 flex flex-wrap justify-center gap-4">
+            <Link
+              href="/about#transparency"
+              className="font-inter text-sm font-semibold text-navy underline hover:text-green-dark"
+            >
+              Transparency approach →
+            </Link>
+            <Link
+              href="/resources"
+              className="font-inter text-sm font-semibold text-navy underline hover:text-green-dark"
+            >
+              Download resources →
+            </Link>
+          </div>
         </div>
       </section>
       <StatsBar />

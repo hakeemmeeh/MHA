@@ -6,7 +6,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   affiliations,
-  boardInfo,
   capabilities,
   coreValues,
   financialAccountability,
@@ -18,6 +17,7 @@ import {
   strategicPurpose,
   vision,
 } from "@/lib/content";
+import { LeadershipSection } from "@/components/sections/LeadershipSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -242,22 +242,7 @@ export function AboutBody() {
         </div>
       </section>
 
-      <section id="leadership" className="bg-cream py-20">
-        <div className="mx-auto max-w-3xl px-6" data-about-block>
-          <h2 data-about-item className="font-playfair text-3xl font-bold text-navy">
-            Leadership
-          </h2>
-          <p data-about-item className="mt-4 font-inter text-text-mid">
-            MHA is led by <strong>{site.contactPerson}</strong>, who also serves on the Board of
-            Directors — linking governance to programme delivery.
-          </p>
-          <p data-about-item className="mt-4 font-inter text-text-mid">
-            The Board comprises <strong>{boardInfo.size}</strong> members and conducts{" "}
-            <strong>{boardInfo.meetingFrequency}</strong> to review progress, approve policies, and
-            exercise oversight.
-          </p>
-        </div>
-      </section>
+      <LeadershipSection />
 
       <section className="bg-navy-dark py-20 text-white">
         <div className="mx-auto max-w-3xl px-6" data-about-block>
@@ -266,8 +251,11 @@ export function AboutBody() {
           </h2>
           <p data-about-item className="mt-4 font-inter text-white/70">
             MHA maintains documented policies across procurement, safeguarding, PSEA, HR,
-            security, finance, fleet, stock, assets, conduct, anti-fraud, and whistle-blowing.
-            Partner due diligence packs can be shared on request where agreements allow.
+            security, finance, fleet, stock, assets, conduct, anti-fraud, and whistle-blowing.{" "}
+            <Link href="/resources" className="text-green underline-offset-2 hover:underline">
+              View resources &amp; request documents
+            </Link>
+            .
           </p>
           <ul data-about-policies className="mt-8 grid gap-2 font-inter text-sm text-white/60 sm:grid-cols-2">
             {policies.map((p) => (

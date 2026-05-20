@@ -79,12 +79,20 @@ export function CTABand() {
               <Mail className="h-5 w-5" aria-hidden />
             </span>
             <p className="mt-4 font-inter text-sm text-white/80">Ready to help?</p>
-            <Link
-              href="/contact"
-              className="mt-4 inline-flex rounded-full bg-white px-6 py-3 font-inter font-bold text-green transition hover:bg-cream"
-            >
-              Contact Us Today
-            </Link>
+            <div className="mt-4 flex flex-col gap-2">
+              <Link
+                href="/donate"
+                className="inline-flex justify-center rounded-full bg-white px-6 py-3 font-inter font-bold text-green transition hover:bg-cream"
+              >
+                Donate
+              </Link>
+              <Link
+                href="/get-involved"
+                className="inline-flex justify-center rounded-full border border-white/40 px-6 py-2.5 font-inter text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                Partner or volunteer
+              </Link>
+            </div>
           </div>
           <div
             data-cta-r
