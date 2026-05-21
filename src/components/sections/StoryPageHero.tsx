@@ -97,7 +97,7 @@ export function StoryPageHero({ story, thematic }: StoryPageHeroProps) {
     <header
       ref={root}
       data-mha-scroll-hero
-      className="relative -mt-[72px] min-h-[50vh] overflow-hidden bg-navy-dark pt-[72px] lg:-mt-[120px] lg:pt-[120px]"
+      className="relative min-h-[50vh] overflow-hidden bg-navy-dark"
     >
       <div
         ref={maskRef}

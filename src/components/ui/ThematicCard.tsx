@@ -41,7 +41,9 @@ export function ThematicCard({
       className="group relative overflow-hidden rounded-2xl bg-navy-dark shadow-lg"
     >
       <Link href={`/programs/${area.slug}`} className="block">
-        <div className="relative aspect-[16/9] w-full overflow-hidden">
+        <div
+          className={`relative w-full overflow-hidden ${featured ? "aspect-[21/9] max-h-[240px] sm:max-h-[300px] md:max-h-[320px]" : "aspect-[16/9]"}`}
+        >
           <div
             ref={imgMoveRef}
             className="absolute inset-0 h-[118%] w-full -translate-y-[8%] will-change-transform"
@@ -55,44 +57,65 @@ export function ThematicCard({
               sizes={featured ? "(max-width:768px) 100vw, 66vw" : "(max-width:768px) 100vw, 50vw"}
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/62 via-navy-dark/28 to-navy-dark/12 transition group-hover:via-navy-dark/34 group-hover:to-navy-dark/18" />
+          {!featured && (
+            <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/62 via-navy-dark/28 to-navy-dark/12 transition group-hover:via-navy-dark/34 group-hover:to-navy-dark/18" />
+          )}
           <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-green/90 px-3 py-1 font-inter text-xs font-semibold text-white">
             <Icon className="h-3.5 w-3.5" aria-hidden />
             Program
           </span>
-          <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-            <h3 className="font-playfair text-2xl font-bold text-white md:text-3xl">
+          {!featured && (
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+              <h3 className="font-playfair text-2xl font-bold text-white md:text-3xl">
+                {area.title}
+              </h3>
+              <p className="mt-2 max-w-xl font-inter text-sm text-white/80">
+                {area.shortDesc}
+              </p>
+              <span className="mt-4 inline-flex font-inter text-sm font-semibold text-green transition group-hover:translate-x-2">
+                Explore program →
+              </span>
+            </div>
+          )}
+        </div>
+        {featured && (
+          <div className="bg-navy-dark px-4 py-2.5 md:px-5 md:py-3">
+            <h3 className="font-playfair text-base font-bold text-white md:text-lg">
               {area.title}
             </h3>
-            <p className="mt-2 max-w-xl font-inter text-sm text-white/80">
+            <p className="mt-1 line-clamp-2 max-w-3xl font-inter text-xs leading-relaxed text-white/80 md:text-[13px]">
               {area.shortDesc}
             </p>
-            <span className="mt-4 inline-flex font-inter text-sm font-semibold text-green transition group-hover:translate-x-2">
+            <span className="mt-2 inline-flex font-inter text-xs font-semibold text-green transition group-hover:translate-x-2">
               Explore program →
             </span>
           </div>
-        </div>
+        )}
       </Link>
       {fieldStory ? (
-        <div className="border-t border-white/10 bg-navy-dark px-5 py-3 md:px-8">
+        <div
+          className={`border-t border-white/10 bg-navy-dark ${featured ? "px-4 py-2 md:px-5" : "px-5 py-3 md:px-8"}`}
+        >
           <p className="font-inter text-[10px] font-semibold uppercase tracking-wider text-white/45">
             From the field
           </p>
           <Link
             href={`/stories/${fieldStory.slug}`}
-            className="mt-1 line-clamp-2 font-inter text-sm font-semibold text-green underline-offset-2 hover:underline"
+            className={`mt-0.5 line-clamp-2 font-inter font-semibold text-green underline-offset-2 hover:underline ${featured ? "text-xs" : "text-sm"}`}
           >
             {fieldStory.title}
           </Link>
         </div>
       ) : (
-        <div className="border-t border-white/10 bg-navy-dark px-5 py-3 md:px-8">
+        <div
+          className={`border-t border-white/10 bg-navy-dark ${featured ? "px-4 py-2 md:px-5" : "px-5 py-3 md:px-8"}`}
+        >
           <p className="font-inter text-[10px] font-semibold uppercase tracking-wider text-white/45">
             Field evidence
           </p>
           <Link
             href="/stories"
-            className="mt-1 font-inter text-sm font-semibold text-green underline-offset-2 hover:underline"
+            className={`mt-0.5 font-inter font-semibold text-green underline-offset-2 hover:underline ${featured ? "text-xs" : "text-sm"}`}
           >
             Browse field stories →
           </Link>

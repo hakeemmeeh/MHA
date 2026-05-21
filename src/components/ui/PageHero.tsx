@@ -112,7 +112,7 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
       ref={root}
       id={id}
       data-mha-scroll-hero
-      className="relative -mt-[72px] min-h-[42vh] overflow-hidden bg-navy-dark pt-[72px] pb-16 lg:-mt-[120px] lg:min-h-[48vh] lg:pt-[120px]"
+      className="relative min-h-[42vh] overflow-hidden bg-navy-dark pb-16 lg:min-h-[48vh]"
     >
       {image && showMaskedImage && (
         <>
