@@ -3,11 +3,23 @@ import { legacyBlogStoryRedirects } from "./src/lib/blog";
 
 const nextConfig: NextConfig = {
   async redirects() {
-    return Object.entries(legacyBlogStoryRedirects).map(([slug, destination]) => ({
-      source: `/blog/${slug}`,
-      destination,
-      permanent: true,
-    }));
+    return [
+      ...Object.entries(legacyBlogStoryRedirects).map(([slug, destination]) => ({
+        source: `/blog/${slug}`,
+        destination,
+        permanent: true,
+      })),
+      {
+        source: "/stories/nfi-torit-eastern-equatoria-unhcr",
+        destination: "/stories/capacity-building-cbp-leaders",
+        permanent: true,
+      },
+      {
+        source: "/stories/cbp-centre-pigi-canal-jonglei",
+        destination: "/stories/cbp-centre-dablual-mayiandit",
+        permanent: true,
+      },
+    ];
   },
   experimental: {
     viewTransition: true,

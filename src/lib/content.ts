@@ -72,11 +72,11 @@ export const thematicCrossCutting =
 export const thematicAreas: ThematicArea[] = [
   {
     slug: "protection",
-    title: "Protection",
+    title: "General Protection",
     shortDesc:
-      "Minimizing harm and upholding rights through monitoring, risk assessment, case management, and community-based prevention.",
+      "Safety, dignity, and rights for refugees, returnees, IDPs, and host communities through monitoring, case management, and community-based protection.",
     fullDesc:
-      "MHA’s protection work aims to minimize harm, enhance safety, and uphold individuals’ rights during displacement and crises. Teams conduct routine protection monitoring and risk assessment, support case management, and make referrals when specialized services sit outside MHA’s direct scope—so people still reach comprehensive support. Community-based protection networks underpin practical action to reduce vulnerability to violence and abuse. We train community members on fundamental human rights so they can advocate for their own protection needs, pair targeted assistance with monitoring insights for the most vulnerable, and facilitate documentation and access to legal aid, social support, and administrative procedures where appropriate.",
+      "Our General Protection program promotes the safety, dignity, and rights of vulnerable populations affected by conflict, displacement, and humanitarian crises. We provide protection monitoring, case management, referrals, awareness sessions, and community-based protection services to individuals at risk, including refugees, returnees, IDPs, and host communities. The program also strengthens community resilience by supporting safe reporting mechanisms, legal documentation support, and advocacy for the protection of human rights. Through collaboration with local authorities and humanitarian partners, we work to ensure inclusive and accountable protection services for all affected populations.",
     icon: "shield",
     image: programImage("protection"),
     keyActivities: [
@@ -91,11 +91,11 @@ export const thematicAreas: ThematicArea[] = [
   },
   {
     slug: "gbv",
-    title: "Gender-Based Violence",
+    title: "Gender-Based Violence (GBV)",
     shortDesc:
-      "Survivor-focused GBV prevention and response—referral pathways, safe service delivery, and community awareness.",
+      "Preventing and responding to gender-based violence with survivor-centered services, safe spaces, and community prevention.",
     fullDesc:
-      "MHA advances GBV prevention and response with survivor-focused services and community awareness. We coordinate with healthcare providers, authorities, and partners on protecting women and children from sexual and gender-based violence and wider protection risks—including school-related GBV through support to gender activists, school management committees, and PTAs to foster safer learning environments. Community sessions with parents, religious leaders, chiefs, and judicial staff address women’s rights and the consequences of GBV, with life-saving information on where to access services. Services mapping informs safe referral pathways; where possible we support survivors to access justice and work with specialized actors under confidentiality and informed consent.",
+      "Our GBV program focuses on preventing and responding to all forms of gender-based violence affecting women, girls, men, and boys. We provide survivor-centered services including psychosocial support, referrals, awareness campaigns, and safe spaces that promote dignity, healing, and protection. The program also engages communities, leaders, youth groups, and service providers in GBV prevention and risk mitigation activities. Through training, advocacy, and community dialogue, we aim to challenge harmful social norms and strengthen protection systems for vulnerable individuals.",
     icon: "heart",
     image: programImage("gbv"),
     keyActivities: [
@@ -112,9 +112,9 @@ export const thematicAreas: ThematicArea[] = [
     slug: "child-protection",
     title: "Child Protection",
     shortDesc:
-      "Keeping children safe and supported—monitoring, consultations, referrals, and stronger protective environments.",
+      "Safeguarding children from abuse, neglect, and exploitation through case management, reunification, and child-friendly spaces.",
     fullDesc:
-      "Child protection programming keeps children safe, supported, and able to access essential services. At the onset of disasters MHA can provide safe spaces, psychological first aid, and emergency supplies alongside awareness on child rights, safeguarding, and protection from violence, exploitation, and abuse. We help establish systems to identify and report concerns, train local staff, leaders, and caregivers in best practices, and facilitate holistic access to health, education, and psychosocial support. Where systems allow, we support tracing and reunification with families—or appropriate alternative care when reunification is not possible.",
+      "Our Child Protection program works to safeguard children from abuse, neglect, exploitation, violence, and harmful practices. We support vulnerable children through case management, family tracing and reunification, psychosocial support, child-friendly spaces, and awareness campaigns that promote child rights and wellbeing. We also collaborate with caregivers, schools, community leaders, and local authorities to strengthen child protection systems and improve community-based care mechanisms. The program emphasizes safe learning environments and increased protection for children affected by emergencies and displacement.",
     icon: "baby",
     image: programImage("child-protection"),
     keyActivities: [
@@ -148,11 +148,11 @@ export const thematicAreas: ThematicArea[] = [
   },
   {
     slug: "hlp",
-    title: "HLP & Justice",
+    title: "HLP and Access to Justice",
     shortDesc:
-      "Housing, land, and property rights plus legal awareness, documentation support, and access to remedies.",
+      "Housing, land, and property rights support with legal awareness, mediation, referrals, and community dialogue for peaceful resolution.",
     fullDesc:
-      "HLP and justice work helps households resolve disputes and barriers linked to housing, land, and property. MHA conducts community sensitization and legal awareness on HLP rights within broader human rights and legal frameworks, assists with alternative dispute resolution—especially lost documents and land registration—and supports referrals to legal and administrative services. In return areas we document HLP contributing factors and engage local authorities and community leaders to pursue amicable solutions, with emphasis on access, confidentiality, and conflict sensitivity.",
+      "Our Housing, Land, and Property (HLP) and Access to Justice program supports vulnerable populations in addressing land disputes, property rights issues, and legal challenges. We provide legal awareness, mediation support, legal referrals, and community dialogue initiatives to promote peaceful conflict resolution and justice. The program works closely with traditional leaders, legal actors, and local authorities to strengthen fair and inclusive justice systems. Through advocacy and legal empowerment, we help individuals and communities secure their rights and improve access to justice services.",
     icon: "home",
     image: programImage("hlp"),
     keyActivities: [
@@ -167,11 +167,11 @@ export const thematicAreas: ThematicArea[] = [
   },
   {
     slug: "youth-engagement",
-    title: "Youth Engagement",
+    title: "Community and Youth Empowerment",
     shortDesc:
-      "Youth consultations, safe spaces, skills, mentorship, and positive engagement to build resilience.",
+      "Leadership, skills development, and social inclusion for youth and communities through peacebuilding, sports, and entrepreneurship.",
     fullDesc:
-      "Youth engagement builds resilience through literacy and numeracy—including storytelling, interactive learning, and digital tools where feasible—plus budgeting, financial literacy, and practical math for daily decisions. Hands-on vocational training in agriculture, entrepreneurship, and technology, with workshops and mentorship, supports employability. Peer-led activities, community service, and psychosocial referrals help youth support one another and reduce harmful coping. MHA has implemented youth engagement activities with EDC, DRC, SFCG, and four other national NGOs across Leer, Mayiandit, Panyijiar, Duk, and Uror counties.",
+      "Our Community and Youth Empowerment program promotes active participation, leadership, and social inclusion among youth and community members. We support skills development, peacebuilding initiatives, sports activities, entrepreneurship, and community engagement programs that strengthen resilience and self-reliance. The program also creates opportunities for youth to participate in decision-making processes and community development activities. By empowering young people and local groups, we contribute to social cohesion, conflict prevention, and sustainable community transformation.",
     icon: "graduation-cap",
     image: programImage("youth-engagement"),
     keyActivities: [
@@ -188,9 +188,9 @@ export const thematicAreas: ThematicArea[] = [
     slug: "wash",
     title: "WASH",
     shortDesc:
-      "Safe water, sanitation, and hygiene—including water points, household sanitation support, and hygiene promotion.",
+      "Safe water, sanitation, and hygiene through water points, hygiene materials, and community water and hygiene committees.",
     fullDesc:
-      "Water, sanitation, and hygiene interventions improve access to safe water and hygiene practices to reduce disease. Where appropriate this includes water trucking or rehabilitation, installing or repairing water points, supporting household sanitation items, and promoting safe water handling. MHA promotes hygiene through community volunteers and targeted messaging on handwashing, latrine use, and menstrual hygiene management. Where possible, WASH incorporates community-driven maintenance and feedback so services last beyond initial distribution.",
+      "Our Water, Sanitation, and Hygiene (WASH) program improves access to safe drinking water, sanitation facilities, and hygiene services for vulnerable communities. We support the rehabilitation and construction of water points, distribution of hygiene materials, and promotion of safe hygiene practices to reduce waterborne diseases. The program also strengthens community participation through the formation and training of water management committees and hygiene promoters. By improving sanitation and encouraging healthy practices, we contribute to better public health and community wellbeing.",
     icon: "droplets",
     image: programImage("wash"),
     keyActivities: [
@@ -205,11 +205,11 @@ export const thematicAreas: ThematicArea[] = [
   },
   {
     slug: "shelter-nfis",
-    title: "Shelter & NFIs",
+    title: "NFIs/Shelter",
     shortDesc:
-      "Emergency shelter support and essential non-food items—prioritizing vulnerable households and safe, dignified distribution.",
+      "Emergency and recovery assistance with essential household items and temporary or durable shelter for displaced families.",
     fullDesc:
-      "Shelter and NFI assistance helps households meet immediate safety and dignity needs. Activities include distributing essential NFIs—blankets, hygiene items, cooking utensils, and weather-appropriate supplies—and supporting emergency shelter options suited to local context. MHA works with communities to identify shelter gaps, prioritize vulnerable households, and strengthen preparedness. Where relevant we coordinate referrals for specialized shelter support and apply safe distribution practices to protect affected people and reduce risks.",
+      "Our Non-Food Items (NFIs) and Shelter program provides emergency and recovery assistance to displaced and vulnerable households. We distribute essential household items such as blankets, mosquito nets, kitchen sets, sleeping mats, and dignity kits to support families affected by crises. The program also supports the construction and rehabilitation of temporary and durable shelters to improve safety and living conditions. Through coordinated humanitarian response efforts, we help communities regain stability and dignity during emergencies and recovery periods.",
     icon: "package",
     image: programImage("shelter-nfis"),
     keyActivities: [
@@ -224,11 +224,11 @@ export const thematicAreas: ThematicArea[] = [
   },
   {
     slug: "food-security-livelihoods",
-    title: "Food Security & Livelihoods",
+    title: "Food Security and Livelihoods",
     shortDesc:
-      "Food, cash, or vouchers where appropriate; livelihood inputs, market linkages, and feedback-informed targeting.",
+      "Reducing hunger and building household resilience through agriculture, vocational training, and income-generating activities.",
     fullDesc:
-      "Food security and livelihoods assistance strengthens household food security through short- and medium-term strategies. Activities can include food, cash, or vouchers where suitable; distribution of livelihood inputs such as agricultural tools or small-scale supplies; and connections to services that help households rebuild productive capacity. MHA supports community-based targeting where possible, offers guidance on livelihood practices, and monitors food security conditions and community feedback to adjust assistance and buffer seasonal shocks and longer-term vulnerability.",
+      "Our Food Security and Livelihoods program aims to reduce hunger and improve household resilience through sustainable livelihood opportunities. We support vulnerable households with agricultural inputs, vocational skills training, small business support, and income-generating activities to enhance food production and economic stability. The program also promotes climate-smart agriculture, financial literacy, and community-based livelihood initiatives that strengthen self-reliance. By improving access to food and economic opportunities, we help communities recover from shocks and build sustainable futures.",
     icon: "wheat",
     image: programImage("food-security-livelihoods"),
     keyActivities: [
@@ -262,11 +262,11 @@ export const thematicAreas: ThematicArea[] = [
   },
   {
     slug: "health",
-    title: "Health Support",
+    title: "Health",
     shortDesc:
-      "Community mobilization, health awareness, and referral networks aligned with Ministry of Health and partners.",
+      "Essential healthcare, disease prevention, and maternal and child health for vulnerable and underserved populations.",
     fullDesc:
-      "Health support strengthens access to essential health information and referrals in hard-to-reach communities. MHA supports health outcomes through community mobilization, referral networks, and coordination with the Ministry of Health and partners where activities fit the organizational mandate—consistent with the cross-cutting emphasis on referrals, confidentiality, and integrated response alongside nutrition, WASH, and protection.",
+      "Our Health program improves access to essential healthcare services for vulnerable and underserved populations. We support primary healthcare services, health awareness campaigns, disease prevention activities, maternal and child health interventions, and referrals to specialized care when needed. The program also strengthens community health systems through training of healthcare workers, support to health facilities, and promotion of preventive health practices. By enhancing healthcare access and awareness, we contribute to healthier and more resilient communities.",
     icon: "stethoscope",
     image: programImage("health"),
     keyActivities: [
@@ -281,11 +281,11 @@ export const thematicAreas: ThematicArea[] = [
   },
   {
     slug: "education-in-emergencies",
-    title: "Education in Emergencies",
+    title: "Education",
     shortDesc:
-      "Learning spaces, materials, safe access to education, teacher/community safeguarding, and inclusive referrals.",
+      "Inclusive, safe, and quality learning for children and youth affected by emergencies and displacement.",
     fullDesc:
-      "Education programming promotes children’s learning and wellbeing in displacement or crisis settings. It often includes creating or restoring learning spaces, providing school supplies and materials, and supporting safe access to education. MHA may integrate psychosocial support through learning activities, train teachers and communities on safeguarding, and refer children with additional protection needs. Interventions aim to be inclusive, reduce barriers to attendance, and coordinate with local education authorities or partners.",
+      "Our Education program promotes inclusive, safe, and quality learning opportunities for children and youth affected by emergencies and displacement. We support school enrollment, distribution of learning materials, teacher capacity building, and rehabilitation of learning spaces to improve access to education. The program also prioritizes education for vulnerable groups including girls and children with disabilities. Through community engagement and child-centered approaches, we aim to create supportive learning environments that enhance academic performance and personal development.",
     icon: "book-open",
     image: programImage("education-in-emergencies"),
     keyActivities: [
@@ -465,14 +465,6 @@ export const projectHighlights: ProjectHighlight[] = [
   },
   {
     dateLabel: "—",
-    title: "Community-based protection centre",
-    summary:
-      "Community-based protection infrastructure in Pigi/Canal supporting local protection networks.",
-    location: "Pigi/Canal, Jonglei State",
-    storySlug: "cbp-centre-pigi-canal-jonglei",
-  },
-  {
-    dateLabel: "—",
     title: "CBP network training",
     summary:
       "Training for community-based protection members in Dablual / Mayiandit County.",
@@ -481,10 +473,10 @@ export const projectHighlights: ProjectHighlight[] = [
   },
   {
     dateLabel: "—",
-    title: "Community-based protection centre (Dablual)",
+    title: "Community-based protection centre",
     summary:
-      "Established / supported community-based protection centre in Dablual, Mayiandit.",
-    location: "Mayiandit County, Unity State",
+      "Community-based protection infrastructure in Pigi/Canal supporting local protection networks.",
+    location: "Pigi/Canal, Jonglei State",
     storySlug: "cbp-centre-dablual-mayiandit",
   },
   {
@@ -497,19 +489,11 @@ export const projectHighlights: ProjectHighlight[] = [
   },
   {
     dateLabel: "—",
-    title: "NFI distribution",
+    title: "NFI distribution in Torit",
     summary:
-      "Distribution of non-food items in Torit as part of UNHCR-supported response activities.",
-    location: "Torit, Eastern Equatoria",
+      "Distribution of core relief items and NFIs in Torit, Eastern Equatoria State, under a UNHCR-funded protection monitoring project.",
+    location: "Torit, Eastern Equatoria State",
     partner: "UNHCR",
-    storySlug: "nfi-torit-eastern-equatoria-unhcr",
-  },
-  {
-    dateLabel: "—",
-    title: "Capacity-building for CBP actors",
-    summary:
-      "Capacity-building for community leaders and members of community-based protection networks.",
-    location: "Unity / Jonglei (field rotations)",
     storySlug: "capacity-building-cbp-leaders",
   },
   {
@@ -736,13 +720,13 @@ export const nav: NavItem[] = [
     label: "Programs",
     href: "/programs",
     children: [
-      { label: "Protection", href: "/programs/protection" },
-      { label: "Gender-Based Violence", href: "/programs/gbv" },
+      { label: "General Protection", href: "/programs/protection" },
+      { label: "Gender-Based Violence (GBV)", href: "/programs/gbv" },
       { label: "Child Protection", href: "/programs/child-protection" },
       { label: "Community Engagement", href: "/programs/community-engagement" },
-      { label: "HLP & Justice", href: "/programs/hlp" },
-      { label: "Youth Engagement", href: "/programs/youth-engagement" },
-      { label: "Shelter & NFIs", href: "/programs/shelter-nfis" },
+      { label: "HLP and Access to Justice", href: "/programs/hlp" },
+      { label: "Community and Youth Empowerment", href: "/programs/youth-engagement" },
+      { label: "NFIs/Shelter", href: "/programs/shelter-nfis" },
     ],
   },
   { label: "Impact", href: "/impact" },
@@ -932,19 +916,6 @@ export const fieldStories: FieldStory[] = [
     ],
   },
   {
-    slug: "cbp-centre-pigi-canal-jonglei",
-    title: "Community-based protection centre in Pigi/Canal",
-    excerpt:
-      "Infrastructure and community structures supporting protection monitoring and response in a Jonglei corridor community.",
-    outcome: "A dedicated hub now anchors local protection monitoring and safer referral dialogue.",
-    location: "Pigi/Canal, Jonglei State",
-    image: storyImage("cbp-centre-pigi-canal-jonglei", "protection"),
-    thematicSlug: "protection",
-    body: [
-      "The centre supports community-based protection networks to document risks and coordinate with wider protection actors where needed.",
-    ],
-  },
-  {
     slug: "cbp-training-dablual-mayiandit",
     title: "CBP members trained in Dablual, Mayiandit",
     excerpt:
@@ -959,14 +930,15 @@ export const fieldStories: FieldStory[] = [
   },
   {
     slug: "cbp-centre-dablual-mayiandit",
-    title: "Protection centre in Dablual, Mayiandit",
+    title: "Protection centre in Pigi/Canal",
     excerpt:
-      "A dedicated space for community-based protection activities, complementing outreach and training in the county.",
-    outcome: "Protection dialogue and follow-up now has a consistent, community-accessible venue.",
-    location: "Mayiandit County, Unity State",
-    image: storyImage("cbp-centre-dablual-mayiandit", "protection"),
+      "Infrastructure and community structures supporting protection monitoring and response in Pigi/Canal, Jonglei State.",
+    outcome: "A dedicated hub now anchors local protection monitoring and safer referral dialogue.",
+    location: "Pigi/Canal, Jonglei State",
+    image: storyImage("cbp-centre-pigi-canal-jonglei", "protection"),
     thematicSlug: "protection",
     body: [
+      "The centre in Pigi/Canal supports community-based protection networks to document risks and coordinate with wider protection actors where needed.",
       "Centres are part of MHA’s approach to keep protection dialogue and support close to affected populations.",
     ],
   },
@@ -984,29 +956,18 @@ export const fieldStories: FieldStory[] = [
     ],
   },
   {
-    slug: "nfi-torit-eastern-equatoria-unhcr",
-    title: "NFI distribution in Torit (UNHCR project)",
-    excerpt:
-      "Distribution of non-food items in Torit, Eastern Equatoria, implemented under the UNHCR project framework.",
-    outcome: "Households received agreed NFI kits with verification steps coordinated with UNHCR and authorities.",
-    location: "Torit, Eastern Equatoria",
-    image: storyImage("nfi-torit-eastern-equatoria-unhcr", "logistics"),
-    thematicSlug: "logistics",
-    body: [
-      "Distributions followed agreed beneficiary communication and verification approaches with UNHCR and local authorities.",
-    ],
-  },
-  {
     slug: "capacity-building-cbp-leaders",
-    title: "Capacity-building for protection network leaders",
+    title: "Core relief item and NFI distribution in Torit",
     excerpt:
-      "Training for community leaders and community-based protection network members on roles, reporting, and safe referral practice.",
-    outcome: "Networks across counties share a more consistent baseline for safe reporting and referrals.",
-    location: "Unity & Jonglei states",
-    image: storyImage("capacity-building-cbp-leaders", "protection"),
-    thematicSlug: "protection",
+      "Distribution of core relief items and NFIs in Torit, Eastern Equatoria State, under a UNHCR-funded protection monitoring project.",
+    outcome:
+      "Households received essential NFIs with verification and coordination through the UNHCR-funded protection monitoring project.",
+    location: "Torit, Eastern Equatoria State",
+    image: storyImage("nfi-torit-eastern-equatoria-unhcr", "shelter-nfis"),
+    thematicSlug: "shelter-nfis",
     body: [
-      "Building consistent skills across counties helps networks support each other and stay aligned to national cluster standards.",
+      "MHA supported distributions of core relief items and non-food items to affected households in Torit, Eastern Equatoria State.",
+      "The activity was implemented as part of a protection monitoring project funded by UNHCR, with beneficiary communication and verification coordinated with UNHCR and local authorities.",
     ],
   },
 ];
