@@ -96,6 +96,12 @@ export type DonationMethod = {
   details: string[];
 };
 
+export type BlogGalleryImage = {
+  src: string;
+  caption: string;
+  alt?: string;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -104,6 +110,8 @@ export type BlogPost = {
   category: "field-reflection" | "programme" | "partnership" | "editorial";
   image: string;
   body: string[];
+  /** Field report photos with captions from programme documents */
+  gallery?: BlogGalleryImage[];
   /** When set, full narrative lives on /stories/[slug] */
   storySlug?: string;
   author?: string;

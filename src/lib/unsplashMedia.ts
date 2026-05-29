@@ -28,11 +28,14 @@ const PROGRAM_UNSPLASH: Record<string, string> = {
   "shelter-nfis": unsplash("1516738901171-8eb4fc13bd20"), // humanitarian supplies / distribution
 };
 
+/** Field stories that always use MHA photos under public/images/stories/ */
+const STORY_LOCAL_SLUGS = new Set([
+  "youth-launch-leer-june-2023",
+  "youth-skills-dukor",
+]);
+
 /** When multiple stories share an Unsplash thematic, override per slug */
-const STORY_UNSPLASH_BY_SLUG: Record<string, string> = {
-  "youth-skills-dukor": unsplash("1523580494863-6f3031224c94"),
-  "youth-launch-leer-june-2023": unsplash("1524178232363-1fb2b075b655"),
-};
+const STORY_UNSPLASH_BY_SLUG: Record<string, string> = {};
 
 const localProgram = (slug: string) => `/images/programs/${slug}.jpg`;
 const localStory = (slug: string) => `/images/stories/${slug}.jpg`;
@@ -42,6 +45,9 @@ export function programImage(slug: string): string {
 }
 
 export function storyImage(slug: string, thematicSlug: string): string {
+  if (STORY_LOCAL_SLUGS.has(slug)) {
+    return localStory(slug);
+  }
   if (!UNSPLASH_THEMATIC_SLUGS.has(thematicSlug)) {
     return localStory(slug);
   }

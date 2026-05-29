@@ -1,8 +1,9 @@
 import type { BlogPost } from "@/types";
+import { pictorialBlogPosts } from "@/lib/blog-pictorials";
 
 /**
- * Insights / blog — editorial & commentary only.
- * Field narratives live exclusively on /stories (no mirroring).
+ * Insights / blog — editorial commentary and programme pictorials.
+ * Long-form field narratives live on /stories.
  */
 const editorialPosts: BlogPost[] = [
   {
@@ -23,7 +24,7 @@ const editorialPosts: BlogPost[] = [
 ];
 
 export function getBlogPosts(): BlogPost[] {
-  return [...editorialPosts].sort(
+  return [...pictorialBlogPosts, ...editorialPosts].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
 }
@@ -32,16 +33,4 @@ export function getBlogPost(slug: string): BlogPost | undefined {
   return getBlogPosts().find((p) => p.slug === slug);
 }
 
-/** Redirect legacy story-mirror URLs (if any were shared) to canonical stories. */
-export const legacyBlogStoryRedirects: Record<string, string> = {
-  "story-listening-posts-leer": "/stories/listening-posts-leer",
-  "story-safe-space-mayiandit": "/stories/safe-space-mayiandit",
-  "story-youth-launch-leer-june-2023": "/stories/youth-launch-leer-june-2023",
-  "story-youth-skills-dukor": "/stories/youth-skills-dukor",
-  "story-cbp-centre-pigi-canal-jonglei": "/stories/cbp-centre-dablual-mayiandit",
-  "story-cbp-training-dablual-mayiandit": "/stories/cbp-training-dablual-mayiandit",
-  "story-cbp-centre-dablual-mayiandit": "/stories/cbp-centre-dablual-mayiandit",
-  "story-mayiandit-leaders-cultural-norms": "/stories/mayiandit-leaders-cultural-norms",
-  "story-nfi-torit-eastern-equatoria-unhcr": "/stories/capacity-building-cbp-leaders",
-  "story-capacity-building-cbp-leaders": "/stories/capacity-building-cbp-leaders",
-};
+export { legacyBlogStoryRedirects } from "@/lib/blog-redirects";

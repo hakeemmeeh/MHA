@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { legacyBlogStoryRedirects } from "./src/lib/blog";
+import { legacyBlogStoryRedirects } from "./src/lib/blog-redirects";
 
 const nextConfig: NextConfig = {
   async redirects() {

@@ -58,7 +58,7 @@ export function ThematicCard({
             />
           </div>
           {!featured && (
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/62 via-navy-dark/28 to-navy-dark/12 transition group-hover:via-navy-dark/34 group-hover:to-navy-dark/18" />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/75 via-navy-dark/20 to-transparent transition group-hover:from-navy-dark/80" />
           )}
           <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-green/90 px-3 py-1 font-inter text-xs font-semibold text-white">
             <Icon className="h-3.5 w-3.5" aria-hidden />

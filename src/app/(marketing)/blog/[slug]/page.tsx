@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogPhotoGallery } from "@/components/blog/BlogPhotoGallery";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
 import { marketingPageMetadata } from "@/lib/social-metadata";
@@ -70,6 +71,20 @@ export default async function BlogPostPage({ params }: Props) {
               <p key={para.slice(0, 40)}>{para}</p>
             ))}
           </div>
+          {post.gallery && post.gallery.length > 0 ? (
+            <BlogPhotoGallery images={post.gallery} />
+          ) : null}
+          {post.storySlug ? (
+            <p className="mt-10 rounded-xl border border-border bg-white px-5 py-4 font-inter text-sm text-text-mid">
+              Related field story:{" "}
+              <Link
+                href={`/stories/${post.storySlug}`}
+                className="font-semibold text-green hover:text-green-dark"
+              >
+                Read the narrative →
+              </Link>
+            </p>
+          ) : null}
           <p className="mt-10 border-t border-border pt-8">
             <Link href="/blog" className="font-inter text-sm font-semibold text-navy hover:underline">
               ← All insights

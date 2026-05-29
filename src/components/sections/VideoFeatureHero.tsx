@@ -15,11 +15,11 @@ export function VideoFeatureHero() {
         alt=""
         fill
         priority
-        className="object-cover opacity-60"
+        className="object-cover"
         sizes="100vw"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-r from-navy-dark/95 via-navy-dark/70 to-navy-dark/40"
+        className="absolute inset-0 bg-gradient-to-r from-navy-dark/85 via-navy-dark/45 to-transparent"
         aria-hidden
       />
       <div className="relative z-10 mx-auto flex min-h-[56vh] max-w-6xl flex-col justify-center px-4 py-20 sm:px-6 lg:min-h-[64vh]">

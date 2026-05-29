@@ -80,13 +80,13 @@ export const thematicAreas: ThematicArea[] = [
     icon: "shield",
     image: programImage("protection"),
     keyActivities: [
-      "Protection monitoring, risk assessment, and reporting",
-      "Case management and referrals to specialized services",
-      "Community-based prevention, documentation, and access to services",
+      "Mobile protection monitoring, focus group discussions, and monthly reporting to the cluster",
+      "Community-based protection network (CBPN) training on PSN identification and referral pathways",
+      "Individual protection assistance (IPA), case management, and coordinated referrals to specialized actors",
     ],
     impactStats: [
-      { value: "8", label: "Counties with active monitoring" },
-      { value: "82+", label: "Staff contributing to protection outcomes" },
+      { value: "15,600+", label: "People reached through scaled Leer protection programming (2023)" },
+      { value: "1,900+", label: "Referrals facilitated to health, shelter, food, and other services" },
     ],
   },
   {
@@ -118,13 +118,13 @@ export const thematicAreas: ThematicArea[] = [
     icon: "baby",
     image: programImage("child-protection"),
     keyActivities: [
-      "Monitoring, consultations, and case referral pathways",
-      "Prevention: caregiving, safeguarding, and reporting awareness",
-      "School-based protection and community response mechanisms where feasible",
+      "Child-friendly spaces (CFS) with structured play, MHPSS, and age-group activities",
+      "Caregiver and community sessions on child rights, abuse, neglect, and safe referral pathways",
+      "Family tracing and reunification, case management, and coordination with UNICEF and partners",
     ],
     impactStats: [
-      { value: "Rapid", label: "Emergency response activation" },
-      { value: "Community", label: "Rights awareness sessions" },
+      { value: "2,600+", label: "Children reached through CFS activities in one month (Leer, 2023)" },
+      { value: "4", label: "Core payams with active child protection outreach" },
     ],
   },
   {
@@ -171,17 +171,17 @@ export const thematicAreas: ThematicArea[] = [
     shortDesc:
       "Leadership, skills development, and social inclusion for youth and communities through peacebuilding, sports, and entrepreneurship.",
     fullDesc:
-      "Our Community and Youth Empowerment program promotes active participation, leadership, and social inclusion among youth and community members. We support skills development, peacebuilding initiatives, sports activities, entrepreneurship, and community engagement programs that strengthen resilience and self-reliance. The program also creates opportunities for youth to participate in decision-making processes and community development activities. By empowering young people and local groups, we contribute to social cohesion, conflict prevention, and sustainable community transformation.",
+      "Our Community and Youth Empowerment program promotes active participation, leadership, and social inclusion among youth and community members. As a USAID Youth Empowerment Activity (YEA) anchor organization with EDC, MHA runs pathway 1 and pathway 2 classes across Leer and Mayiandit counties—covering basic education literacy and numeracy, Work Ready Now, soft skills, and wellbeing—with youth corps leaders, local authorities, and community venues verified for safety and access. We support skills development, peacebuilding initiatives, sports activities, entrepreneurship, and community engagement that strengthen resilience and self-reliance, while creating opportunities for youth to participate in decision-making and community development. By empowering young people and local groups, we contribute to social cohesion, conflict prevention, and sustainable community transformation.",
     icon: "graduation-cap",
     image: programImage("youth-engagement"),
     keyActivities: [
-      "Literacy, numeracy, financial literacy, and digital learning where feasible",
-      "Vocational skills in agriculture, entrepreneurship, and technology",
-      "Peer outreach, community service, and partnerships (EDC, DRC, SFCG + national NGOs)",
+      "USAID YEA classes: literacy, numeracy, Work Ready Now, and soft-skills pathways (Leer & Mayiandit)",
+      "Training of trainers, classroom monitoring, and youth corps mobilization with YCLs and YLSOs",
+      "Partnerships with EDC, DRC, SFCG, and national NGOs; peer outreach and community service",
     ],
     impactStats: [
-      { value: "Multi-partner", label: "Youth program collaborations" },
-      { value: "County-wide", label: "Reach across operational areas" },
+      { value: "1,626+", label: "Youth enrolled across active YEA centers (Sep 2023)" },
+      { value: "50", label: "Active training classes in Leer and Mayiandit" },
     ],
   },
   {
@@ -455,13 +455,21 @@ export const financialAccountability = {
 /** Representative activities — public-facing log for partner transparency (from MHA organizational profile & field reporting). */
 export const projectHighlights: ProjectHighlight[] = [
   {
-    dateLabel: "16 Jun 2023",
-    title: "Youth training launch (Leer)",
+    dateLabel: "Jun–Sep 2023",
+    title: "USAID Youth Empowerment Activity (Leer & Mayiandit)",
     summary:
-      "Launch of youth engagement training in Leer County; volunteer trainers supported under the USAID Youth Engagement Project.",
-    location: "Leer County, Unity State",
-    partner: "USAID",
+      "Pathway 1 and 2 classes launched with EDC—50 active centers, 1,626+ youth enrolled, and ongoing trainer support across Unity State.",
+    location: "Leer & Mayiandit counties, Unity State",
+    partner: "USAID / EDC",
     storySlug: "youth-launch-leer-june-2023",
+  },
+  {
+    dateLabel: "Jun 2023",
+    title: "Child-friendly space activities (Leer)",
+    summary:
+      "MHPSS through CFS reached 2,694 children with structured play, drawing, and games—including rising returnee attendance from Sudan.",
+    location: "Leer County, Unity State",
+    storySlug: "safe-space-mayiandit",
   },
   {
     dateLabel: "—",
@@ -792,7 +800,7 @@ export const impactDashboardCharts = {
   headlineMetrics: [
     { label: "Field-based workforce", value: 85, hint: "% of staff deployed outside Juba" },
     { label: "Counties with active programming", value: 8, hint: "Unity & Jonglei core footprint" },
-    { label: "Documented activity log entries", value: 9, hint: "Representative public milestones" },
+    { label: "Documented activity log entries", value: 10, hint: "Representative public milestones" },
     { label: "Field narratives published", value: 10, hint: "Consent-led stories on this site" },
   ] satisfies ImpactChartItem[],
   countiesByState: [
@@ -863,28 +871,32 @@ export const fieldStories: FieldStory[] = [
     slug: "listening-posts-leer",
     title: "Listening posts changed how families report risk",
     excerpt:
-      "Community volunteers in Leer County supported weekly listening posts so concerns could be escalated quickly—reducing dangerous gaps between incidents and response.",
-    outcome: "Community-owned reporting shortened the path from risk to coordinated response.",
-    location: "Leer County, Unity State",
+      "Community volunteers in Dablual, Mayiandit County supported listening posts and protection monitoring so concerns could be escalated quickly—with findings shared with the protection cluster and partners.",
+    outcome:
+      "Community-owned reporting and monthly monitoring reports informed wider humanitarian responses in the area.",
+    location: "Dablual, Mayiandit County, Unity State",
     image: storyImage("listening-posts-leer", "protection"),
     thematicSlug: "protection",
     body: [
-      "Volunteers trained alongside MHA protection teams documented risks using simple, community-owned tools.",
-      "Escalation pathways were agreed with local leaders so sensitive cases could move to appropriate services.",
+      "Volunteers trained alongside MHA protection teams documented risks using simple, community-owned tools and focus group discussions with women, men, and community leaders.",
+      "Escalation pathways were agreed with local leaders so sensitive cases could move to individual protection assistance, referrals, or specialized services where needed.",
+      "Protection monitoring data was shared with the cluster and partners to inform health, WASH, education, nutrition, and wider responses.",
     ],
   },
   {
     slug: "safe-space-mayiandit",
-    title: "A safe space for adolescents after displacement",
+    title: "A child-friendly space when families needed it most",
     excerpt:
-      "A temporary safe space gave young people structured activities, psychosocial support, and referral options while families stabilized shelter and food.",
-    outcome: "Young people accessed structured support and referrals while households regained stability.",
-    location: "Mayiandit County, Unity State",
-    image: storyImage("safe-space-mayiandit", "child-protection"),
+      "In Leer County, a child-friendly space gave children aged 3–18 structured play, psychosocial support, and referral options—including many returnees arriving from Sudan.",
+    outcome:
+      "More than 2,600 children accessed MHPSS activities in one month, with inclusive participation for children with vulnerabilities.",
+    location: "Leer County, Unity State",
+    image: "/images/stories/youth-launch-leer-june-2023.jpg",
     thematicSlug: "child-protection",
     body: [
-      "Facilitators used child-friendly approaches aligned to safeguarding standards.",
-      "Referrals were coordinated with health and protection actors where needed.",
+      "Animators led indoor and outdoor activities—drawing, games, sports, and group sessions—so children could express feelings and rebuild resilience in a protected environment.",
+      "CFS teams identified protection concerns at the centre and coordinated referrals with health and protection actors where needed.",
+      "Attendance grew as returnee children arrived from Sudan; teams continued mobilizing vulnerable children and adapting activities during the rainy season.",
     ],
   },
   {
@@ -894,7 +906,7 @@ export const fieldStories: FieldStory[] = [
       "Peer mentors supported literacy refreshers and practical vocational orientation so participants could explore small enterprise options safely.",
     outcome: "Participants left with stronger literacy, numeracy, and practical livelihood options to explore.",
     location: "Duk County, Jonglei State",
-    image: storyImage("youth-skills-dukor", "youth-engagement"),
+    image: "/images/stories/youth-skills-dukor.jpg",
     thematicSlug: "youth-engagement",
     body: [
       "Workshops combined numeracy refreshers with business basics relevant to local markets.",
@@ -905,27 +917,32 @@ export const fieldStories: FieldStory[] = [
     slug: "youth-launch-leer-june-2023",
     title: "Youth engagement training launched in Leer",
     excerpt:
-      "Public launch of youth training in Leer County, with volunteer trainers supported through the USAID Youth Engagement Project.",
-    outcome: "County leaders and youth publicly committed to an expanded training and mentorship pathway.",
-    location: "Leer County, Unity State",
-    image: storyImage("youth-launch-leer-june-2023", "youth-engagement"),
+      "MHA opened USAID Youth Empowerment Activity classes across Leer and Mayiandit—with pathway 1 literacy and Work Ready Now training, pathway 2 cohorts, and trainers supported by EDC.",
+    outcome:
+      "By September 2023, 50 active classes enrolled 1,626+ youth (846 in Leer, 780 in Mayiandit), with ongoing monitoring and community-led mobilization.",
+    location: "Leer & Mayiandit counties, Unity State",
+    image: "/images/stories/youth-launch-leer-june-2023.jpg",
     thematicSlug: "youth-engagement",
     body: [
-      "The event marked a visible milestone for youth programming in the county, with community leaders and participants present.",
-      "MHA continues youth engagement in partnership with EDC, DRC, SFCG, and national NGOs across Leer, Mayiandit, Panyijiar, Duk, and Uror.",
+      "Cohort 1 training began in June 2023; pathway 2 classes followed in August, with training-of-trainers, venue verification, and pairing of youth corps leaders across payams.",
+      "Classes covered basic education literacy and numeracy, audio Work Ready Now lessons, soft skills, and wellbeing—with supervisors visiting centers on foot when roads were impassable.",
+      "MHA implements YEA with EDC as prime partner, alongside DRC, SFCG, and national NGOs, with local chiefs and payam administrators supporting recruitment.",
     ],
   },
   {
     slug: "cbp-training-dablual-mayiandit",
     title: "CBP members trained in Dablual, Mayiandit",
     excerpt:
-      "Hands-on training for community-based protection members to strengthen local monitoring and referral awareness.",
-    outcome: "Volunteers gained clearer tools and escalation routes to act safely within their mandate.",
+      "Community-based protection network volunteers learned to identify persons with specific needs, document concerns safely, and refer cases through agreed pathways.",
+    outcome:
+      "CBPN members and community stakeholders gained shared tools for PSN identification, child protection concepts, and referral practice.",
     location: "Dablual, Mayiandit County, Unity State",
     image: storyImage("cbp-training-dablual-mayiandit", "protection"),
     thematicSlug: "protection",
     body: [
-      "Training combined practical tools with clear escalation routes so volunteers can act safely within their mandate.",
+      "One-day capacity-building sessions covered vulnerability criteria, case identification, and referral pathways for community-based protection volunteers.",
+      "Parallel trainings with chiefs, religious leaders, and stakeholders addressed child rights, neglect, exploitation, and when to escalate cases.",
+      "Training complemented mobile protection monitoring and individual protection assistance delivered in nearby payams.",
     ],
   },
   {
@@ -946,13 +963,16 @@ export const fieldStories: FieldStory[] = [
     slug: "mayiandit-leaders-cultural-norms",
     title: "Leaders sensitized on harmful cultural norms",
     excerpt:
-      "Structured engagement with community leaders in Mayiandit on adverse effects of harmful norms and on rights-sensitive community dialogue.",
-    outcome: "Influential leaders aligned on rights-sensitive messaging alongside programme staff.",
+      "MHA engaged caregivers, parents, and community leaders on child labour, exploitation, neglect, early marriage, and protection-sensitive messaging in Unity State payams.",
+    outcome:
+      "Influential leaders and parents aligned on child rights messaging, including during school-based awareness days with local administrators.",
     location: "Mayiandit County, Unity State",
     image: storyImage("mayiandit-leaders-cultural-norms", "gbv"),
     thematicSlug: "gbv",
     body: [
-      "Sessions involved chiefs, religious leaders, and other influencers alongside programme staff to align messaging with local structures.",
+      "Facilitated sessions with caregivers and parents described core concepts of child abuse, neglect, exploitation, and harmful practices affecting children in emergencies.",
+      "Parents’ day ceremonies at primary schools brought together chiefs, religious leaders, and staff to discuss forced marriage, street children, and lack of parental care.",
+      "Awareness at child-friendly spaces complemented wider GBV and child protection prevention, linking communities to services where available.",
     ],
   },
   {

@@ -15,7 +15,7 @@ function VideoEmbed({ video }: { video: MediaVideo }) {
           src={video.posterImage}
           alt=""
           fill
-          className="object-cover opacity-50"
+          className="object-cover"
           sizes="(max-width: 1024px) 100vw, 896px"
         />
         <div className="relative z-10 px-6 text-center">
@@ -91,7 +91,7 @@ export function MediaVideoHub() {
                     className="object-cover transition duration-500 group-hover:scale-[1.03]"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <span className="absolute inset-0 flex items-center justify-center bg-navy-dark/35 transition group-hover:bg-navy-dark/45">
+                  <span className="absolute inset-0 flex items-center justify-center bg-transparent transition group-hover:bg-navy-dark/15">
                     <span className="rounded-full bg-white/90 p-3 text-navy">
                       <Play className="h-6 w-6" aria-hidden />
                     </span>

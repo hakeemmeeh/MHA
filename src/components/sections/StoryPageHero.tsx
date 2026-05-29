@@ -120,7 +120,7 @@ export function StoryPageHero({ story, thematic }: StoryPageHeroProps) {
       </div>
       <div
         ref={overlayRef}
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-dark/58 via-navy-dark/32 to-navy-dark/10 opacity-[0.55]"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-dark/80 via-navy-dark/25 to-transparent"
         aria-hidden
       />
       <div className="relative z-10 mx-auto flex max-w-3xl flex-col justify-end px-6 pb-12 pt-32">

@@ -27,8 +27,8 @@ export function BlogGrid() {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
           <div>
             <p className="max-w-2xl font-inter text-sm text-text-mid">
-              <strong className="text-navy">Insights</strong> is for editorial perspective — not
-              copies of field stories. Programme narratives with communities&apos; voices live on{" "}
+              <strong className="text-navy">Insights</strong> includes programme pictorials from
+              field reports and editorial commentary. Full narratives with communities&apos; voices live on{" "}
               <Link href="/stories" className="font-semibold text-green hover:text-green-dark">
                 Field stories
               </Link>
