@@ -81,13 +81,14 @@ function BarChart({
 function DonutChart({ items }: { items: ImpactChartItem[] }) {
   const total = items.reduce((s, i) => s + i.value, 0) || 1;
   const colors = ["#1a3d6b", "#4caf50", "#d4a574", "#2b5a8f"];
-  let offset = 0;
-  const segments = items.map((item, i) => {
+  const segments = items.reduce<
+    Array<ImpactChartItem & { pct: number; color: string; offset: number }>
+  >((acc, item, i) => {
     const pct = (item.value / total) * 100;
-    const seg = { ...item, pct, color: colors[i % colors.length], offset };
-    offset += pct;
-    return seg;
-  });
+    const offset = acc.reduce((sum, s) => sum + s.pct, 0);
+    acc.push({ ...item, pct, color: colors[i % colors.length], offset });
+    return acc;
+  }, []);
 
   const gradient = segments
     .map((s) => `${s.color} ${s.offset}% ${s.offset + s.pct}%`)
