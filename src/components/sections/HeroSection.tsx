@@ -91,15 +91,18 @@ export function HeroSection() {
 
   return (
     <section ref={root} className="bg-cream" aria-label="Introduction">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 sm:py-14 lg:min-h-[min(72vh,720px)] lg:grid-cols-2 lg:items-stretch lg:gap-0 lg:py-0">
+      <div className="page-x mx-auto grid max-w-7xl gap-8 py-14 sm:gap-10 sm:py-16 lg:min-h-[min(76vh,780px)] lg:grid-cols-2 lg:items-stretch lg:gap-0 lg:py-0">
         <div
           ref={copyCol}
-          className="flex flex-col justify-center lg:px-10 lg:py-20 xl:px-12"
+          className="flex flex-col justify-center lg:pr-10 lg:py-20 xl:pr-12"
         >
-          <p data-hero-eyebrow className="opacity-0">
+          <div data-hero-eyebrow className="opacity-0">
             <SectionEyebrow>{hero.eyebrow}</SectionEyebrow>
-          </p>
-          <h1 className="mt-4 font-playfair text-3xl font-bold leading-tight text-text-dark md:text-4xl lg:text-[2.75rem] lg:leading-[1.12] xl:text-5xl">
+          </div>
+          <h1
+            className="mt-2 font-playfair text-3xl font-normal leading-tight text-text-dark md:text-4xl lg:text-[2.85rem] lg:leading-[1.12] xl:text-[3.25rem]"
+            style={{ fontWeight: 400 }}
+          >
             {hero.titleLines.map((line, i) => (
               <span key={line} className="block overflow-hidden">
                 <span
@@ -113,15 +116,15 @@ export function HeroSection() {
           </h1>
           <p
             data-hero-sub
-            className="mt-5 max-w-lg font-inter text-base text-text-mid opacity-0 md:text-lg"
+            className="mt-6 max-w-md font-inter text-base leading-relaxed text-text-mid opacity-0 md:text-lg"
           >
             {hero.subtext}
           </p>
-          <div data-hero-ctas className="mt-8 flex flex-wrap gap-3">
+          <div data-hero-ctas className="mt-10 flex flex-wrap gap-4">
             <Link
               href="/get-involved"
               data-hero-cta
-              className="group inline-flex items-center gap-2 rounded-full bg-green px-7 py-2.5 font-inter text-sm font-semibold text-white opacity-0 shadow-sm transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-green-dark hover:shadow-lg hover:shadow-green/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-dark active:translate-y-0"
+              className="group inline-flex items-center gap-2 rounded-full bg-green px-8 py-3 font-inter text-sm font-semibold uppercase tracking-[0.05em] text-white opacity-0 shadow-sm transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-green-dark hover:shadow-lg hover:shadow-green/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-dark active:translate-y-0"
             >
               Get Involved
               <span
@@ -134,7 +137,7 @@ export function HeroSection() {
             <Link
               href="/programs"
               data-hero-cta
-              className="group inline-flex items-center gap-2 rounded-full border-2 border-navy px-7 py-2.5 font-inter text-sm font-semibold text-navy opacity-0 transition-[transform,box-shadow,background-color,color,border-color] duration-300 hover:-translate-y-0.5 hover:border-navy hover:bg-navy hover:text-white hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy active:translate-y-0"
+              className="link-cta self-center py-3 text-navy opacity-0"
             >
               Our Programs
               <span
@@ -147,10 +150,10 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="relative min-h-[min(52vw,320px)] lg:min-h-0">
+        <div className="relative min-h-[min(56vw,360px)] lg:min-h-0">
           <div
             data-hero-split-image
-            className="absolute inset-0 overflow-hidden rounded-2xl opacity-0 shadow-xl sm:inset-2 lg:inset-6 lg:left-0"
+            className="absolute inset-0 overflow-hidden rounded-2xl opacity-0 shadow-xl sm:inset-3 lg:inset-8 lg:left-0"
           >
             <Image
               src={hero.image}

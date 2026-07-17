@@ -13,7 +13,8 @@
   --color-gold-light: #fdf0e6;
   --color-cream: #f5f5f0;
   --color-text-dark: #0d1a2e;
-  --color-text-mid: #3a4f6b;
+  /* Softened body-copy gray (was #3a4f6b) so headings carry the contrast — still AA at 16px */
+  --color-text-mid: #5a6b7f;
   --color-text-muted: #6b7a8c;
   --color-border: #e0e5eb;
 }
@@ -72,6 +73,7 @@ body {
 
 h1 {
   font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  font-weight: 400 !important;
   text-rendering: geometricPrecision;
   font-synthesis: none;
 }
@@ -79,8 +81,92 @@ h1 {
 h2,
 h3 {
   font-family: var(--font-fraunces);
+  font-weight: 400;
   text-rendering: geometricPrecision;
   font-synthesis: none;
+}
+
+/* Balanced spacing rhythm — one consistent tier across all sections */
+@layer utilities {
+  .section-y {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .section-y-sm {
+    @apply py-12 sm:py-14 lg:py-16;
+  }
+
+  .page-x {
+    @apply px-5 sm:px-6 lg:px-8 xl:px-10;
+  }
+}
+
+/* In the components layer so Tailwind utilities (text-*, px-*, mt-*) can override */
+@layer components {
+  /* One locked heading scale for section headers — color set by context */
+  .section-title {
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 1.45rem + 1.8vw, 2.75rem);
+    line-height: 1.15;
+    text-rendering: geometricPrecision;
+    font-synthesis: none;
+  }
+
+  /* Unified CTA language: primary pill + tracked uppercase text link */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 9999px;
+    background: var(--color-green);
+    padding: 12px 28px;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background: var(--color-green-dark);
+  }
+
+  .link-cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-green);
+  }
+
+  .link-cta::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 1.5px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .link-cta:hover::after,
+  .link-cta:focus-visible::after {
+    transform: scaleX(1);
+  }
 }
 
 .eyebrow {
@@ -93,7 +179,7 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--color-green);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   text-rendering: geometricPrecision;
 }
 

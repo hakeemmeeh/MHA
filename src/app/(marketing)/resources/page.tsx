@@ -13,11 +13,7 @@ export const metadata = marketingPageMetadata({
 export default function ResourcesPage() {
   return (
     <>
-      <PageHero
-        animate
-        title="Resources & documents"
-        subtitle="Policies, registration, and financial materials for partners, donors, and auditors."
-      />
+      <PageHero animate title="Resources & documents" />
       <ResourcesList />
     </>
   );

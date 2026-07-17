@@ -69,7 +69,18 @@ export function Navbar() {
               >
                 <Link
                   href={item.href}
-                  className="inline-flex items-center gap-1 font-inter text-sm font-medium text-current hover:opacity-80"
+                  className={`inline-flex items-center gap-1 font-inter text-sm font-medium transition hover:opacity-80 ${
+                    pathname === item.href ||
+                    (item.href !== "/" && pathname.startsWith(item.href))
+                      ? "text-green"
+                      : "text-current"
+                  }`}
+                  aria-current={
+                    pathname === item.href ||
+                    (item.href !== "/" && pathname.startsWith(item.href))
+                      ? "page"
+                      : undefined
+                  }
                 >
                   {item.label}
                   {item.children && (
@@ -98,7 +109,7 @@ export function Navbar() {
           <div className="hidden lg:block">
             <Link
               href="/get-involved"
-              className="inline-flex rounded-full bg-green px-6 py-2.5 font-inter text-sm font-semibold text-white transition hover:bg-green-dark"
+              className="inline-flex rounded-full bg-green px-6 py-2.5 font-inter text-sm font-semibold uppercase tracking-[0.05em] text-white transition hover:bg-green-dark"
             >
               Get Involved
             </Link>

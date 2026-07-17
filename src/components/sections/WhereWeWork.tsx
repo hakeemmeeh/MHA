@@ -31,12 +31,12 @@ function OfficeRow({
   subtitle: string;
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-border bg-white p-4">
-      <span className="rounded-lg bg-green/15 p-2 text-green">
+    <div className="flex items-start gap-3 border-t border-border pt-4">
+      <span className="mt-0.5 text-green">
         <MapPin className="h-4 w-4 shrink-0" aria-hidden />
       </span>
       <div className="min-w-0 flex-1">
-        <p className="font-inter font-semibold text-text-dark">{name}</p>
+        <p className="font-inter font-medium text-text-dark">{name}</p>
         <p className="font-inter text-xs uppercase tracking-wide text-text-muted">{subtitle}</p>
       </div>
     </div>
@@ -212,41 +212,24 @@ export function WhereWeWork() {
   }, []);
 
   return (
-    <section ref={root} id="presence" className="bg-cream py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <section ref={root} id="presence" className="section-y scroll-mt-20 bg-cream">
+      <div className="page-x mx-auto max-w-7xl">
         <div data-mh-intro>
           <SectionEyebrow>Our Presence</SectionEyebrow>
         </div>
         <h2
           data-mh-intro
-          className="font-playfair text-3xl font-bold text-text-dark md:text-[44px]"
+          className="section-title text-text-dark"
         >
           Where We Work in South Sudan
         </h2>
-        <p data-mh-intro className="mt-3 max-w-2xl font-inter text-sm text-text-mid">
-          Active counties at a glance — full detail alongside the map.
+        <p data-mh-intro className="mt-4 max-w-2xl font-inter text-base leading-relaxed text-text-mid">
+          Active counties across Unity and Jonglei — map and county lists side by side.
         </p>
-        <div data-mh-intro className="mt-6">
-          <ul
-            className="flex flex-wrap gap-2"
-            aria-label="Counties where MHA is active"
-          >
-            {coverage.states.flatMap((st) =>
-              st.counties.map((c) => (
-                <li key={`${st.name}-${c}`}>
-                  <span className="inline-flex rounded-full border border-border bg-white px-3 py-1 font-inter text-xs font-medium text-navy shadow-sm">
-                    {c}
-                    <span className="sr-only">{`, ${st.name}`}</span>
-                  </span>
-                </li>
-              )),
-            )}
-          </ul>
-        </div>
         <div className="mt-10 grid min-w-0 gap-10 sm:mt-12 sm:gap-12 lg:grid-cols-5">
           <div
             ref={mapPanelRef}
-            className="min-w-0 rounded-2xl border border-border bg-white p-4 shadow-sm sm:p-6 lg:col-span-3"
+            className="min-w-0 border border-border bg-white p-4 sm:p-6 lg:col-span-3"
           >
             <svg
               ref={svgRef}
@@ -275,7 +258,7 @@ export function WhereWeWork() {
                 </filter>
               </defs>
               <rect width="400" height="420" fill="#F0F4FA" rx="12" />
-              <text x="200" y="36" textAnchor="middle" className="fill-navy font-sans text-sm font-bold">
+              <text x="200" y="36" textAnchor="middle" className="fill-navy font-sans text-sm font-normal">
                 South Sudan — active counties
               </text>
               <path
@@ -395,24 +378,23 @@ export function WhereWeWork() {
               </text>
             </svg>
             <p className="mt-3 font-inter text-xs text-text-muted">
-              Navy: Unity State counties · Green: Jonglei State counties. Hover tooltips: county
-              name + “MHA Active”.
+              Navy: Unity State · Green: Jonglei State. Labels show counties where MHA is active.
             </p>
           </div>
           <div
             ref={sidebarRevealRef}
-            className="min-w-0 lg:col-span-2 lg:rounded-2xl lg:border lg:border-border lg:bg-white lg:p-6 lg:shadow-sm"
+            className="min-w-0 lg:col-span-2 lg:border lg:border-border lg:bg-white lg:p-6"
           >
-            <div ref={stateRegionsRef} className="space-y-6 lg:space-y-8">
+            <div ref={stateRegionsRef} className="space-y-8">
               {coverage.states.map((st) => (
-                <div
-                  key={st.name}
-                  className="rounded-2xl border border-border bg-navy-light/60 p-6 lg:border-0 lg:bg-navy-light/50"
-                >
-                  <h3 className="font-playfair text-xl font-bold text-navy">{st.name}</h3>
-                  <ul className="mt-3 list-inside list-disc font-inter text-sm text-text-mid">
+                <div key={st.name}>
+                  <h3 className="font-playfair text-xl font-normal text-navy">{st.name}</h3>
+                  <ul className="mt-3 space-y-1.5 font-inter text-sm text-text-mid">
                     {st.counties.map((c) => (
-                      <li key={c}>{c}</li>
+                      <li key={c} className="flex items-center gap-2">
+                        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-green" aria-hidden />
+                        {c}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -421,7 +403,7 @@ export function WhereWeWork() {
             <div className="mt-8 border-t border-border pt-8">
               <h3
                 ref={officesHeadingRef}
-                className="font-playfair text-lg font-bold text-navy"
+                className="font-playfair text-lg font-normal text-navy"
               >
                 Offices
               </h3>

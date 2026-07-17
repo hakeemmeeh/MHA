@@ -47,22 +47,27 @@ export function StatsBar() {
   }, []);
 
   return (
-    <section ref={root} id="impact-stats" className="bg-navy py-12">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 sm:gap-8 sm:px-6 md:grid-cols-3 lg:grid-cols-6 lg:gap-0 lg:px-8">
+    <section
+      ref={root}
+      id="impact-stats"
+      className="scroll-mt-20 bg-navy pb-10 pt-12 sm:pb-12 sm:pt-14 lg:pb-14 lg:pt-16"
+    >
+      <div className="page-x mx-auto grid max-w-7xl grid-cols-2 gap-8 sm:gap-10 md:grid-cols-3 lg:grid-cols-6 lg:gap-0">
         {stats.map((s, i) => (
           <div
             key={s.label}
-            className={`text-center font-playfair lg:border-r lg:border-white/15 lg:px-4 ${i === stats.length - 1 ? "lg:border-r-0" : ""}`}
+            className={`text-center font-playfair lg:border-r lg:border-white/15 lg:px-5 ${i === stats.length - 1 ? "lg:border-r-0" : ""}`}
           >
-            <div className="text-4xl font-bold text-white">
+            {/* Light serif numerals with gold suffix — editorial display style */}
+            <div className="text-[2.75rem] font-light leading-none text-white md:text-[3.25rem]">
               <span data-stat data-target={s.value}>
                 0
               </span>
               {s.suffix ? (
-                <span className="text-green">{s.suffix}</span>
+                <span className="text-[0.6em] text-gold">{s.suffix}</span>
               ) : null}
             </div>
-            <p className="mt-1 font-inter text-sm text-white/60">{s.label}</p>
+            <p className="mt-3 font-inter text-sm text-white/60">{s.label}</p>
           </div>
         ))}
       </div>

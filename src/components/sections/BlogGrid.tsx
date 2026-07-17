@@ -65,7 +65,7 @@ export function BlogGrid() {
                         <p className="font-inter text-xs font-semibold uppercase tracking-wide text-green">
                           {categoryLabels[post.category]} · {formatDate(post.publishedAt)}
                         </p>
-                        <h2 className="mt-2 font-playfair text-xl font-bold text-navy">
+                        <h2 className="mt-2 font-playfair text-xl font-normal text-navy">
                           <Link href={`/blog/${post.slug}`} className="hover:text-navy-mid">
                             {post.title}
                           </Link>
@@ -75,7 +75,7 @@ export function BlogGrid() {
                         </p>
                         <Link
                           href={`/blog/${post.slug}`}
-                          className="mt-4 font-inter text-sm font-semibold text-green hover:text-green-dark"
+                          className="link-cta mt-4 w-fit text-xs"
                         >
                           Read insight →
                         </Link>

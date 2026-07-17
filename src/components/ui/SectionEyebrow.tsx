@@ -7,5 +7,5 @@ export function SectionEyebrow({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <p className={cn("eyebrow", className)}>{children}</p>;
+  return <div className={cn("eyebrow", className)}>{children}</div>;
 }

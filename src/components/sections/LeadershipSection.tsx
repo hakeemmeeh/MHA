@@ -22,12 +22,12 @@ export function LeadershipSection() {
   const groups = ["management", "board", "technical"] as const;
 
   return (
-    <section id="leadership" className="bg-cream py-20">
-      <div className="mx-auto max-w-6xl px-6">
-        <h2 className="font-playfair text-3xl font-bold text-navy md:text-4xl">
+    <section id="leadership" className="section-y scroll-mt-20 bg-cream">
+      <div className="page-x mx-auto max-w-7xl">
+        <h2 className="section-title text-text-dark">
           Leadership &amp; governance
         </h2>
-        <p className="mt-4 max-w-2xl font-inter text-text-mid">
+        <p className="mt-4 max-w-2xl font-inter text-base leading-relaxed text-text-mid">
           MHA links board oversight with field delivery — so accountability and programme quality
           stay connected.
         </p>
@@ -41,23 +41,20 @@ export function LeadershipSection() {
                 <h3 className="font-inter text-xs font-semibold uppercase tracking-widest text-green">
                   {groupLabels[group]}
                 </h3>
-                <ul className="mt-6 grid gap-6 sm:grid-cols-2">
+                <ul className="mt-6 grid gap-8 sm:grid-cols-2">
                   {members.map((m) => (
-                    <li
-                      key={m.name}
-                      className="flex gap-5 rounded-2xl border border-border bg-white p-6 shadow-sm"
-                    >
+                    <li key={m.name} className="flex gap-5 border-t border-border pt-6">
                       <span
                         className={cn(
                           "flex h-14 w-14 shrink-0 items-center justify-center rounded-full",
-                          "bg-navy font-inter text-sm font-bold text-white",
+                          "bg-navy font-inter text-sm font-semibold text-white",
                         )}
                         aria-hidden
                       >
                         {initials(m.name)}
                       </span>
                       <div className="min-w-0">
-                        <p className="font-playfair text-lg font-bold text-navy">{m.name}</p>
+                        <p className="font-playfair text-lg text-navy">{m.name}</p>
                         <p className="mt-1 font-inter text-xs font-semibold uppercase tracking-wide text-text-muted">
                           {m.role}
                         </p>

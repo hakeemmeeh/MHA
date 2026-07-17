@@ -24,7 +24,7 @@ export default async function AdminInquiriesPage() {
 
   return (
     <div>
-      <h1 className="font-bodoni-display text-3xl font-bold text-navy">Inquiries</h1>
+      <h1 className="font-bodoni-display text-3xl font-normal text-navy">Inquiries</h1>
       <p className="mt-2 max-w-2xl font-inter text-sm text-text-mid">
         Contact form submissions from the public site. Requires{" "}
         <code className="text-navy">SUPABASE_SERVICE_ROLE_KEY</code> on the server.
@@ -57,7 +57,7 @@ export default async function AdminInquiriesPage() {
             ) : (
               rows.map((row) => (
                 <tr key={row.id} className="border-b border-border/80 align-top hover:bg-cream/50">
-                  <td className="px-4 py-3 font-medium text-text-dark">{row.name}</td>
+                  <td className="px-4 py-3 font-light text-text-dark">{row.name}</td>
                   <td className="px-4 py-3">
                     <a href={`mailto:${row.email}`} className="text-navy hover:underline">
                       {row.email}

@@ -10,7 +10,7 @@ export function BlogPhotoGallery({ images }: Props) {
 
   return (
     <div className="mt-12 space-y-12 border-t border-border pt-12">
-      <h2 className="font-playfair text-2xl font-bold text-navy">Field photos</h2>
+      <h2 className="font-playfair text-2xl font-normal text-navy">Field photos</h2>
       <ul className="space-y-14">
         {images.map((item, index) => (
           <li key={item.src}>

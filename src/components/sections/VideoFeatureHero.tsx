@@ -26,7 +26,7 @@ export function VideoFeatureHero() {
         <p className="font-inter text-xs font-semibold uppercase tracking-widest text-green">
           Documentary hub
         </p>
-        <h1 className="mt-4 max-w-2xl font-playfair text-4xl font-bold text-white md:text-5xl">
+        <h1 className="mt-4 max-w-2xl font-playfair text-4xl font-normal text-white md:text-5xl">
           {mediaHubIntro.title}
         </h1>
         <p className="mt-5 max-w-xl font-inter text-lg text-white/80">{mediaHubIntro.subtitle}</p>

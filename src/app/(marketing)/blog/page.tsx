@@ -16,7 +16,7 @@ export default function BlogPage() {
       <PageHero
         animate
         title="Insights"
-        subtitle="Programme pictorials from the field and editorial commentary. Full narratives live under Field stories."
+        subtitle="Programme pictorials and editorial commentary from the field."
         image="/images/hero/home-hero.jpg"
       />
       <BlogGrid />

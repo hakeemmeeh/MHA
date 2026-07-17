@@ -31,7 +31,7 @@ function PreviewLabel({
       <p className="font-inter text-xs font-semibold uppercase tracking-widest text-green">
         {number}
       </p>
-      <h2 className="mt-1 font-playfair text-2xl font-bold text-navy md:text-3xl">
+      <h2 className="mt-1 font-playfair text-2xl font-normal text-navy md:text-3xl">
         {title}
       </h2>
       <p className="mt-2 max-w-3xl font-inter text-sm text-text-mid">{description}</p>
@@ -62,7 +62,7 @@ export function HeroPreviewFullBleed() {
       />
       <div className="relative z-10 mx-auto flex min-h-[85vh] max-w-5xl flex-col items-center justify-center px-4 pb-16 text-center sm:px-6 lg:min-h-[92vh]">
         <SectionEyebrow className="justify-center text-green">{hero.eyebrow}</SectionEyebrow>
-        <h1 className="mt-4 font-playfair text-4xl font-bold leading-tight text-white md:text-6xl">
+        <h1 className="mt-4 font-playfair text-4xl font-normal leading-tight text-white md:text-6xl">
           {hero.titleLines.map((line) => (
             <span key={line} className="block">
               {line}
@@ -92,7 +92,7 @@ export function HeroPreviewSplit() {
       <div className="mx-auto grid max-w-7xl gap-0 lg:min-h-[72vh] lg:grid-cols-2 lg:items-stretch">
         <div className="flex flex-col justify-center px-4 py-14 sm:px-6 lg:px-10 lg:py-20">
           <SectionEyebrow>{hero.eyebrow}</SectionEyebrow>
-          <h1 className="mt-4 font-playfair text-4xl font-bold leading-tight text-text-dark md:text-5xl">
+          <h1 className="mt-4 font-playfair text-4xl font-normal leading-tight text-text-dark md:text-5xl">
             {hero.titleLines.join(" ")}
           </h1>
           <p className="mt-5 max-w-lg font-inter text-base text-text-mid md:text-lg">
@@ -130,7 +130,7 @@ export function HeroPreviewContained() {
     <section className="bg-white py-14 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <SectionEyebrow>{hero.eyebrow}</SectionEyebrow>
-        <h1 className="mt-4 font-playfair text-4xl font-bold text-text-dark md:text-5xl">
+        <h1 className="mt-4 font-playfair text-4xl font-normal text-text-dark md:text-5xl">
           Our Programs
         </h1>
         <p className="mt-4 max-w-2xl font-inter text-lg text-text-mid">
@@ -161,7 +161,7 @@ export function HeroPreviewTypography() {
     <section className="bg-gradient-to-br from-navy to-navy-dark px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-4xl text-center">
         <SectionEyebrow className="justify-center text-green">{hero.eyebrow}</SectionEyebrow>
-        <h1 className="mt-5 font-playfair text-4xl font-bold text-white md:text-5xl lg:text-6xl">
+        <h1 className="mt-5 font-playfair text-4xl font-normal text-white md:text-5xl lg:text-6xl">
           Contact MHA
         </h1>
         <p className="mx-auto mt-5 max-w-xl font-inter text-lg text-white/75">
@@ -186,7 +186,7 @@ export function HeroPreviewBento() {
         <div className="grid gap-4 lg:grid-cols-12 lg:grid-rows-2 lg:gap-5 lg:min-h-[70vh]">
           <div className="flex flex-col justify-center lg:col-span-5 lg:row-span-2 lg:pr-4">
             <SectionEyebrow>{hero.eyebrow}</SectionEyebrow>
-            <h1 className="mt-4 font-playfair text-3xl font-bold text-text-dark md:text-4xl lg:text-5xl">
+            <h1 className="mt-4 font-playfair text-3xl font-normal text-text-dark md:text-4xl lg:text-5xl">
               {hero.titleLines[0]}
               <span className="block text-navy-mid">{hero.titleLines[1]}</span>
             </h1>
@@ -224,7 +224,7 @@ export function HeroPreviewStats() {
     <section className="border-b border-border bg-white">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:py-20">
         <SectionEyebrow>Impact at a glance</SectionEyebrow>
-        <h1 className="mt-4 max-w-3xl font-playfair text-4xl font-bold text-text-dark md:text-5xl">
+        <h1 className="mt-4 max-w-3xl font-playfair text-4xl font-normal text-text-dark md:text-5xl">
           Principled assistance where access is hardest
         </h1>
         <p className="mt-4 max-w-2xl font-inter text-lg text-text-mid">
@@ -291,7 +291,7 @@ export function HeroPreviewMap() {
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
         <div>
           <SectionEyebrow>Our presence</SectionEyebrow>
-          <h1 className="mt-4 font-playfair text-4xl font-bold text-text-dark md:text-5xl">
+          <h1 className="mt-4 font-playfair text-4xl font-normal text-text-dark md:text-5xl">
             Where we work in South Sudan
           </h1>
           <p className="mt-4 font-inter text-text-mid">
@@ -301,7 +301,7 @@ export function HeroPreviewMap() {
           <ul className="mt-6 flex flex-wrap gap-2">
             {counties.slice(0, 6).map(({ county, state }) => (
               <li key={`${state}-${county}`}>
-                <span className="inline-flex rounded-full border border-border bg-white px-3 py-1 font-inter text-xs font-medium text-navy">
+                <span className="inline-flex rounded-full border border-border bg-white px-3 py-1 font-inter text-xs font-light text-navy">
                   {county}
                 </span>
               </li>
@@ -400,7 +400,7 @@ export function HeroVariantsPreview() {
         <p className="font-inter text-xs font-semibold uppercase tracking-widest text-green">
           Design preview
         </p>
-        <h1 className="mt-2 font-playfair text-3xl font-bold md:text-4xl">
+        <h1 className="mt-2 font-playfair text-3xl font-normal md:text-4xl">
           Hero variants
         </h1>
         <p className="mt-3 max-w-2xl font-inter text-sm text-white/75">

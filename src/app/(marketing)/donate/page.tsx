@@ -16,7 +16,7 @@ export default function DonatePage() {
       <PageHero
         animate
         title="Donate to MHA"
-        subtitle="Your gift helps protection, GBV response, and life-saving assistance reach communities others cannot."
+        subtitle="Choose a giving pathway — bank transfer, in-kind support, or partnership funding — with transparent stewardship."
         image="/images/hero/home-hero.jpg"
       />
       <DonateSection />

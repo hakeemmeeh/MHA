@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { thematicAreas, thematicCrossCutting, thematicSectionIntro } from "@/lib/content";
+import { thematicAreas } from "@/lib/content";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { ThematicCard } from "@/components/ui/ThematicCard";
 
@@ -70,62 +70,38 @@ export function ThematicGrid() {
     return () => ctx.revert();
   }, []);
 
-  const [first, second, ...restAll] = thematicAreas;
-  const rest = restAll.slice(0, 4);
+  const displayed = thematicAreas.slice(0, 6);
 
   return (
-    <section ref={sectionRef} id="programs" className="bg-navy-light py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="flex min-w-0 flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <section ref={sectionRef} id="programs" className="section-y bg-navy-light">
+      <div className="page-x mx-auto max-w-7xl">
+        <div className="flex min-w-0 flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-12">
           <div className="min-w-0 flex-1">
             <div data-mh-thematic-head>
               <SectionEyebrow>Our Work</SectionEyebrow>
             </div>
-            <h2
-              data-mh-thematic-head
-              className="font-playfair text-3xl font-bold text-text-dark md:text-[44px] md:leading-[1.15]"
-            >
+            <h2 data-mh-thematic-head className="section-title text-text-dark">
               Thematic Areas of Focus
             </h2>
-            <p data-mh-thematic-sub className="mt-4 max-w-2xl font-inter text-text-mid">
-              {thematicSectionIntro}
-            </p>
             <p
               data-mh-thematic-sub
-              className="mt-3 max-w-3xl font-inter text-sm leading-relaxed text-text-muted md:text-[15px]"
+              className="mt-4 max-w-xl font-inter text-base leading-relaxed text-text-mid md:text-lg"
             >
-              {thematicCrossCutting}
-            </p>
-            <p
-              data-mh-thematic-sub
-              className="mt-2 max-w-3xl font-inter text-xs text-text-muted md:text-[13px]"
-            >
-              This page highlights six areas;{" "}
-              <Link href="/programs" className="font-semibold text-navy underline-offset-2 hover:underline">
-                all fourteen programs
-              </Link>{" "}
-              are listed on the programs page.
+              Fourteen interconnected programs, one goal: protection and dignity for
+              displaced communities.
             </p>
           </div>
-          <div data-mh-thematic-sub className="shrink-0 pt-1 md:pt-0">
-            <Link
-              href="/programs"
-              className="inline-flex items-center gap-1 font-inter text-sm font-semibold text-navy underline-offset-4 hover:text-green hover:underline"
-            >
+          <div data-mh-thematic-sub className="shrink-0">
+            <Link href="/programs" className="link-cta text-navy">
               View all programs →
             </Link>
           </div>
         </div>
         <div
           ref={grid}
-          className="mt-10 grid min-w-0 grid-cols-1 gap-6 sm:mt-14 md:grid-cols-2"
+          className="mt-10 grid min-w-0 grid-cols-1 gap-7 sm:mt-12 md:grid-cols-2 md:gap-8"
         >
-          {[first, second].map((area) => (
-            <div key={area.slug} data-card className="md:col-span-2">
-              <ThematicCard area={area} featured />
-            </div>
-          ))}
-          {rest.map((area) => (
+          {displayed.map((area) => (
             <div key={area.slug} data-card>
               <ThematicCard area={area} />
             </div>

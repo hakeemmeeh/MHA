@@ -63,7 +63,7 @@ export default async function BlogPostPage({ params }: Props) {
             {date}
             {post.author ? ` · ${post.author}` : ""}
           </p>
-          <h1 className="mt-3 font-playfair text-3xl font-bold text-navy md:text-4xl">
+          <h1 className="mt-3 font-playfair text-3xl font-normal text-navy md:text-4xl">
             {post.title}
           </h1>
           <div className="mt-8 space-y-4 font-inter text-base leading-relaxed text-text-mid">

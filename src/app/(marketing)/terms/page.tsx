@@ -19,25 +19,25 @@ export default function TermsPage() {
             By using {site.website}, you agree to these terms. If you do not agree, please do not use
             the site.
           </p>
-          <h2 className="font-playfair text-xl font-bold text-navy">Content</h2>
+          <h2 className="font-playfair text-xl font-normal text-navy">Content</h2>
           <p>
             Text, images, and materials on this site are published for general information about{" "}
             {site.name}&apos;s humanitarian work. They do not constitute legal advice or a guarantee
             of service availability in every location.
           </p>
-          <h2 className="font-playfair text-xl font-bold text-navy">Acceptable use</h2>
+          <h2 className="font-playfair text-xl font-normal text-navy">Acceptable use</h2>
           <p>You agree not to misuse the site, including attempting to disrupt services, submit false safeguarding reports in bad faith, or scrape content for unrelated commercial use without permission.</p>
-          <h2 className="font-playfair text-xl font-bold text-navy">External links</h2>
+          <h2 className="font-playfair text-xl font-normal text-navy">External links</h2>
           <p>
             Links to partner or reference sites are provided for convenience. MHA is not responsible
             for third-party content or privacy practices.
           </p>
-          <h2 className="font-playfair text-xl font-bold text-navy">Limitation of liability</h2>
+          <h2 className="font-playfair text-xl font-normal text-navy">Limitation of liability</h2>
           <p>
             The site is provided &ldquo;as is.&rdquo; To the extent permitted by law, MHA is not
             liable for indirect damages arising from use of the website.
           </p>
-          <h2 className="font-playfair text-xl font-bold text-navy">Contact</h2>
+          <h2 className="font-playfair text-xl font-normal text-navy">Contact</h2>
           <p>
             <a href={`mailto:${site.email}`} className="text-navy hover:underline">
               {site.email}

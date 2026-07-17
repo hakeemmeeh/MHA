@@ -61,7 +61,7 @@ export function MediaVideoHub() {
               Now playing
               {selected.durationLabel ? ` · ${selected.durationLabel}` : ""}
             </p>
-            <h2 className="mt-2 font-playfair text-2xl font-bold text-navy">{selected.title}</h2>
+            <h2 className="mt-2 font-playfair text-2xl font-normal text-navy">{selected.title}</h2>
             {selected.location && (
               <p className="mt-1 font-inter text-sm text-text-muted">{selected.location}</p>
             )}

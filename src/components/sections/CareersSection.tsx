@@ -24,7 +24,7 @@ export function CareersSection() {
               >
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
-                    <h2 className="font-playfair text-2xl font-bold text-navy">{role.title}</h2>
+                    <h2 className="font-playfair text-2xl font-normal text-navy">{role.title}</h2>
                     <p className="mt-2 flex flex-wrap items-center gap-3 font-inter text-sm text-text-muted">
                       <span className="inline-flex items-center gap-1">
                         <MapPin className="h-4 w-4 text-green" aria-hidden />
@@ -83,6 +83,13 @@ export function CareersSection() {
           and{" "}
           <Link href="/contact#feedback-complaints" className="text-navy hover:underline">
             complaints mechanism
+          </Link>
+          .
+        </p>
+        <p className="mt-6 font-inter text-sm text-text-mid">
+          General interest in working with MHA?{" "}
+          <Link href="/contact" className="font-semibold text-navy hover:underline">
+            Contact the team
           </Link>
           .
         </p>

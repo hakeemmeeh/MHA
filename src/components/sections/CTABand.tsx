@@ -52,43 +52,43 @@ export function CTABand() {
   }, []);
 
   return (
-    <section ref={root} id="take-action" className="relative overflow-hidden bg-navy-dark py-16 sm:py-20 lg:py-24">
+    <section ref={root} id="take-action" className="section-y relative overflow-hidden bg-navy-dark">
       <div
         className="pointer-events-none absolute -right-24 -top-24 h-[400px] w-[400px] rounded-full bg-white/5"
         aria-hidden
       />
-      <div className="relative mx-auto grid min-w-0 max-w-7xl gap-10 px-4 sm:gap-12 sm:px-6 lg:grid-cols-2 lg:items-center">
+      <div className="page-x relative mx-auto grid min-w-0 max-w-7xl gap-10 sm:gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
         <div className="min-w-0">
           <div data-cta-l>
             <SectionEyebrow className="text-green [&::before]:bg-green">Take Action</SectionEyebrow>
           </div>
           <h2
             data-cta-l
-            className="font-playfair text-3xl font-bold text-white md:text-4xl"
+            className="section-title text-white"
           >
             Join Us in Safeguarding Displaced Communities
           </h2>
-          <p data-cta-l className="mt-4 max-w-lg font-inter text-white/60">
+          <p data-cta-l className="mt-5 max-w-lg font-inter text-base leading-relaxed text-white/65">
             Whether you&apos;re a donor, partner, or volunteer — your contribution can
             change lives.
           </p>
         </div>
-        <div className="grid min-w-0 gap-4 sm:grid-cols-2">
-          <div data-cta-r className="rounded-3xl bg-green p-6">
+        <div className="grid min-w-0 gap-5 sm:grid-cols-2">
+          <div data-cta-r className="rounded-3xl bg-green p-6 md:p-7">
             <span className="inline-flex rounded-xl bg-white/20 p-3 text-white">
               <Mail className="h-5 w-5" aria-hidden />
             </span>
-            <p className="mt-4 font-inter text-sm text-white/80">Ready to help?</p>
-            <div className="mt-4 flex flex-col gap-2">
+            <p className="mt-5 font-inter text-sm text-white/80">Ready to help?</p>
+            <div className="mt-5 flex flex-col gap-3">
               <Link
                 href="/donate"
-                className="inline-flex justify-center rounded-full bg-white px-6 py-3 font-inter font-bold text-green transition hover:bg-cream"
+                className="inline-flex justify-center rounded-full bg-white px-6 py-3.5 font-inter text-sm font-normal uppercase tracking-[0.05em] text-green transition hover:bg-cream"
               >
                 Donate
               </Link>
               <Link
                 href="/get-involved"
-                className="inline-flex justify-center rounded-full border border-white/40 px-6 py-2.5 font-inter text-sm font-semibold text-white transition hover:bg-white/10"
+                className="link-cta justify-center self-center py-2 text-white"
               >
                 Partner or volunteer
               </Link>
@@ -96,13 +96,13 @@ export function CTABand() {
           </div>
           <div
             data-cta-r
-            className="rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-sm"
+            className="rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-sm md:p-7"
           >
             <span className="inline-flex rounded-xl bg-green p-3 text-white">
               <Phone className="h-5 w-5" aria-hidden />
             </span>
-            <p className="mt-4 font-inter text-sm text-white/60">Call Us</p>
-            <p className="font-playfair text-xl font-bold text-white">{site.phone}</p>
+            <p className="mt-5 font-inter text-sm text-white/60">Call Us</p>
+            <p className="mt-1 font-playfair text-xl font-normal text-white md:text-2xl">{site.phone}</p>
           </div>
         </div>
       </div>

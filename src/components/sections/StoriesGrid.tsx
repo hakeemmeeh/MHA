@@ -123,10 +123,10 @@ export function StoriesGrid() {
               />
             </Link>
             <div className="flex flex-1 flex-col p-6">
-              <p className="font-inter text-xs font-semibold uppercase tracking-wide text-gold">
+              <p className="font-inter text-xs font-semibold uppercase tracking-wide text-text-muted">
                 {s.location}
               </p>
-              <h2 className="mt-2 font-playfair text-xl font-bold text-navy">
+              <h2 className="mt-2 font-playfair text-xl font-normal text-navy">
                 <Link href={`/stories/${s.slug}`} className="hover:underline">
                   {s.title}
                 </Link>
@@ -136,7 +136,7 @@ export function StoriesGrid() {
               </p>
               <Link
                 href={`/stories/${s.slug}`}
-                className="mt-4 font-inter text-sm font-semibold text-green"
+                className="link-cta mt-4 w-fit text-xs"
               >
                 Read story →
               </Link>

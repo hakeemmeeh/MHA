@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ProjectHighlight } from "@/types";
+import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 
 export function TransparencyProjectLog({
   items,
@@ -16,20 +17,22 @@ export function TransparencyProjectLog({
   return (
     <section
       id={anchorId}
-      className="bg-cream py-20"
+      className="section-y scroll-mt-20 bg-cream"
       aria-labelledby="project-log-heading"
     >
-      <div className="mx-auto max-w-6xl px-6">
-        <h2
-          id="project-log-heading"
-          className="font-playfair text-3xl font-bold text-navy md:text-[40px]"
-        >
+      <div className="page-x mx-auto max-w-7xl">
+        <SectionEyebrow>Public record</SectionEyebrow>
+        <h2 id="project-log-heading" className="section-title text-text-dark">
           {title}
         </h2>
         {intro && (
-          <p className="mt-4 max-w-3xl font-inter text-text-mid">{intro}</p>
+          <p className="mt-4 max-w-3xl font-inter text-base leading-relaxed text-text-mid">
+            {intro}
+          </p>
         )}
-        <div className="mt-10 overflow-x-auto rounded-2xl border border-border bg-white shadow-sm">
+
+        {/* Desktop table */}
+        <div className="mt-10 hidden overflow-x-auto border border-border bg-white md:block">
           <table className="w-full min-w-[640px] text-left font-inter text-sm">
             <thead className="border-b border-border bg-navy-light/60 text-xs font-semibold uppercase tracking-wide text-text-muted">
               <tr>
@@ -42,7 +45,10 @@ export function TransparencyProjectLog({
             </thead>
             <tbody className="divide-y divide-border text-text-dark">
               {items.map((row) => (
-                <tr key={`${row.dateLabel}-${row.title}`} className="bg-white hover:bg-navy-light/30">
+                <tr
+                  key={`${row.dateLabel}-${row.title}`}
+                  className="bg-white hover:bg-navy-light/30"
+                >
                   <td className="whitespace-nowrap px-4 py-4 text-text-muted">
                     {row.dateLabel}
                   </td>
@@ -69,6 +75,37 @@ export function TransparencyProjectLog({
             </tbody>
           </table>
         </div>
+
+        {/* Mobile stacked rows */}
+        <ul className="mt-10 space-y-4 md:hidden">
+          {items.map((row) => (
+            <li
+              key={`${row.dateLabel}-${row.title}-m`}
+              className="border-t-2 border-green bg-white px-5 py-5"
+            >
+              <p className="font-inter text-xs font-semibold uppercase tracking-wide text-text-muted">
+                {row.dateLabel}
+              </p>
+              <h3 className="mt-2 font-playfair text-lg text-navy">{row.title}</h3>
+              <p className="mt-2 font-inter text-sm leading-relaxed text-text-mid">
+                {row.summary}
+              </p>
+              <p className="mt-3 font-inter text-xs text-text-muted">
+                {row.location}
+                {row.partner ? ` · ${row.partner}` : ""}
+              </p>
+              {row.storySlug ? (
+                <Link
+                  href={`/stories/${row.storySlug}`}
+                  className="link-cta mt-4 inline-flex text-xs text-navy"
+                >
+                  Field story →
+                </Link>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+
         <p className="mt-6 font-inter text-xs text-text-muted">
           Dates are shown where documented in MHA&apos;s public organizational profile; other
           rows reflect ongoing or multi-site programme lines. Contact MHA for partner-specific

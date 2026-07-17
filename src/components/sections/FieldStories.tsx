@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ctaQuote, fieldStories } from "@/lib/content";
+import { fieldStories } from "@/lib/content";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,7 +16,6 @@ const FEATURED_STORIES = fieldStories.slice(0, 3);
 export function FieldStories() {
   const root = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const quote = useRef<HTMLParagraphElement>(null);
 
   useLayoutEffect(() => {
     const track = trackRef.current;
@@ -32,16 +31,12 @@ export function FieldStories() {
       if (intros.length) gsap.set(intros, { y: 0, opacity: 1 });
       gsap.set(track, { opacity: 1 });
       gsap.set(cards, { x: 0, y: 0, opacity: 1 });
-      if (quote.current) gsap.set(quote.current, { opacity: 1, y: 0 });
       return;
     }
 
     const ctx = gsap.context(() => {
       gsap.set(track, { opacity: 0 });
       gsap.set(cards, isMd ? { x: 56, opacity: 0 } : { y: 48, opacity: 0 });
-      if (quote.current) {
-        gsap.set(quote.current, { opacity: 0, y: 28 });
-      }
       if (intros.length) {
         gsap.set(intros, { y: 32, opacity: 0 });
       }
@@ -77,23 +72,14 @@ export function FieldStories() {
         { x: 0, y: 0, opacity: 1, duration: 0.88, stagger: 0.26 },
         intros.length ? "<0.45" : 0.1,
       );
-
-      if (quote.current) {
-        tl.fromTo(
-          quote.current,
-          { y: 28, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.95 },
-          "+=1.0",
-        );
-      }
     }, rootEl);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={root} id="stories" className="bg-navy py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <section ref={root} id="stories" className="section-y bg-navy">
+      <div className="page-x mx-auto max-w-7xl">
         <div data-mh-intro>
           <SectionEyebrow className="text-green [&::before]:bg-green">
             From the Field
@@ -101,21 +87,22 @@ export function FieldStories() {
         </div>
         <h2
           data-mh-intro
-          className="font-playfair text-3xl font-bold text-white md:text-[44px]"
+          className="section-title text-white"
         >
           Stories of Impact
         </h2>
-        <p data-mh-intro className="mt-4 max-w-2xl font-inter text-sm text-white/65">
-          A sample of field narratives. For every story and the public activity log for partners,
-          see{" "}
-          <Link href="/stories" className="font-semibold text-green underline">
-            all stories
-          </Link>{" "}
-          and{" "}
-          <Link href="/impact#project-log" className="font-semibold text-green underline">
-            impact &amp; transparency
+        <p data-mh-intro className="mt-4 max-w-2xl font-inter text-base leading-relaxed text-white/70">
+          Real outcomes, documented with community consent.{" "}
+          <Link href="/stories" className="text-green underline-offset-2 hover:underline">
+            All stories
           </Link>
-          .
+          {" · "}
+          <Link
+            href="/impact#project-log"
+            className="text-green underline-offset-2 hover:underline"
+          >
+            Activity log
+          </Link>
         </p>
 
         <div
@@ -128,7 +115,7 @@ export function FieldStories() {
             <article
               key={s.slug}
               data-story-card
-              className={`shrink-0 rounded-xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-black/15 md:snap-center md:p-6 lg:flex lg:min-h-0 lg:gap-8 ${
+              className={`shrink-0 rounded-xl bg-white p-4 shadow-lg shadow-black/20 md:snap-center md:p-6 lg:flex lg:min-h-0 lg:gap-8 ${
                 index === 0
                   ? "md:w-[min(920px,92vw)] lg:min-h-[280px]"
                   : "md:w-[min(640px,82vw)]"
@@ -145,21 +132,21 @@ export function FieldStories() {
                 />
               </div>
               <div className="mt-6 flex flex-1 flex-col justify-center lg:mt-0">
-                <p className="font-inter text-xs font-semibold uppercase tracking-wider text-gold">
+                <p className="font-inter text-xs font-semibold uppercase tracking-wider text-text-muted">
                   {s.location}
                 </p>
-                <h3 className="mt-2 font-playfair text-xl text-white md:text-2xl">{s.title}</h3>
+                <h3 className="mt-2 font-playfair text-xl text-navy md:text-2xl">{s.title}</h3>
                 {s.outcome ? (
                   <p className="mt-2 font-inter text-sm font-semibold leading-snug text-green">
                     {s.outcome}
                   </p>
                 ) : null}
-                <p className="mt-3 line-clamp-3 font-inter text-sm leading-relaxed text-white/70">
+                <p className="mt-3 line-clamp-3 font-inter text-sm leading-relaxed text-text-mid">
                   {s.excerpt}
                 </p>
                 <Link
                   href={`/stories/${s.slug}`}
-                  className="mt-4 font-inter text-sm font-semibold text-green hover:underline"
+                  className="link-cta mt-4 w-fit text-xs text-navy"
                 >
                   Read Full Story →
                 </Link>
@@ -167,13 +154,6 @@ export function FieldStories() {
             </article>
           ))}
         </div>
-
-        <p
-          ref={quote}
-          className="mx-auto mt-16 max-w-3xl text-center font-playfair text-xl italic text-white/60 md:text-2xl"
-        >
-          {ctaQuote}
-        </p>
       </div>
     </section>
   );

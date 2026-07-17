@@ -421,8 +421,8 @@ export const partnershipTransparency = {
   title: "Partnership & transparency",
   paragraphs: [
     "MHA is accountable first to the communities we serve, and transparent with the donors, UN agencies, and national NGOs who make our work possible.",
-    "We publish representative field activities and governance information so partners can see what has been delivered, where it happened, and how oversight works — including policies, board practice, and financial controls.",
-    "This site is a summary, not a full audit trail. For formal due diligence, procurement packs, or donor-specific reports, contact us directly and we will route your request to the right focal point.",
+    "We publish representative field activities so partners can see what has been delivered and where. Board practice, financial controls, and documented policies are summarized under Leadership and Policies — and available on request for formal due diligence.",
+    "This site is a summary, not a full audit trail. For procurement packs or donor-specific reports, contact us and we will route your request to the right focal point.",
   ],
 };
 
@@ -431,24 +431,7 @@ export const capabilities = {
   bullets: [
     "As a South Sudanese organization, MHA brings deep knowledge of local challenges, cultures, experiences, and indigenous community strengths.",
     "Professional, experienced staff with strong field exposure—a comparative advantage in remote and volatile contexts across the country.",
-    "Static and mobile delivery models, including hard-to-reach areas and islands accessible only by canoe.",
-  ],
-};
-
-export const managementModel = {
-  title: "Governance & management",
-  paragraphs: [
-    "The Board of Directors (five members) oversees strategy, policy formulation, and performance monitoring. The Executive Director serves as a board member—linking governance directly to day-to-day operations.",
-    "Quarterly board visits enable thorough progress review and timely course correction.",
-    "Programme implementation is led by Program Managers and technical staff, with support from Project Technical Managers as required.",
-  ],
-};
-
-export const financialAccountability = {
-  title: "Finance & accountability",
-  paragraphs: [
-    "MHA maintains a documented financial control system. A Financial Controller leads the finance function, with qualified accounting staff managing day-to-day books and compliance.",
-    "The Board uses tracking procedures and internal audits to strengthen accountability and identify improvements — aligned with our Financial Policy, Anti-Fraud and Bribery Policy, and Whistle-blowing Policy.",
+    "Static and mobile delivery models that extend protection and resilience support into remote and hard-to-reach communities.",
   ],
 };
 
@@ -613,7 +596,7 @@ export const newsItems: NewsItem[] = [
     category: "announcement",
     excerpt:
       "Governance documents and due-diligence materials are easier to find for partners and donors.",
-    image: "/og-image.svg",
+    image: "/images/stories/cbp-training-dablual-mayiandit.jpg",
     body: [
       "The Resources page lists policies and financial documents available on request while direct PDF uploads are finalized.",
       "Partners seeking formal packs should contact the Juba headquarters or use the contact form with a due-diligence inquiry.",
@@ -773,7 +756,7 @@ export const aboutPreview = {
   headline: "Delivering Life-Saving Assistance to Displaced Communities",
   paragraphs: [
     "Mobile Humanitarian Agency (MHA) is a South Sudanese NGO established in 2017 to safeguard rights and restore dignity for people affected by conflict and displacement—including IDPs, returnees, refugees, and host communities, with particular attention to the most vulnerable.",
-    "Registered under the NGOs Act 2016, we work with humanitarian partners to uphold non-discrimination in service delivery. We combine rapid emergency response with longer-term resilience—deploying a predominantly field-based team to reach remote areas, including islands accessible only by canoe.",
+    "We work with humanitarian partners to uphold non-discrimination in service delivery, combining rapid emergency response with longer-term resilience through a predominantly field-based team.",
   ],
   checklist: [
     "Registered under NGOs Act 2016",
@@ -787,6 +770,30 @@ export const strategicPurpose = {
   title: "Strategic purpose",
   body: "MHA’s dual focus combines emergency response with strengthening existing community-based protection mechanisms—so communities can weather shocks today while building resilience, local ownership, and capacity for the long term.",
 };
+
+/** Verified org milestones for the About page timeline (no invented dates). */
+export const aboutTimeline = [
+  {
+    year: "2017",
+    title: "Founded & registered",
+    body: "Established as a South Sudanese NGO under the NGOs Act (2016) to safeguard rights and restore dignity for displaced communities.",
+  },
+  {
+    year: "2019",
+    title: "Charter & network affiliations",
+    body: "Joined the International Humanitarian Charter on Inclusion of Persons with Disabilities and the Global Legal Empowerment Network (Namati).",
+  },
+  {
+    year: "Ongoing",
+    title: "National cluster membership",
+    body: "Full member of the National Protection Cluster, GBV Sub-Cluster, and FSL Cluster — plus NGO Forum and INSO.",
+  },
+  {
+    year: "Today",
+    title: "Eight-county field footprint",
+    body: "Predominantly field-based teams deliver protection and resilience support across Unity and Jonglei.",
+  },
+] as const;
 
 export const impactPageStats: Stat[] = [
   { value: 8, label: "Counties", suffix: "" },

@@ -52,9 +52,8 @@ function BarChart({
                 >
                   {item.label}
                 </span>
-                <span className="font-playfair text-lg font-bold text-navy tabular-nums">
+                <span className="font-playfair text-lg font-normal text-navy tabular-nums">
                   {item.value}
-                  {item.label.includes("%") ? "" : ""}
                 </span>
               </div>
               <div className="mt-2 h-3 overflow-hidden rounded-full bg-navy-light">
@@ -139,17 +138,14 @@ export function ImpactDashboard() {
   return (
     <section
       id="impact-dashboard"
-      className="border-y border-border bg-white py-16 sm:py-20"
+      className="section-y scroll-mt-20 border-y border-border bg-white"
       aria-labelledby="impact-dashboard-heading"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <h2
-          id="impact-dashboard-heading"
-          className="font-playfair text-3xl font-bold text-navy md:text-4xl"
-        >
+      <div className="page-x mx-auto max-w-7xl">
+        <h2 id="impact-dashboard-heading" className="section-title text-text-dark">
           Impact dashboard
         </h2>
-        <p className="mt-3 max-w-2xl font-inter text-text-mid">
+        <p className="mt-4 max-w-2xl font-inter text-base leading-relaxed text-text-mid">
           Interactive summary of reach and programming — hover bars for detail. Figures are
           representative of published MHA data, not a live database feed.
         </p>
@@ -183,7 +179,7 @@ export function ImpactDashboard() {
           id={`impact-panel-${tab}`}
           data-impact-panel
           role="tabpanel"
-          className="mt-10 rounded-2xl border border-border bg-cream/60 p-6 sm:p-8"
+          className="mt-10 border border-border bg-cream/60 p-6 sm:p-8"
         >
           {tab === "activities" ? (
             <DonutChart items={panelData.activities} />

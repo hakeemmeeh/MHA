@@ -7,18 +7,15 @@ export const metadata = marketingPageMetadata({
   description:
     "Organizational announcements from MHA — site updates and partnership notes. Field reporting is on Stories.",
   pathname: "/news",
-  image: "/og-image.svg",
+  image: "/images/stories/capacity-building-cbp-leaders.jpg",
 });
+
+const heroImg = "/images/stories/capacity-building-cbp-leaders.jpg";
 
 export default function NewsPage() {
   return (
     <>
-      <PageHero
-        animate
-        title="News"
-        subtitle="Brief organizational announcements — not duplicate field narratives."
-        image="/og-image.svg"
-      />
+      <PageHero animate title="News" subtitle="Organizational announcements and updates." image={heroImg} />
       <NewsGrid />
     </>
   );

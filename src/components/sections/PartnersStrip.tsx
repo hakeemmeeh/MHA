@@ -8,29 +8,29 @@ export function PartnersStrip() {
   return (
     <section
       id="partners"
-      className="relative overflow-hidden border-y border-border bg-cream py-12 sm:py-16 md:py-20"
+      className="section-y relative overflow-hidden border-y border-border bg-cream"
       aria-labelledby="partners-strip-heading"
     >
-      <div className="relative z-[1] mx-auto max-w-7xl px-4 text-center sm:px-6">
+      <div className="page-x relative z-[1] mx-auto max-w-7xl text-center">
         <SectionEyebrow className="justify-center">Partners &amp; donors</SectionEyebrow>
         <h2
           id="partners-strip-heading"
-          className="mt-3 font-playfair text-2xl font-bold tracking-tight text-text-dark md:text-3xl"
+          className="section-title mt-2 text-text-dark"
         >
           Trusted by leading humanitarian organizations
         </h2>
-        <p className="mx-auto mt-3 max-w-2xl font-inter text-sm text-text-mid md:text-base">
+        <p className="mx-auto mt-5 max-w-2xl font-inter text-base leading-relaxed text-text-mid">
           Collaboration with agencies and funds that help us reach communities others cannot.
         </p>
       </div>
 
-      <div className="relative z-[1] mt-10 md:mt-12">
+      <div className="relative z-[1] mt-12 md:mt-14">
         {/* Reduced motion: static logo row */}
-        <div className="hidden flex-wrap items-center justify-center gap-4 px-4 motion-reduce:flex sm:gap-6 sm:px-6 md:gap-8">
+        <div className="hidden flex-wrap items-center justify-center gap-10 px-6 motion-reduce:flex sm:gap-14 sm:px-8">
           {partners.map((p) => (
             <div
               key={p.name}
-              className="shrink-0 rounded-2xl border border-border bg-white px-5 py-3 shadow-sm"
+              className="flex h-16 w-40 shrink-0 items-center justify-center sm:h-20 sm:w-48"
             >
               <Image
                 src={p.logo}
@@ -38,7 +38,7 @@ export function PartnersStrip() {
                 width={320}
                 height={80}
                 quality={85}
-                className="h-11 w-auto max-w-[min(100%,280px)] object-contain md:h-12"
+                className="h-10 w-auto max-w-full object-contain opacity-80 md:h-12"
               />
             </div>
           ))}
@@ -55,12 +55,12 @@ export function PartnersStrip() {
             className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-cream to-transparent md:w-28"
           />
 
-          <div className="overflow-hidden">
-            <div className="flex w-max animate-marquee items-center gap-10 px-4 sm:gap-14 sm:px-6 md:gap-24 md:px-10">
+          <div className="overflow-hidden py-2">
+            <div className="flex w-max animate-marquee items-center gap-8 px-5 sm:gap-10 sm:px-6 md:gap-14 md:px-8">
               {row.map((p, i) => (
                 <div
                   key={`${p.name}-${i}`}
-                  className="shrink-0 rounded-2xl border border-border bg-white px-5 py-3 shadow-sm transition duration-300 hover:border-green/40 hover:shadow-md"
+                  className="flex h-16 w-40 shrink-0 items-center justify-center sm:h-20 sm:w-48"
                 >
                   <Image
                     src={p.logo}
@@ -68,7 +68,7 @@ export function PartnersStrip() {
                     width={320}
                     height={80}
                     quality={85}
-                    className="h-11 w-auto max-w-[min(100%,280px)] object-contain md:h-12"
+                    className="h-10 w-auto max-w-full object-contain opacity-80 transition hover:opacity-100 md:h-12"
                   />
                 </div>
               ))}

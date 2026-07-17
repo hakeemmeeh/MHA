@@ -25,23 +25,23 @@ export function MidPageCTA({
   return (
     <aside
       id={id}
-      className="border-y border-border bg-gradient-to-r from-navy/5 via-cream to-navy/5 py-12"
+      className="section-y-sm border-y border-border bg-gradient-to-r from-navy/5 via-cream to-navy/5"
     >
-      <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+      <div className="page-x mx-auto max-w-3xl text-center">
         <p className="font-inter text-xs font-semibold uppercase tracking-wider text-green">{eyebrow}</p>
-        <h2 className="mt-2 font-playfair text-2xl font-bold text-navy md:text-3xl">{title}</h2>
-        <p className="mt-3 font-inter text-sm text-text-mid md:text-base">{body}</p>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <h2 className="mt-3 font-playfair text-2xl font-normal text-navy md:text-3xl lg:text-[2.15rem]">{title}</h2>
+        <p className="mt-4 font-inter text-base leading-relaxed text-text-mid">{body}</p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
             href={primaryHref}
-            className="inline-flex rounded-full bg-green px-6 py-2.5 font-inter text-sm font-semibold text-white transition hover:bg-green-dark"
+            className="btn-primary"
           >
             {primaryLabel}
           </Link>
           {secondaryHref && secondaryLabel ? (
             <Link
               href={secondaryHref}
-              className="inline-flex rounded-full border border-navy/20 bg-white px-6 py-2.5 font-inter text-sm font-semibold text-navy transition hover:border-navy/40"
+              className="link-cta py-3 text-navy"
             >
               {secondaryLabel}
             </Link>

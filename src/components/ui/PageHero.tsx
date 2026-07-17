@@ -162,10 +162,11 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
       {!image && (
         <div className="absolute inset-0 bg-gradient-to-br from-navy to-navy-dark" />
       )}
-      <div className="relative z-10 mx-auto flex max-w-5xl flex-col justify-end px-6 pt-16 pb-4 md:pt-24">
+      <div className="relative z-10 mx-auto flex min-h-[42vh] max-w-5xl flex-col justify-end px-6 pb-10 pt-28 md:pb-12 md:pt-32 lg:min-h-[48vh]">
         <h1
           ref={animate ? titleRef : undefined}
-          className="font-bodoni-display text-4xl font-bold text-white md:text-5xl"
+          className="font-playfair text-4xl font-normal text-white md:text-5xl"
+          style={{ fontWeight: 400 }}
         >
           {title}
         </h1>

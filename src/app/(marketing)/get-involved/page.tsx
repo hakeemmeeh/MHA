@@ -1,7 +1,7 @@
 import { Handshake, Heart, Users } from "lucide-react";
 import Link from "next/link";
-import { MarketingScrollReveal } from "@/components/layout/MarketingScrollReveal";
 import { PageHero } from "@/components/ui/PageHero";
+import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { marketingPageMetadata } from "@/lib/social-metadata";
 
@@ -48,47 +48,44 @@ export default function GetInvolvedPage() {
         subtitle="Donors, partners, and volunteers strengthen the same mission: safeguarding rights and restoring dignity."
         image={heroImg}
       />
-      <MarketingScrollReveal>
-        <section className="bg-cream py-20">
-          <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-3">
+      <section className="section-y bg-cream">
+        <div className="page-x mx-auto max-w-7xl">
+          <SectionEyebrow>Pathways</SectionEyebrow>
+          <h2 className="section-title text-text-dark">Choose how you help</h2>
+          <div className="mt-10 grid gap-10 md:grid-cols-3">
             {paths.map((p) => {
               const Icon = p.icon;
               return (
-                <div
-                  key={p.title}
-                  className="flex flex-col rounded-2xl border border-border bg-white p-8 shadow-sm"
-                >
-                  <span className="inline-flex w-fit rounded-xl bg-navy-light p-3 text-navy">
-                    <Icon className="h-6 w-6" aria-hidden />
+                <div key={p.title} className="flex flex-col border-t-2 border-green pt-6">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-green shadow-[0_8px_20px_rgba(13,26,46,0.1)] ring-1 ring-black/[0.04]">
+                    <Icon className="h-6 w-6" strokeWidth={1.35} aria-hidden />
                   </span>
-                  <h2 className="mt-4 font-playfair text-2xl font-bold text-navy">{p.title}</h2>
-                  <p className="mt-3 flex-1 font-inter text-sm text-text-mid">{p.desc}</p>
-                  <Link
-                    href={p.href}
-                    className="mt-6 inline-flex rounded-full bg-green px-5 py-2.5 text-center font-inter text-sm font-semibold text-white hover:bg-green-dark"
-                  >
-                    {p.cta}
+                  <h3 className="mt-5 font-playfair text-2xl font-normal text-navy">{p.title}</h3>
+                  <p className="mt-3 flex-1 font-inter text-sm leading-relaxed text-text-mid">
+                    {p.desc}
+                  </p>
+                  <Link href={p.href} className="link-cta mt-6 w-fit text-navy">
+                    {p.cta} →
                   </Link>
                 </div>
               );
             })}
           </div>
-        </section>
-      </MarketingScrollReveal>
-      <MarketingScrollReveal subtle>
-        <div data-marketing-reveal className="bg-navy-light py-20">
-          <div className="mx-auto max-w-xl px-6">
-            <h2 className="font-playfair text-2xl font-bold text-navy">Quick message</h2>
-            <p className="mt-2 font-inter text-sm text-text-mid">
-              Name, email, and how you want to help — we will route your message to the right focal
-              point.
-            </p>
-            <div className="mt-8 rounded-2xl border border-border bg-white p-8 shadow-sm">
-              <ContactForm simplified />
-            </div>
+        </div>
+      </section>
+      <section className="section-y bg-navy-light">
+        <div className="page-x mx-auto max-w-xl">
+          <SectionEyebrow>Quick message</SectionEyebrow>
+          <h2 className="section-title text-text-dark">Tell us how you want to help</h2>
+          <p className="mt-4 font-inter text-sm leading-relaxed text-text-mid">
+            Name, email, and how you want to help — we will route your message to the right focal
+            point.
+          </p>
+          <div className="mt-8 border border-border bg-white p-8">
+            <ContactForm simplified />
           </div>
         </div>
-      </MarketingScrollReveal>
+      </section>
     </>
   );
 }

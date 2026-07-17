@@ -132,7 +132,8 @@ export function StoryPageHero({ story, thematic }: StoryPageHeroProps) {
         </p>
         <h1
           ref={titleRef}
-          className="mt-3 font-bodoni-display text-4xl font-bold text-white md:text-5xl"
+          className="mt-3 font-playfair text-4xl font-normal text-white md:text-5xl"
+          style={{ fontWeight: 400 }}
         >
           {story.title}
         </h1>

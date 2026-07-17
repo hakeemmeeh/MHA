@@ -1,11 +1,16 @@
+import Image from "next/image";
 import Link from "next/link";
-import { MarketingScrollReveal } from "@/components/layout/MarketingScrollReveal";
-import { PageHero } from "@/components/ui/PageHero";
 import { ImpactDashboard } from "@/components/sections/ImpactDashboard";
-import { StatsBar } from "@/components/sections/StatsBar";
+import { ImpactPageNav } from "@/components/sections/ImpactPageNav";
+import { MidPageCTA } from "@/components/sections/MidPageCTA";
 import { TransparencyProjectLog } from "@/components/sections/TransparencyProjectLog";
-import { WhereWeWork } from "@/components/sections/WhereWeWork";
-import { fieldStories, partnershipTransparency, projectHighlights } from "@/lib/content";
+import { PageHero } from "@/components/ui/PageHero";
+import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
+import {
+  fieldStories,
+  projectHighlights,
+  site,
+} from "@/lib/content";
 import { marketingPageMetadata } from "@/lib/social-metadata";
 
 export const metadata = marketingPageMetadata({
@@ -19,72 +24,102 @@ export const metadata = marketingPageMetadata({
 const heroImg = "/images/hero/home-hero.jpg";
 
 export default function ImpactPage() {
+  const featured = fieldStories[0];
+
   return (
     <>
       <PageHero
         animate
         title="Impact & transparency"
-        subtitle="Field-led results, honest geography, and a public activity log so partners can see what we deliver — alongside deeper field stories."
+        subtitle="Field-led results, honest geography, and a public activity log so partners can see what we deliver."
         image={heroImg}
       />
-      <MarketingScrollReveal>
-      <section className="bg-navy-light py-14">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <p className="font-inter text-text-mid">{partnershipTransparency.paragraphs[0]}</p>
-          <div className="mt-4 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/about#transparency"
-              className="font-inter text-sm font-semibold text-navy underline hover:text-green-dark"
-            >
-              Transparency approach →
-            </Link>
-            <Link
-              href="/resources"
-              className="font-inter text-sm font-semibold text-navy underline hover:text-green-dark"
-            >
-              Download resources →
-            </Link>
+      <ImpactPageNav />
+
+      <section id="overview" className="section-y scroll-mt-20 bg-cream">
+        <div className="page-x mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <SectionEyebrow>Accountability</SectionEyebrow>
+            <h2 className="section-title text-text-dark">How we report impact</h2>
+            <p className="mt-5 font-inter text-base leading-relaxed text-text-mid">
+              MHA is accountable first to the communities we serve, and transparent with the
+              donors and partners who make our work possible. This page holds the public activity
+              log and programme snapshot — governance and policies live on About and Resources.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link href="/about#transparency" className="btn-primary">
+                Transparency approach
+              </Link>
+              <Link href="/resources" className="link-cta text-navy">
+                Download resources →
+              </Link>
+            </div>
+          </div>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+            <Image
+              src="/images/stories/youth-launch-leer-june-2023.jpg"
+              alt="MHA programme activity with youth in Leer County"
+              fill
+              quality={85}
+              sizes="(max-width:1024px) 100vw, 50vw"
+              className="object-cover photo-brighten photo-focal"
+            />
           </div>
         </div>
       </section>
-      <StatsBar />
+
       <ImpactDashboard />
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-4xl px-6">
-          <h2 className="font-playfair text-3xl font-bold text-navy">At a glance</h2>
-          <ul className="mt-8 space-y-6 font-inter text-text-mid">
-            <li>
-              <strong className="text-navy">2017–present:</strong> sustained operations
-              through conflict cycles with dual focus on emergency response and resilience.
-            </li>
-            <li>
-              <strong className="text-navy">Core coverage:</strong> active programming across
-              eight counties in Unity and Jonglei states, coordinated from Juba and field
-              offices — with select partner-funded activities in other locations when agreed
-              (see activity log).
-            </li>
-            <li>
-              <strong className="text-navy">Field stories:</strong>{" "}
-              <Link href="/stories" className="font-semibold text-green underline">
-                {fieldStories.length} consent-led narratives
+
+      {featured ? (
+        <section className="section-y bg-white">
+          <div className="page-x mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl lg:order-2">
+              <Image
+                src={featured.image}
+                alt={featured.title}
+                fill
+                quality={85}
+                sizes="(max-width:1024px) 100vw, 50vw"
+                className="object-cover photo-brighten photo-focal"
+              />
+            </div>
+            <div className="lg:order-1">
+              <SectionEyebrow>Proof from the field</SectionEyebrow>
+              <h2 className="section-title text-text-dark">{featured.title}</h2>
+              <p className="mt-2 font-inter text-xs font-semibold uppercase tracking-wide text-text-muted">
+                {featured.location}
+              </p>
+              <p className="mt-5 font-inter text-base leading-relaxed text-text-mid">
+                {featured.excerpt}
+              </p>
+              <Link
+                href={`/stories/${featured.slug}`}
+                className="link-cta mt-8 inline-flex text-navy"
+              >
+                Read the field story →
               </Link>
-              {" · "}
-              <Link href="/news" className="font-semibold text-green underline">
-                news
-              </Link>{" "}
-              for organizational announcements only.
-            </li>
-          </ul>
-        </div>
-      </section>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <TransparencyProjectLog
         anchorId="project-log"
         title="Project & activity log"
         intro="Documented milestones and programme lines from MHA’s organizational profile, with links to longer field stories where available."
         items={projectHighlights}
       />
-      <WhereWeWork />
-      </MarketingScrollReveal>
+
+      <MidPageCTA
+        id="cta-impact"
+        eyebrow="Partner with us"
+        title="Need a due-diligence pack or deeper reporting?"
+        body={`Contact ${site.acronym} for procurement packs, donor-specific reports, or verification questions — we will route your request to the right focal point.`}
+        primaryHref="/contact"
+        primaryLabel="Contact the team"
+        secondaryHref="/resources"
+        secondaryLabel="View resources"
+      />
     </>
   );
 }

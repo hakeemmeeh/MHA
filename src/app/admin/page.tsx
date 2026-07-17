@@ -17,7 +17,7 @@ const cards = [
 export default function AdminDashboardPage() {
   return (
     <div className="space-y-10">
-      <h1 className="font-bodoni-display text-3xl font-bold text-navy">Overview</h1>
+      <h1 className="font-bodoni-display text-3xl font-normal text-navy">Overview</h1>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {cards.map((c) => {
           const Icon = c.icon;
@@ -35,7 +35,7 @@ export default function AdminDashboardPage() {
         })}
       </div>
       <div className="rounded-xl border border-border bg-white p-6 shadow-sm">
-        <h2 className="font-playfair text-xl font-bold text-navy">Recent inquiries</h2>
+        <h2 className="font-playfair text-xl font-normal text-navy">Recent inquiries</h2>
         <p className="mt-2 font-inter text-sm text-text-mid">
           Connect your Supabase project and service role key to list submissions here. The
           contact API already inserts into <code className="text-navy">inquiries</code> when

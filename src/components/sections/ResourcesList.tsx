@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Download, Mail } from "lucide-react";
 import { publicDocuments, site } from "@/lib/content";
+import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 
 const categoryLabels = {
   registration: "Registration",
@@ -15,41 +16,43 @@ export function ResourcesList() {
   const requestMailto = `mailto:${site.email}?subject=${encodeURIComponent("Document request — MHA")}`;
 
   return (
-    <section className="bg-cream py-16 sm:py-20">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6">
-        <p className="font-inter text-sm text-text-mid">
-          Upload finalized PDFs to <code className="text-navy">public/documents/</code> and set
-          each item&apos;s download link in <code className="text-navy">content.ts</code>. Until
-          then, request copies by email — we respond to partner due-diligence requests promptly.
+    <section className="section-y bg-cream">
+      <div className="page-x mx-auto max-w-4xl">
+        <SectionEyebrow>Partner due diligence</SectionEyebrow>
+        <h2 className="section-title text-text-dark">Document library</h2>
+        <p className="mt-4 font-inter text-base leading-relaxed text-text-mid">
+          Policies, registration, and financial materials for partners, donors, and auditors.
+          Where a download is not yet published online, request a copy by email — we respond to
+          partner due-diligence requests promptly.
         </p>
 
-        <div className="mt-10 space-y-12">
+        <div className="mt-12 space-y-12">
           {categoryOrder.map((cat) => {
             const docs = publicDocuments.filter((d) => d.category === cat);
             if (!docs.length) return null;
             return (
               <div key={cat}>
-                <h2 className="font-playfair text-2xl font-bold text-navy">
+                <h3 className="font-inter text-xs font-semibold uppercase tracking-wider text-green">
                   {categoryLabels[cat]}
-                </h2>
-                <ul className="mt-6 space-y-4">
+                </h3>
+                <ul className="mt-5 divide-y divide-border border-y border-border">
                   {docs.map((doc) => (
                     <li
                       key={doc.title}
-                      className="flex flex-col gap-4 rounded-xl border border-border bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between"
+                      className="flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between"
                     >
                       <div className="min-w-0">
-                        <p className="font-inter font-semibold text-text-dark">{doc.title}</p>
-                        {doc.year && (
+                        <p className="font-inter font-medium text-text-dark">{doc.title}</p>
+                        {doc.year ? (
                           <p className="mt-0.5 font-inter text-xs text-text-muted">{doc.year}</p>
-                        )}
+                        ) : null}
                         <p className="mt-2 font-inter text-sm text-text-mid">{doc.description}</p>
                       </div>
                       {doc.href && !doc.onRequest ? (
                         <a
                           href={doc.href}
                           download
-                          className="inline-flex shrink-0 items-center gap-2 rounded-full bg-navy px-5 py-2.5 font-inter text-sm font-semibold text-white hover:bg-navy-dark"
+                          className="btn-primary shrink-0 px-5 py-2.5 text-xs"
                         >
                           <Download className="h-4 w-4" aria-hidden />
                           Download
@@ -57,7 +60,7 @@ export function ResourcesList() {
                       ) : (
                         <a
                           href={requestMailto}
-                          className="inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-navy px-5 py-2.5 font-inter text-sm font-semibold text-navy hover:bg-navy-light"
+                          className="inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-navy px-5 py-2.5 font-inter text-xs font-semibold uppercase tracking-[0.05em] text-navy transition hover:bg-navy-light"
                         >
                           <Mail className="h-4 w-4" aria-hidden />
                           Request copy
@@ -71,9 +74,9 @@ export function ResourcesList() {
           })}
         </div>
 
-        <p className="mt-12 rounded-xl border border-green/25 bg-green-light/40 p-6 font-inter text-sm text-text-mid">
+        <p className="mt-12 border-t-2 border-green pt-6 font-inter text-sm leading-relaxed text-text-mid">
           For full audit trails, procurement packs, or donor-specific reports,{" "}
-          <Link href="/contact" className="font-semibold text-navy hover:underline">
+          <Link href="/contact" className="font-semibold text-navy underline-offset-2 hover:underline">
             contact us
           </Link>{" "}
           and we will route your request to the right focal point.
