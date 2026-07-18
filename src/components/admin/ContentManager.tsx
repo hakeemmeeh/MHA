@@ -32,6 +32,7 @@ export function ContentManager({
 
   async function load() {
     setLoading(true);
+    setError(null);
     try {
       const res = await fetch(`/api/content/${type}`);
       const data = await res.json();
@@ -43,9 +44,25 @@ export function ContentManager({
       setLoading(false);
     }
   }
+
   useEffect(() => {
-    load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`/api/content/${type}`);
+        const data = await res.json();
+        if (cancelled) return;
+        setRows(data.rows ?? []);
+        if (data.error) setError(data.error);
+      } catch {
+        if (!cancelled) setError("Could not load content.");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [type]);
 
   function blank(): Row {
