@@ -46,9 +46,10 @@ function VideoEmbed({ video }: { video: MediaVideo }) {
   );
 }
 
-export function MediaVideoHub() {
-  const featured = mediaVideos.find((v) => v.featured) ?? mediaVideos[0];
-  const rest = mediaVideos.filter((v) => v.slug !== featured?.slug);
+export function MediaVideoHub({ videos }: { videos?: MediaVideo[] }) {
+  const data = videos ?? mediaVideos;
+  const featured = data.find((v) => v.featured) ?? data[0];
+  const rest = data.filter((v) => v.slug !== featured?.slug);
   const [selected, setSelected] = useState<MediaVideo>(featured);
 
   return (
@@ -61,7 +62,7 @@ export function MediaVideoHub() {
               Now playing
               {selected.durationLabel ? ` · ${selected.durationLabel}` : ""}
             </p>
-            <h2 className="mt-2 font-playfair text-2xl font-normal text-navy">{selected.title}</h2>
+            <h2 className="mt-2 font-playfair text-2xl font-bold text-navy">{selected.title}</h2>
             {selected.location && (
               <p className="mt-1 font-inter text-sm text-text-muted">{selected.location}</p>
             )}

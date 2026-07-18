@@ -3,10 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogPhotoGallery } from "@/components/blog/BlogPhotoGallery";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
-import { getBlogPost, getBlogPosts } from "@/lib/blog";
+import { getBlogPosts } from "@/lib/blog";
+import { getBlogPost } from "@/lib/published-content";
 import { marketingPageMetadata } from "@/lib/social-metadata";
 
 type Props = { params: Promise<{ slug: string }> };
+
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return getBlogPosts().map((p) => ({ slug: p.slug }));
@@ -14,7 +17,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogPost(slug);
   if (!post) return {};
   return marketingPageMetadata({
     title: post.title,
@@ -27,7 +30,7 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogPost(slug);
   if (!post) notFound();
 
   const date = new Date(post.publishedAt).toLocaleDateString("en-GB", {
@@ -63,7 +66,7 @@ export default async function BlogPostPage({ params }: Props) {
             {date}
             {post.author ? ` · ${post.author}` : ""}
           </p>
-          <h1 className="mt-3 font-playfair text-3xl font-normal text-navy md:text-4xl">
+          <h1 className="mt-3 font-playfair text-3xl font-bold text-navy md:text-4xl">
             {post.title}
           </h1>
           <div className="mt-8 space-y-4 font-inter text-base leading-relaxed text-text-mid">

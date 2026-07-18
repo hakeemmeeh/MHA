@@ -1,4 +1,5 @@
 import { NewsGrid } from "@/components/sections/NewsGrid";
+import { getNews } from "@/lib/published-content";
 import { PageHero } from "@/components/ui/PageHero";
 import { marketingPageMetadata } from "@/lib/social-metadata";
 
@@ -7,16 +8,20 @@ export const metadata = marketingPageMetadata({
   description:
     "Organizational announcements from MHA — site updates and partnership notes. Field reporting is on Stories.",
   pathname: "/news",
-  image: "/images/stories/capacity-building-cbp-leaders.jpg",
+  image: "/og-image.svg",
 });
 
-const heroImg = "/images/stories/capacity-building-cbp-leaders.jpg";
-
-export default function NewsPage() {
+export default async function NewsPage() {
+  const items = await getNews();
   return (
     <>
-      <PageHero animate title="News" subtitle="Organizational announcements and updates." image={heroImg} />
-      <NewsGrid />
+      <PageHero
+        animate
+        title="News"
+        subtitle="Brief organizational announcements — not duplicate field narratives."
+        image="/og-image.svg"
+      />
+      <NewsGrid items={items} />
     </>
   );
 }

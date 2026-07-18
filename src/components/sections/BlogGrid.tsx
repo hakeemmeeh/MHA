@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ContentWayfinder } from "@/components/ui/ContentWayfinder";
 import { getBlogPosts } from "@/lib/blog";
+import type { BlogPost } from "@/types";
 
 const categoryLabels = {
   "field-reflection": "Field reflection",
@@ -18,8 +19,8 @@ function formatDate(iso: string) {
   });
 }
 
-export function BlogGrid() {
-  const posts = getBlogPosts();
+export function BlogGrid({ posts: postsProp }: { posts?: BlogPost[] }) {
+  const posts = postsProp ?? getBlogPosts();
 
   return (
     <section className="bg-cream py-16 sm:py-20">
@@ -65,7 +66,7 @@ export function BlogGrid() {
                         <p className="font-inter text-xs font-semibold uppercase tracking-wide text-green">
                           {categoryLabels[post.category]} · {formatDate(post.publishedAt)}
                         </p>
-                        <h2 className="mt-2 font-playfair text-xl font-normal text-navy">
+                        <h2 className="mt-2 font-playfair text-xl font-bold text-navy">
                           <Link href={`/blog/${post.slug}`} className="hover:text-navy-mid">
                             {post.title}
                           </Link>
@@ -75,7 +76,7 @@ export function BlogGrid() {
                         </p>
                         <Link
                           href={`/blog/${post.slug}`}
-                          className="link-cta mt-4 w-fit text-xs"
+                          className="mt-4 font-inter text-sm font-semibold text-green hover:text-green-dark"
                         >
                           Read insight →
                         </Link>

@@ -6,9 +6,12 @@ import { MarketingScrollReveal } from "@/components/layout/MarketingScrollReveal
 import { StoryPageHero } from "@/components/sections/StoryPageHero";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { fieldStories, thematicAreas } from "@/lib/content";
+import { getStory } from "@/lib/published-content";
 import { shareCardMeta } from "@/lib/social-metadata";
 
 type Props = { params: Promise<{ slug: string }> };
+
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return fieldStories.map((s) => ({ slug: s.slug }));
@@ -16,7 +19,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const story = fieldStories.find((s) => s.slug === slug);
+  const story = await getStory(slug);
   if (!story) return { title: "Story" };
   const description = story.outcome ?? story.excerpt;
   return {
@@ -34,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function StoryPage({ params }: Props) {
   const { slug } = await params;
-  const story = fieldStories.find((s) => s.slug === slug);
+  const story = await getStory(slug);
   if (!story) notFound();
   const thematic = thematicAreas.find((t) => t.slug === story.thematicSlug);
 

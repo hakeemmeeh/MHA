@@ -4,9 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Play } from "lucide-react";
 import { mediaHubIntro, mediaVideos } from "@/lib/content";
+import type { MediaVideo } from "@/types";
 
-export function VideoFeatureHero() {
-  const featured = mediaVideos.find((v) => v.featured) ?? mediaVideos[0];
+export function VideoFeatureHero({ videos }: { videos?: MediaVideo[] }) {
+  const data = videos ?? mediaVideos;
+  const featured = data.find((v) => v.featured) ?? data[0];
 
   return (
     <section className="relative min-h-[56vh] overflow-hidden bg-navy-dark lg:min-h-[64vh]">
@@ -26,7 +28,7 @@ export function VideoFeatureHero() {
         <p className="font-inter text-xs font-semibold uppercase tracking-widest text-green">
           Documentary hub
         </p>
-        <h1 className="mt-4 max-w-2xl font-playfair text-4xl font-normal text-white md:text-5xl">
+        <h1 className="mt-4 max-w-2xl font-playfair text-4xl font-bold text-white md:text-5xl">
           {mediaHubIntro.title}
         </h1>
         <p className="mt-5 max-w-xl font-inter text-lg text-white/80">{mediaHubIntro.subtitle}</p>

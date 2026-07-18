@@ -7,12 +7,14 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ContentWayfinder } from "@/components/ui/ContentWayfinder";
 import { fieldStories, thematicAreas } from "@/lib/content";
+import type { FieldStory } from "@/types";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ALL = "all";
 
-export function StoriesGrid() {
+export function StoriesGrid({ stories }: { stories?: FieldStory[] }) {
+  const data = stories ?? fieldStories;
   const gridRef = useRef<HTMLDivElement>(null);
   const [filter, setFilter] = useState<string>(ALL);
   const options = useMemo(
@@ -21,8 +23,8 @@ export function StoriesGrid() {
   );
   const filtered = useMemo(
     () =>
-      filter === ALL ? fieldStories : fieldStories.filter((s) => s.thematicSlug === filter),
-    [filter],
+      filter === ALL ? data : data.filter((s) => s.thematicSlug === filter),
+    [filter, data],
   );
 
   const filteredSlugs = useMemo(() => filtered.map((s) => s.slug).join(), [filtered]);
@@ -123,10 +125,10 @@ export function StoriesGrid() {
               />
             </Link>
             <div className="flex flex-1 flex-col p-6">
-              <p className="font-inter text-xs font-semibold uppercase tracking-wide text-text-muted">
+              <p className="font-inter text-xs font-semibold uppercase tracking-wide text-gold">
                 {s.location}
               </p>
-              <h2 className="mt-2 font-playfair text-xl font-normal text-navy">
+              <h2 className="mt-2 font-playfair text-xl font-bold text-navy">
                 <Link href={`/stories/${s.slug}`} className="hover:underline">
                   {s.title}
                 </Link>
@@ -136,7 +138,7 @@ export function StoriesGrid() {
               </p>
               <Link
                 href={`/stories/${s.slug}`}
-                className="link-cta mt-4 w-fit text-xs"
+                className="mt-4 font-inter text-sm font-semibold text-green"
               >
                 Read story →
               </Link>

@@ -6,6 +6,10 @@ import {
   MessageSquare,
   Settings,
   Users,
+  FileText,
+  Newspaper,
+  PenLine,
+  Video,
 } from "lucide-react";
 import Image from "next/image";
 import { mhaLogoOnDarkClass } from "@/lib/brand";
@@ -17,6 +21,10 @@ const links = [
   { href: "/admin/donors", label: "Donors", icon: Heart },
   { href: "/admin/partners", label: "Partners", icon: Handshake },
   { href: "/admin/volunteers", label: "Volunteers", icon: Users },
+  { href: "/admin/content/stories", label: "Stories", icon: FileText },
+  { href: "/admin/content/news", label: "News", icon: Newspaper },
+  { href: "/admin/content/blog", label: "Insights", icon: PenLine },
+  { href: "/admin/content/videos", label: "Videos", icon: Video },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 

@@ -1,5 +1,6 @@
 import { MarketingScrollReveal } from "@/components/layout/MarketingScrollReveal";
 import { StoriesGrid } from "@/components/sections/StoriesGrid";
+import { getStories } from "@/lib/published-content";
 import { PageHero } from "@/components/ui/PageHero";
 import { marketingPageMetadata } from "@/lib/social-metadata";
 
@@ -13,7 +14,8 @@ export const metadata = marketingPageMetadata({
 
 const heroImg = "/images/stories/safe-space-mayiandit.jpg";
 
-export default function StoriesPage() {
+export default async function StoriesPage() {
+  const stories = await getStories();
   return (
     <>
       <PageHero
@@ -23,7 +25,7 @@ export default function StoriesPage() {
         image={heroImg}
       />
       <MarketingScrollReveal className="bg-cream">
-        <StoriesGrid />
+        <StoriesGrid stories={stories} />
       </MarketingScrollReveal>
     </>
   );

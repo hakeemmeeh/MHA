@@ -1,4 +1,5 @@
 import { BlogGrid } from "@/components/sections/BlogGrid";
+import { getBlog } from "@/lib/published-content";
 import { PageHero } from "@/components/ui/PageHero";
 import { marketingPageMetadata } from "@/lib/social-metadata";
 
@@ -10,16 +11,17 @@ export const metadata = marketingPageMetadata({
   image: "/images/hero/home-hero.jpg",
 });
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getBlog();
   return (
     <>
       <PageHero
         animate
         title="Insights"
-        subtitle="Programme pictorials and editorial commentary from the field."
+        subtitle="Programme pictorials from the field and editorial commentary. Full narratives live under Field stories."
         image="/images/hero/home-hero.jpg"
       />
-      <BlogGrid />
+      <BlogGrid posts={posts} />
     </>
   );
 }

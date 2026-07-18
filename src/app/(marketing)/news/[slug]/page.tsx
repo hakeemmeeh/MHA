@@ -3,9 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { newsItems } from "@/lib/content";
+import { getNewsItem } from "@/lib/published-content";
 import { marketingPageMetadata } from "@/lib/social-metadata";
 
 type Props = { params: Promise<{ slug: string }> };
+
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return newsItems.map((n) => ({ slug: n.slug }));
@@ -13,7 +16,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const item = newsItems.find((n) => n.slug === slug);
+  const item = await getNewsItem(slug);
   if (!item) return {};
   return marketingPageMetadata({
     title: item.title,
@@ -26,7 +29,7 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function NewsArticlePage({ params }: Props) {
   const { slug } = await params;
-  const item = newsItems.find((n) => n.slug === slug);
+  const item = await getNewsItem(slug);
   if (!item) notFound();
 
   const date = new Date(item.date).toLocaleDateString("en-GB", {
@@ -63,7 +66,7 @@ export default async function NewsArticlePage({ params }: Props) {
           <p className="font-inter text-xs font-semibold uppercase tracking-wide text-green">
             {date}
           </p>
-          <h1 className="mt-3 font-playfair text-3xl font-normal text-navy md:text-4xl">
+          <h1 className="mt-3 font-playfair text-3xl font-bold text-navy md:text-4xl">
             {item.title}
           </h1>
           <div className="mt-8 space-y-4 font-inter text-base leading-relaxed text-text-mid">

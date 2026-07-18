@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { AdminSidebar } from "@/components/admin/Sidebar";
+import { LogoutButton } from "@/components/admin/LogoutButton";
+
+export const dynamic = "force-dynamic";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -11,6 +14,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           ["/admin/donors", "Donors"],
           ["/admin/partners", "Partners"],
           ["/admin/volunteers", "Volunteers"],
+          ["/admin/content/stories", "Stories"],
+          ["/admin/content/news", "News"],
+          ["/admin/content/blog", "Insights"],
+          ["/admin/content/videos", "Videos"],
           ["/admin/settings", "Settings"],
         ].map(([href, label]) => (
           <Link
@@ -27,9 +34,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <header className="sticky top-0 z-20 border-b border-border bg-white px-6 py-4">
           <div className="flex items-center justify-between">
             <p className="font-inter text-sm text-text-muted">Admin</p>
-            <Link href="/" className="font-inter text-sm font-medium text-navy hover:underline">
-              View site
-            </Link>
+            <div className="flex items-center gap-5">
+              <Link href="/" className="font-inter text-sm font-medium text-navy hover:underline">
+                View site
+              </Link>
+              <LogoutButton />
+            </div>
           </div>
         </header>
         <div className="p-6">{children}</div>
