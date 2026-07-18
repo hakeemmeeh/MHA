@@ -1,21 +1,35 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { isAdminSessionValid } from "@/lib/admin/session";
 
-// Protects every /admin route. Unauthenticated visitors are sent to /admin-login.
-// The login page sets an httpOnly cookie after checking ADMIN_PASSWORD.
+const PROTECTED_API_PREFIXES = ["/api/content/", "/api/inquiries/"] as const;
+const PROTECTED_API_EXACT = ["/api/media"] as const;
+
+function isProtectedAdminApi(pathname: string): boolean {
+  return (
+    PROTECTED_API_EXACT.includes(pathname as (typeof PROTECTED_API_EXACT)[number]) ||
+    PROTECTED_API_PREFIXES.some((prefix) => pathname.startsWith(prefix))
+  );
+}
+
+// Protects /admin pages and admin write APIs. Login sets an httpOnly cookie
+// after checking ADMIN_PASSWORD.
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Allow the login page and the login API through.
   if (pathname === "/admin-login" || pathname.startsWith("/api/admin-login")) {
     return NextResponse.next();
   }
 
-  if (pathname.startsWith("/admin")) {
-    const session = req.cookies.get("mha_admin")?.value;
-    const expected = process.env.ADMIN_SESSION_SECRET;
+  const protectedPage = pathname === "/admin" || pathname.startsWith("/admin/");
+  const protectedApi = isProtectedAdminApi(pathname);
 
-    if (!session || !expected || session !== expected) {
+  if (protectedPage || protectedApi) {
+    if (!isAdminSessionValid(req)) {
+      if (protectedApi) {
+        return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+      }
+
       const url = req.nextUrl.clone();
       url.pathname = "/admin-login";
       url.searchParams.set("from", pathname);
@@ -27,5 +41,11 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: [
+    "/admin",
+    "/admin/:path*",
+    "/api/content/:path*",
+    "/api/media",
+    "/api/inquiries/:path*",
+  ],
 };
