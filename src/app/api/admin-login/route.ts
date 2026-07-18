@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { password } = await req.json();
-    const expected = process.env.ADMIN_PASSWORD;
+    const { password: rawPassword } = await req.json();
+    const password = typeof rawPassword === "string" ? rawPassword.trim() : "";
+    const expected = process.env.ADMIN_PASSWORD?.trim();
     const secret = process.env.ADMIN_SESSION_SECRET;
 
     if (!expected || !secret) {
