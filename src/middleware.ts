@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { isAdminSessionValid } from "@/lib/admin/session";
 
-const PROTECTED_API_PREFIXES = ["/api/content/", "/api/inquiries/"] as const;
+const PROTECTED_API_PREFIXES = ["/api/content/", "/api/inquiries/", "/api/admin/"] as const;
 const PROTECTED_API_EXACT = ["/api/media"] as const;
 
 function isProtectedAdminApi(pathname: string): boolean {
@@ -47,5 +47,6 @@ export const config = {
     "/api/content/:path*",
     "/api/media",
     "/api/inquiries/:path*",
+    "/api/admin/:path*",
   ],
 };

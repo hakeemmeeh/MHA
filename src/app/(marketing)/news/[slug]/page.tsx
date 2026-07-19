@@ -2,16 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
-import { newsItems } from "@/lib/content";
-import { getNewsItem } from "@/lib/published-content";
+import { getNews, getNewsItem } from "@/lib/published-content";
 import { marketingPageMetadata } from "@/lib/social-metadata";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export const dynamicParams = true;
 
-export function generateStaticParams() {
-  return newsItems.map((n) => ({ slug: n.slug }));
+export async function generateStaticParams() {
+  const items = await getNews();
+  return items.map((n) => ({ slug: n.slug }));
 }
 
 export async function generateMetadata({ params }: Props) {

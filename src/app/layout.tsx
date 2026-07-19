@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { SchemaOrg } from "@/components/seo/SchemaOrg";
 import { siteMetadata } from "@/lib/site-metadata";
@@ -32,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fraunces.variable} ${plusJakarta.variable} h-full`}>
       <body className="font-inter min-h-full antialiased">
+        <GoogleAnalytics />
         <SchemaOrg />
         <SmoothScroll>{children}</SmoothScroll>
       </body>

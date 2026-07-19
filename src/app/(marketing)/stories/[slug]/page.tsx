@@ -5,16 +5,17 @@ import { EditorialContinueStripStory } from "@/components/sections/EditorialCont
 import { MarketingScrollReveal } from "@/components/layout/MarketingScrollReveal";
 import { StoryPageHero } from "@/components/sections/StoryPageHero";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
-import { fieldStories, thematicAreas } from "@/lib/content";
-import { getStory } from "@/lib/published-content";
+import { thematicAreas } from "@/lib/content";
+import { getStories, getStory } from "@/lib/published-content";
 import { shareCardMeta } from "@/lib/social-metadata";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export const dynamicParams = true;
 
-export function generateStaticParams() {
-  return fieldStories.map((s) => ({ slug: s.slug }));
+export async function generateStaticParams() {
+  const stories = await getStories();
+  return stories.map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -39,6 +40,7 @@ export default async function StoryPage({ params }: Props) {
   const { slug } = await params;
   const story = await getStory(slug);
   if (!story) notFound();
+  const allStories = await getStories();
   const thematic = thematicAreas.find((t) => t.slug === story.thematicSlug);
 
   return (
@@ -97,7 +99,7 @@ export default async function StoryPage({ params }: Props) {
           </div>
         </div>
       </MarketingScrollReveal>
-      <EditorialContinueStripStory currentSlug={slug} />
+      <EditorialContinueStripStory currentSlug={slug} stories={allStories} />
     </article>
   );
 }

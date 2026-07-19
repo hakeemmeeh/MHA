@@ -7,7 +7,8 @@ import { CTABand } from "@/components/sections/CTABand";
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
-import { fieldStories, thematicAreas } from "@/lib/content";
+import { thematicAreas } from "@/lib/content";
+import { getStories } from "@/lib/published-content";
 import { shareCardMeta } from "@/lib/social-metadata";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -45,7 +46,8 @@ export default async function ProgramDetailPage({ params }: Props) {
   const area = thematicAreas.find((t) => t.slug === slug);
   if (!area) notFound();
 
-  const related = fieldStories.filter((s) => s.thematicSlug === slug);
+  const stories = await getStories();
+  const related = stories.filter((s) => s.thematicSlug === slug);
   const paragraphs = splitDesc(area.fullDesc);
 
   return (

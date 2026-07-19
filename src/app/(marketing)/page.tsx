@@ -9,6 +9,7 @@ import { StatsBar } from "@/components/sections/StatsBar";
 import { ThematicGrid } from "@/components/sections/ThematicGrid";
 import { WhereWeWork } from "@/components/sections/WhereWeWork";
 import { marketingPageMetadata } from "@/lib/social-metadata";
+import { getStories } from "@/lib/published-content";
 import { site } from "@/lib/content";
 
 export const metadata = marketingPageMetadata({
@@ -18,7 +19,9 @@ export const metadata = marketingPageMetadata({
   image: "/og-image.svg",
 });
 
-export default function HomePage() {
+export default async function HomePage() {
+  const stories = await getStories();
+
   return (
     <>
       <HeroSection />
@@ -27,7 +30,7 @@ export default function HomePage() {
       <DonateBand />
       <AboutSection />
       <ThematicGrid />
-      <FieldStories />
+      <FieldStories stories={stories} />
       <WhereWeWork />
       <PartnersStrip />
       <CTABand />

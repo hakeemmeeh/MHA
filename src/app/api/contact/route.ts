@@ -1,11 +1,16 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { getSupabaseService } from "@/lib/supabase";
+import { verifyTurnstileToken } from "@/lib/turnstile";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, phone, inquiry_type, message } = body;
+    const { name, email, phone, inquiry_type, message, turnstileToken } = body;
+
+    if (!(await verifyTurnstileToken(turnstileToken))) {
+      return NextResponse.json({ error: "Security check failed. Please try again." }, { status: 400 });
+    }
 
     if (!name || !email || !inquiry_type || !message) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });

@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { inquiryTypes } from "@/lib/content";
+import { TurnstileWidget } from "@/components/ui/TurnstileWidget";
 
 const inquiryEnum = z.enum(inquiryTypes);
+const turnstileEnabled = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
 const schema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -26,6 +28,10 @@ type Props = {
 
 export function ContactForm({ simplified, defaultInquiryType }: Props) {
   const [status, setStatus] = useState<"idle" | "ok" | "err">("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [widgetKey, setWidgetKey] = useState(0);
+
   const {
     register,
     handleSubmit,
@@ -38,18 +44,38 @@ export function ContactForm({ simplified, defaultInquiryType }: Props) {
       : { inquiry_type: defaultInquiryType ?? inquiryTypes[0] },
   });
 
+  const handleTurnstileToken = useCallback((token: string) => {
+    setTurnstileToken(token);
+  }, []);
+
+  const handleTurnstileExpire = useCallback(() => {
+    setTurnstileToken(null);
+  }, []);
+
   async function onSubmit(data: FormData) {
     setStatus("idle");
+    setErrorMessage(null);
+
+    if (turnstileEnabled && !turnstileToken) {
+      setStatus("err");
+      setErrorMessage("Please complete the security check.");
+      return;
+    }
+
     const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, turnstileToken }),
     });
+    const payload = (await res.json().catch(() => ({}))) as { error?: string };
     if (res.ok) {
       setStatus("ok");
       reset();
+      setTurnstileToken(null);
+      setWidgetKey((k) => k + 1);
     } else {
       setStatus("err");
+      setErrorMessage(payload.error || "Something went wrong. Please try again or call us directly.");
     }
   }
 
@@ -62,7 +88,7 @@ export function ContactForm({ simplified, defaultInquiryType }: Props) {
       )}
       {status === "err" && (
         <p className="rounded-xl bg-gold-light px-4 py-3 font-inter text-sm text-text-dark" role="alert">
-          Something went wrong. Please try again or call us directly.
+          {errorMessage}
         </p>
       )}
       <div>
@@ -160,9 +186,16 @@ export function ContactForm({ simplified, defaultInquiryType }: Props) {
           <p className="mt-1 font-inter text-xs text-red-600">{errors.message.message}</p>
         )}
       </div>
+      {turnstileEnabled ? (
+        <TurnstileWidget
+          key={widgetKey}
+          onToken={handleTurnstileToken}
+          onExpire={handleTurnstileExpire}
+        />
+      ) : null}
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || (turnstileEnabled && !turnstileToken)}
         className="w-full rounded-full bg-navy py-3.5 font-inter text-sm font-semibold text-white transition hover:bg-navy-dark disabled:opacity-50"
       >
         {isSubmitting ? "Sending..." : "Send Message"}

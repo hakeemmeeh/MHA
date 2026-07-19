@@ -6,14 +6,14 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { fieldStories } from "@/lib/content";
+import type { FieldStory } from "@/types";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /** Spec §5: three featured field stories — horizontal scroll (desktop), stacked (mobile). */
-const FEATURED_STORIES = fieldStories.slice(0, 3);
-
-export function FieldStories() {
+export function FieldStories({ stories }: { stories?: FieldStory[] }) {
+  const featuredStories = (stories ?? fieldStories).slice(0, 3);
   const root = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -111,7 +111,7 @@ export function FieldStories() {
           role="region"
           aria-label="Featured field stories"
         >
-          {FEATURED_STORIES.map((s, index) => (
+          {featuredStories.map((s, index) => (
             <article
               key={s.slug}
               data-story-card

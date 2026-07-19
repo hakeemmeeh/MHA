@@ -7,10 +7,10 @@ import { TransparencyProjectLog } from "@/components/sections/TransparencyProjec
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import {
-  fieldStories,
   projectHighlights,
   site,
 } from "@/lib/content";
+import { getStories } from "@/lib/published-content";
 import { marketingPageMetadata } from "@/lib/social-metadata";
 
 export const metadata = marketingPageMetadata({
@@ -23,8 +23,9 @@ export const metadata = marketingPageMetadata({
 
 const heroImg = "/images/hero/home-hero.jpg";
 
-export default function ImpactPage() {
-  const featured = fieldStories[0];
+export default async function ImpactPage() {
+  const stories = await getStories();
+  const featured = stories[0];
 
   return (
     <>

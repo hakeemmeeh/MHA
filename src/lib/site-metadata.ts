@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/site-url";
+
+const description =
+  "MHA is a South Sudanese NGO (NGOs Act 2016) serving IDPs, returnees, refugees, and host communities with protection, GBV, child protection, youth, WASH, livelihoods, and more—field-led since 2017.";
+
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const siteMetadata: Metadata = {
   title: {
     template: "%s | Mobile Humanitarian Agency",
     default: "MHA — Humanitarian Response in South Sudan",
   },
-  description:
-    "MHA is a South Sudanese NGO (NGOs Act 2016) serving IDPs, returnees, refugees, and host communities with protection, GBV, child protection, youth, WASH, livelihoods, and more—field-led since 2017.",
+  description,
   keywords: [
     "MHA",
     "Mobile Humanitarian Agency",
@@ -19,11 +24,12 @@ export const siteMetadata: Metadata = {
     "Juba",
     "displacement",
   ],
-  metadataBase: new URL("https://mha-ss.org"),
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mha-ss.org",
+    url: SITE_URL,
     siteName: "Mobile Humanitarian Agency",
     title: "MHA — Humanitarian Response in South Sudan",
     description:
@@ -38,4 +44,11 @@ export const siteMetadata: Metadata = {
     images: ["/og-image.svg"],
   },
   robots: { index: true, follow: true },
+  verification: googleVerification ? { google: googleVerification } : undefined,
+  other: {
+    "geo.region": "SS",
+    "geo.placename": "Juba, South Sudan",
+    "geo.position": "4.8594;31.5713",
+    ICBM: "4.8594, 31.5713",
+  },
 };

@@ -89,3 +89,9 @@ Client clicks **Add new** in `/admin/content/stories` → fills the form → **S
 row lands in Supabase `stories` with `status = published` → the public `/stories`
 page fetches it on next load. Until they publish anything, the original `content.ts`
 stories keep showing. Migration is gradual and safe.
+
+### One-time import (recommended)
+
+After CMS schema is set up, sign in to `/admin/settings` and click **Import content to
+Supabase**. This copies all built-in stories, news, insights, and videos into the CMS
+so staff can edit them without retyping. Safe to run again — matching slugs are updated.

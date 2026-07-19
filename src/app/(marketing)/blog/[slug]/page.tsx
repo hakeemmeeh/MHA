@@ -3,16 +3,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogPhotoGallery } from "@/components/blog/BlogPhotoGallery";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
-import { getBlogPosts } from "@/lib/blog";
-import { getBlogPost } from "@/lib/published-content";
+import { getBlog, getBlogPost } from "@/lib/published-content";
 import { marketingPageMetadata } from "@/lib/social-metadata";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export const dynamicParams = true;
 
-export function generateStaticParams() {
-  return getBlogPosts().map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const posts = await getBlog();
+  return posts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props) {

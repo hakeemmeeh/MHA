@@ -1,11 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { fieldStories, thematicAreas } from "@/lib/content";
+import type { FieldStory } from "@/types";
+import { thematicAreas } from "@/lib/content";
 import { getNextBySlugCircular } from "@/lib/editorialNav";
 
 /** “Next story” strip at the end of a field story (Phase 4). */
-export function EditorialContinueStripStory({ currentSlug }: { currentSlug: string }) {
-  const next = getNextBySlugCircular(fieldStories, currentSlug);
+export function EditorialContinueStripStory({
+  currentSlug,
+  stories,
+}: {
+  currentSlug: string;
+  stories: FieldStory[];
+}) {
+  const next = getNextBySlugCircular(stories, currentSlug);
   if (!next) return null;
 
   return (
