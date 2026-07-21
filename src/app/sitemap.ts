@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getBlog, getNews, getStories } from "@/lib/published-content";
-import { thematicAreas } from "@/lib/content";
+import { fieldStories, newsItems, thematicAreas } from "@/lib/content";
+import { getBlogPosts } from "@/lib/blog";
 import { SITE_URL } from "@/lib/site-url";
 
 export const revalidate = 3600;
@@ -25,7 +26,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/terms",
   ];
 
-  const [stories, news, blog] = await Promise.all([getStories(), getNews(), getBlog()]);
+  let stories = fieldStories;
+  let news = newsItems;
+  let blog = getBlogPosts();
+  try {
+    [stories, news, blog] = await Promise.all([getStories(), getNews(), getBlog()]);
+  } catch {
+    // Keep static fallbacks so Google always gets a valid sitemap.
+  }
 
   const entries: MetadataRoute.Sitemap = staticPages.map((path) => ({
     url: `${base}${path}`,
