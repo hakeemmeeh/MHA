@@ -8,7 +8,6 @@ import { inquiryTypes } from "@/lib/content";
 import { TurnstileWidget } from "@/components/ui/TurnstileWidget";
 
 const inquiryEnum = z.enum(inquiryTypes);
-const turnstileEnabled = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
 const schema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -19,18 +18,19 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
-
 type Props = {
   simplified?: boolean;
   /** Preset inquiry type when the simplified form hides the dropdown */
   defaultInquiryType?: (typeof inquiryTypes)[number];
+  turnstileSiteKey?: string;
 };
 
-export function ContactForm({ simplified, defaultInquiryType }: Props) {
+export function ContactForm({ simplified, defaultInquiryType, turnstileSiteKey }: Props) {
   const [status, setStatus] = useState<"idle" | "ok" | "err">("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [widgetKey, setWidgetKey] = useState(0);
+  const turnstileEnabled = Boolean(turnstileSiteKey);
 
   const {
     register,
@@ -189,6 +189,7 @@ export function ContactForm({ simplified, defaultInquiryType }: Props) {
       {turnstileEnabled ? (
         <TurnstileWidget
           key={widgetKey}
+          siteKey={turnstileSiteKey!}
           onToken={handleTurnstileToken}
           onExpire={handleTurnstileExpire}
         />

@@ -1,6 +1,7 @@
 import { DonateSection } from "@/components/sections/DonateSection";
 import { PageHero } from "@/components/ui/PageHero";
 import { marketingPageMetadata } from "@/lib/social-metadata";
+import { getTurnstileSiteKey } from "@/lib/turnstile-config";
 
 export const metadata = marketingPageMetadata({
   title: "Donate",
@@ -11,6 +12,8 @@ export const metadata = marketingPageMetadata({
 });
 
 export default function DonatePage() {
+  const turnstileSiteKey = getTurnstileSiteKey();
+
   return (
     <>
       <PageHero
@@ -19,7 +22,7 @@ export default function DonatePage() {
         subtitle="Choose a giving pathway — bank transfer, in-kind support, or partnership funding — with transparent stewardship."
         image="/images/hero/home-hero.jpg"
       />
-      <DonateSection />
+      <DonateSection turnstileSiteKey={turnstileSiteKey} />
     </>
   );
 }

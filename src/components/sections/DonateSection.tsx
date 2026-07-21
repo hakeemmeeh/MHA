@@ -6,7 +6,7 @@ import { donationMethods, site } from "@/lib/content";
 
 const icons = [Banknote, Package, Building2, Heart] as const;
 
-export function DonateSection() {
+export function DonateSection({ turnstileSiteKey }: { turnstileSiteKey?: string }) {
   return (
     <>
       <section className="section-y bg-cream">
@@ -69,7 +69,7 @@ export function DonateSection() {
             Select &ldquo;I want to donate&rdquo; and tell us how you would like to give.
           </p>
           <div className="mt-8 border border-border bg-white p-8">
-            <ContactForm simplified defaultInquiryType="I want to donate" />
+            <ContactForm simplified defaultInquiryType="I want to donate" turnstileSiteKey={turnstileSiteKey} />
           </div>
         </div>
       </section>

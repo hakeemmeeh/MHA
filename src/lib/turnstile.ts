@@ -1,6 +1,8 @@
 /** Server-side Cloudflare Turnstile verification. Skips when secret is not configured. */
 export async function verifyTurnstileToken(token: string | undefined): Promise<boolean> {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
+  const secret =
+    process.env.TURNSTILE_SECRET_KEY?.trim() ||
+    process.env.TURNTILE_SECRET_KEY?.trim();
   if (!secret) return true;
   if (!token) return false;
 

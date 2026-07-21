@@ -4,6 +4,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { marketingPageMetadata } from "@/lib/social-metadata";
+import { getTurnstileSiteKey } from "@/lib/turnstile-config";
 
 export const metadata = marketingPageMetadata({
   title: "Get Involved",
@@ -40,6 +41,8 @@ const paths = [
 ];
 
 export default function GetInvolvedPage() {
+  const turnstileSiteKey = getTurnstileSiteKey();
+
   return (
     <>
       <PageHero
@@ -82,7 +85,7 @@ export default function GetInvolvedPage() {
             point.
           </p>
           <div className="mt-8 border border-border bg-white p-8">
-            <ContactForm simplified />
+            <ContactForm simplified turnstileSiteKey={turnstileSiteKey} />
           </div>
         </div>
       </section>

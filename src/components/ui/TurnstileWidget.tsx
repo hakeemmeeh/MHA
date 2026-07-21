@@ -4,6 +4,7 @@ import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 
 type Props = {
+  siteKey: string;
   onToken: (token: string) => void;
   onExpire?: () => void;
 };
@@ -25,8 +26,7 @@ declare global {
   }
 }
 
-export function TurnstileWidget({ onToken, onExpire }: Props) {
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+export function TurnstileWidget({ siteKey, onToken, onExpire }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
   const onTokenRef = useRef(onToken);

@@ -5,6 +5,7 @@ import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { coverage, site } from "@/lib/content";
 import { marketingPageMetadata } from "@/lib/social-metadata";
+import { getTurnstileSiteKey } from "@/lib/turnstile-config";
 
 export const metadata = marketingPageMetadata({
   title: "Contact",
@@ -16,6 +17,8 @@ export const metadata = marketingPageMetadata({
 const heroImg = "/images/programs/logistics.jpg";
 
 export default function ContactPage() {
+  const turnstileSiteKey = getTurnstileSiteKey();
+
   return (
     <>
       <PageHero
@@ -112,7 +115,7 @@ export default function ContactPage() {
 
           <div className="min-w-0 border border-border bg-white p-8">
             <h2 className="font-playfair text-2xl font-normal text-navy">Send a message</h2>
-            <ContactForm />
+            <ContactForm turnstileSiteKey={turnstileSiteKey} />
           </div>
         </div>
       </section>
