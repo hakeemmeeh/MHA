@@ -187,12 +187,17 @@ export function ContactForm({ simplified, defaultInquiryType, turnstileSiteKey }
         )}
       </div>
       {turnstileEnabled ? (
-        <TurnstileWidget
-          key={widgetKey}
-          siteKey={turnstileSiteKey!}
-          onToken={handleTurnstileToken}
-          onExpire={handleTurnstileExpire}
-        />
+        <div className="space-y-2">
+          <p className="font-inter text-xs text-text-muted">
+            Complete the security check below, then click Send Message.
+          </p>
+          <TurnstileWidget
+            key={widgetKey}
+            siteKey={turnstileSiteKey!}
+            onToken={handleTurnstileToken}
+            onExpire={handleTurnstileExpire}
+          />
+        </div>
       ) : null}
       <button
         type="submit"
