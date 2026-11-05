@@ -24,7 +24,9 @@ const site = {
 };
 
 export function isMaintenanceOn() {
-  return process.env.MAINTENANCE_MODE === "true";
+  // Accepts true / TRUE / 1 / yes / on (spaces and quotes ignored)
+  const v = (process.env.MAINTENANCE_MODE ?? "").trim().replace(/^["']|["']$/g, "").toLowerCase();
+  return v === "true" || v === "1" || v === "yes" || v === "on";
 }
 
 /** Paths that always work, even during maintenance. */
@@ -45,7 +47,7 @@ export function maintenanceResponse(req: NextRequest): NextResponse | null {
   const { pathname, searchParams } = req.nextUrl;
   if (isAlwaysAllowed(pathname)) return null;
 
-  const token = process.env.MAINTENANCE_BYPASS_TOKEN;
+  const token = process.env.MAINTENANCE_BYPASS_TOKEN?.trim();
   if (token) {
     if (searchParams.get("preview") === token) {
       const url = req.nextUrl.clone();

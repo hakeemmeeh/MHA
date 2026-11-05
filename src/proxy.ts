@@ -13,9 +13,9 @@ function isProtectedAdminApi(pathname: string): boolean {
   );
 }
 
-// Protects /admin pages and admin write APIs. Login sets an httpOnly cookie
+// Next.js 16 "proxy" (formerly middleware). Protects /admin pages and admin write APIs. Login sets an httpOnly cookie
 // after checking ADMIN_PASSWORD.
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Maintenance mode (off unless MAINTENANCE_MODE=true) — see src/lib/maintenance.ts
