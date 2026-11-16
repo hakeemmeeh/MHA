@@ -17,8 +17,10 @@ function formatWhen(iso: string) {
 }
 
 export default async function AdminDashboardPage() {
-  const { stats, error } = await fetchDashboardStats();
-  const { rows } = await fetchInquiries(5);
+  const [{ stats, error }, { rows }] = await Promise.all([
+    fetchDashboardStats(),
+    fetchInquiries(5),
+  ]);
 
   const cards = [
     { label: "New Inquiries", value: stats.new_inquiries, icon: MessageSquare, hint: `${stats.total_inquiries} total` },
