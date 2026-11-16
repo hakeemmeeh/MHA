@@ -138,11 +138,11 @@ export function ContentManager({
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="font-bodoni-display text-3xl font-bold text-navy">{title}</h1>
         <button
           onClick={() => setEditing(blank())}
-          className="flex items-center gap-1.5 rounded-lg bg-navy px-4 py-2 font-inter text-sm font-semibold text-white transition hover:bg-navy-dark"
+          className="flex items-center justify-center gap-1.5 rounded-lg bg-navy px-4 py-2 font-inter text-sm font-semibold text-white transition hover:bg-navy-dark"
         >
           <Plus className="h-4 w-4" /> Add new
         </button>
@@ -165,7 +165,7 @@ export function ContentManager({
         ) : (
           <ul className="divide-y divide-border">
             {rows.map((r) => (
-              <li key={String(r.id)} className="flex items-center justify-between gap-4 p-4">
+              <li key={String(r.id)} className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
                   <p className="truncate font-inter text-sm font-medium text-text-dark">
                     {String(r.title)}
@@ -179,7 +179,7 @@ export function ContentManager({
                     )}
                   </p>
                 </div>
-                <div className="flex shrink-0 gap-2">
+                <div className="flex shrink-0 gap-2 self-end sm:self-auto">
                   <button
                     onClick={() => startEdit(r)}
                     className="rounded-lg border border-border p-2 text-navy transition hover:bg-cream"
@@ -203,14 +203,14 @@ export function ContentManager({
 
       {/* Editor modal */}
       {editing && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/40 p-4">
-          <div className="my-8 w-full max-w-2xl rounded-2xl bg-white p-6 shadow-xl">
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/40 p-3 sm:p-4">
+          <div className="my-6 w-full max-w-2xl rounded-2xl bg-white p-4 shadow-xl sm:p-6 lg:max-w-3xl">
             <h2 className="font-playfair text-xl font-bold text-navy">
               {editing.id ? "Edit" : "New"} item
             </h2>
             <div className="mt-5 space-y-4">
               {fields.map((f) => (
-                <div key={f.key}>
+                <div key={f.key} className="w-full">
                   {f.type === "image" ? (
                     <ImageUploadField
                       label={f.label}

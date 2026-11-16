@@ -47,9 +47,6 @@ export async function POST(
   if (!supabase) return NextResponse.json({ error: "Supabase not configured." }, { status: 503 });
 
   const body = await req.json();
-  if (!body.slug || !body.title) {
-    return NextResponse.json({ error: "Slug and title are required." }, { status: 400 });
-  }
 
   const { data, error } = await supabase.from(t).insert([body]).select().single();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
