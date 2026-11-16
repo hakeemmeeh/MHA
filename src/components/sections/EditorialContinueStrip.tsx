@@ -41,7 +41,7 @@ export function EditorialContinueStripStory({
               {next.title}
             </p>
             <p className="mt-2 line-clamp-2 font-inter text-sm text-text-mid">{next.excerpt}</p>
-            <span className="mt-3 font-inter text-sm font-semibold text-green transition group-hover:translate-x-1">
+            <span className="mt-3 font-inter text-sm font-semibold text-green-dark transition group-hover:translate-x-1">
               Next story →
             </span>
           </div>
@@ -82,7 +82,7 @@ export function EditorialContinueStripProgram({ currentSlug }: { currentSlug: st
               {next.title}
             </p>
             <p className="mt-2 line-clamp-2 font-inter text-sm text-text-mid">{next.shortDesc}</p>
-            <span className="mt-3 font-inter text-sm font-semibold text-green transition group-hover:translate-x-1">
+            <span className="mt-3 font-inter text-sm font-semibold text-green-dark transition group-hover:translate-x-1">
               Next program →
             </span>
           </div>

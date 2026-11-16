@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useLayoutEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { nav } from "@/lib/content";
 import { useLenis } from "@/components/layout/lenis-context";
@@ -14,6 +14,9 @@ export function Navbar() {
   const lenis = useLenis();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -29,11 +32,39 @@ export function Navbar() {
 
   useEffect(() => {
     if (!mobileOpen) return;
+
+    const menu = mobileMenuRef.current;
+    const menuToggle = menuToggleRef.current;
+    const getFocusableItems = () =>
+      Array.from(
+        menu?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? [],
+      );
+    getFocusableItems()[0]?.focus();
+
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMobileOpen(false);
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const items = getFocusableItems();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && (document.activeElement === first || !menu?.contains(document.activeElement))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (document.activeElement === last || !menu?.contains(document.activeElement))) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      menuToggle?.focus();
+    };
   }, [mobileOpen]);
 
   return (
@@ -66,13 +97,19 @@ export function Navbar() {
                   item.children && setOpenDropdown(item.label)
                 }
                 onMouseLeave={() => setOpenDropdown(null)}
+                onFocus={() => item.children && setOpenDropdown(item.label)}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                    setOpenDropdown(null);
+                  }
+                }}
               >
                 <Link
                   href={item.href}
                   className={`inline-flex items-center gap-1 font-inter text-sm font-medium transition hover:opacity-80 ${
                     pathname === item.href ||
                     (item.href !== "/" && pathname.startsWith(item.href))
-                      ? "text-green"
+                      ? "text-green-dark"
                       : "text-current"
                   }`}
                   aria-current={
@@ -81,6 +118,7 @@ export function Navbar() {
                       ? "page"
                       : undefined
                   }
+                  aria-expanded={item.children ? openDropdown === item.label : undefined}
                 >
                   {item.label}
                   {item.children && (
@@ -109,15 +147,16 @@ export function Navbar() {
           <div className="hidden lg:block">
             <Link
               href="/get-involved"
-              className="inline-flex rounded-full bg-green px-6 py-2.5 font-inter text-sm font-semibold uppercase tracking-[0.05em] text-white transition hover:bg-green-dark"
+              className="inline-flex rounded-full bg-green-dark px-6 py-2.5 font-inter text-sm font-semibold uppercase tracking-[0.05em] text-white transition hover:bg-green-dark"
             >
               Get Involved
             </Link>
           </div>
 
           <button
+            ref={menuToggleRef}
             type="button"
-            className="relative z-[60] inline-flex items-center justify-center p-1 lg:hidden focus-visible:outline-none"
+            className="relative z-[60] inline-flex items-center justify-center p-1 lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="primary-mobile-navigation"
@@ -135,14 +174,15 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            ref={mobileMenuRef}
             id="primary-mobile-navigation"
             role="dialog"
             aria-modal="true"
             aria-label="Main navigation"
-            initial={{ clipPath: "circle(0% at calc(100% - 2rem) 2rem)" }}
+            initial={reduceMotion ? false : { clipPath: "circle(0% at calc(100% - 2rem) 2rem)" }}
             animate={{ clipPath: "circle(150% at calc(100% - 2rem) 2rem)" }}
             exit={{ clipPath: "circle(0% at calc(100% - 2rem) 2rem)" }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-40 bg-navy-dark lg:hidden"
           >
             <div className="flex h-full flex-col px-8 pb-12 pt-24">
@@ -150,9 +190,9 @@ export function Navbar() {
                 {nav.map((item, i) => (
                   <motion.div
                     key={item.href}
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.05 * i }}
+                    transition={{ delay: reduceMotion ? 0 : 0.05 * i }}
                   >
                     <Link
                       href={item.href}
@@ -180,7 +220,7 @@ export function Navbar() {
               </nav>
               <Link
                 href="/get-involved"
-                className="mt-6 inline-flex justify-center rounded-full bg-green px-6 py-3 font-inter font-semibold text-white"
+                className="mt-6 inline-flex justify-center rounded-full bg-green-dark px-6 py-3 font-inter font-semibold text-white"
                 onClick={() => setMobileOpen(false)}
               >
                 Get Involved

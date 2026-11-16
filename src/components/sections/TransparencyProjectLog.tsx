@@ -62,7 +62,7 @@ export function TransparencyProjectLog({
                     {row.storySlug ? (
                       <Link
                         href={`/stories/${row.storySlug}`}
-                        className="font-semibold text-green hover:underline"
+                        className="font-semibold text-green-dark hover:underline"
                       >
                         Field story
                       </Link>

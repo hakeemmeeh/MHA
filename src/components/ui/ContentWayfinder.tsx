@@ -30,7 +30,7 @@ export function ContentWayfinder({ current, className }: Props) {
             <li key={key}>
               {isCurrent ? (
                 <span className="block">
-                  <span className="font-semibold text-green">{layer.label}</span>
+                  <span className="font-semibold text-green-dark">{layer.label}</span>
                   <span className="mt-0.5 block text-xs text-text-muted">{layer.short}</span>
                 </span>
               ) : (

@@ -38,7 +38,7 @@ export function Footer() {
             href={socialLinks.website}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 font-inter text-sm text-navy underline-offset-2 transition hover:text-green hover:underline"
+            className="mt-6 inline-flex items-center gap-2 font-inter text-sm text-navy underline-offset-2 transition hover:text-green-dark hover:underline"
           >
             {socialLinks.website.replace("https://", "")}
             <ExternalLink className="h-3.5 w-3.5" aria-hidden />
@@ -115,7 +115,7 @@ export function Footer() {
             Report concerns about MHA staff, volunteers, or representatives confidentially to{" "}
             <a
               href={`mailto:${site.email}`}
-              className="text-navy underline-offset-2 hover:text-green hover:underline"
+              className="text-navy underline-offset-2 hover:text-green-dark hover:underline"
             >
               {site.email}
             </a>
@@ -125,7 +125,7 @@ export function Footer() {
             <span className="font-medium text-text-dark">Feedback &amp; complaints: </span>
             <Link
               href="/contact#feedback-complaints"
-              className="text-navy underline-offset-2 hover:text-green hover:underline"
+              className="text-navy underline-offset-2 hover:text-green-dark hover:underline"
             >
               Use the contact page channels
             </Link>

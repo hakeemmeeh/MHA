@@ -30,11 +30,11 @@ export function BlogGrid({ posts: postsProp }: { posts?: BlogPost[] }) {
             <p className="max-w-2xl font-inter text-sm text-text-mid">
               <strong className="text-navy">Insights</strong> includes programme pictorials from
               field reports and editorial commentary. Full narratives with communities&apos; voices live on{" "}
-              <Link href="/stories" className="font-semibold text-green hover:text-green-dark">
+              <Link href="/stories" className="font-semibold text-green-dark hover:underline">
                 Field stories
               </Link>
               ; organizational bulletins are on{" "}
-              <Link href="/news" className="font-semibold text-green hover:text-green-dark">
+              <Link href="/news" className="font-semibold text-green-dark hover:underline">
                 News
               </Link>
               .
@@ -63,7 +63,7 @@ export function BlogGrid({ posts: postsProp }: { posts?: BlogPost[] }) {
                         />
                       </div>
                       <div className="flex flex-1 flex-col p-6">
-                        <p className="font-inter text-xs font-semibold uppercase tracking-wide text-green">
+                        <p className="font-inter text-xs font-semibold uppercase tracking-wide text-green-dark">
                           {categoryLabels[post.category]} · {formatDate(post.publishedAt)}
                         </p>
                         <h2 className="mt-2 font-playfair text-xl font-bold text-navy">
@@ -76,7 +76,7 @@ export function BlogGrid({ posts: postsProp }: { posts?: BlogPost[] }) {
                         </p>
                         <Link
                           href={`/blog/${post.slug}`}
-                          className="mt-4 font-inter text-sm font-semibold text-green hover:text-green-dark"
+                          className="mt-4 font-inter text-sm font-semibold text-green-dark hover:underline"
                         >
                           Read insight →
                         </Link>

@@ -82,7 +82,7 @@ export default async function BlogPostPage({ params }: Props) {
               Related field story:{" "}
               <Link
                 href={`/stories/${post.storySlug}`}
-                className="font-semibold text-green hover:text-green-dark"
+                className="font-semibold text-green-dark hover:underline"
               >
                 Read the narrative →
               </Link>
@@ -93,7 +93,7 @@ export default async function BlogPostPage({ params }: Props) {
               ← All insights
             </Link>
             {" · "}
-            <Link href="/stories" className="font-inter text-sm font-semibold text-green hover:text-green-dark">
+            <Link href="/stories" className="font-inter text-sm font-semibold text-green-dark hover:underline">
               Field stories
             </Link>
           </p>

@@ -4,7 +4,7 @@ import { SITE_URL } from "@/lib/site-url";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: "*", allow: "/", disallow: ["/admin", "/admin-login"] },
+      { userAgent: "*", allow: "/", disallow: ["/admin", "/admin-login", "/api/"] },
       { userAgent: "GPTBot", allow: "/" },
       { userAgent: "ChatGPT-User", allow: "/" },
       { userAgent: "ClaudeBot", allow: "/" },

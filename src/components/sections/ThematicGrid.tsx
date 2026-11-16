@@ -70,7 +70,7 @@ export function ThematicGrid() {
     return () => ctx.revert();
   }, []);
 
-  const displayed = thematicAreas.slice(0, 6);
+  const displayed = thematicAreas.slice(0, 3);
 
   return (
     <section ref={sectionRef} id="programs" className="section-y bg-navy-light">
@@ -99,11 +99,11 @@ export function ThematicGrid() {
         </div>
         <div
           ref={grid}
-          className="mt-10 grid min-w-0 grid-cols-1 gap-7 sm:mt-12 md:grid-cols-2 md:gap-8"
+          className="mt-8 grid min-w-0 grid-cols-1 gap-6 sm:mt-10 md:grid-cols-2 md:gap-7 lg:grid-cols-3"
         >
           {displayed.map((area) => (
             <div key={area.slug} data-card>
-              <ThematicCard area={area} />
+              <ThematicCard area={area} featured />
             </div>
           ))}
         </div>

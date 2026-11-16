@@ -11,9 +11,9 @@ import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/** Spec §5: three featured field stories — horizontal scroll (desktop), stacked (mobile). */
+/** One featured field story keeps the homepage focused; the stories page holds the full archive. */
 export function FieldStories({ stories }: { stories?: FieldStory[] }) {
-  const featuredStories = (stories ?? fieldStories).slice(0, 3);
+  const featuredStories = (stories ?? fieldStories).slice(0, 1);
   const root = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -107,19 +107,15 @@ export function FieldStories({ stories }: { stories?: FieldStory[] }) {
 
         <div
           ref={trackRef}
-          className="mt-10 flex min-w-0 flex-col gap-10 sm:mt-12 md:-mx-2 md:flex-row md:snap-x md:snap-mandatory md:gap-8 md:overflow-x-auto md:overflow-y-visible md:px-2 md:pb-4 md:[scrollbar-width:thin]"
+          className="mt-8 flex min-w-0 flex-col sm:mt-10"
           role="region"
           aria-label="Featured field stories"
         >
-          {featuredStories.map((s, index) => (
+          {featuredStories.map((s) => (
             <article
               key={s.slug}
               data-story-card
-              className={`shrink-0 rounded-xl bg-white p-4 shadow-lg shadow-black/20 md:snap-center md:p-6 lg:flex lg:min-h-0 lg:gap-8 ${
-                index === 0
-                  ? "md:w-[min(920px,92vw)] lg:min-h-[280px]"
-                  : "md:w-[min(640px,82vw)]"
-              }`}
+              className="w-full rounded-xl bg-white p-4 shadow-lg shadow-black/20 sm:p-6 lg:flex lg:min-h-[280px] lg:gap-8"
             >
               <div className="relative mx-auto aspect-[16/10] w-full max-w-xl overflow-hidden rounded-lg lg:mx-0 lg:aspect-auto lg:h-full lg:min-h-[240px] lg:w-96 lg:max-w-none lg:shrink-0">
                 <Image

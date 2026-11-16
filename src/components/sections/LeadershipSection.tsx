@@ -38,7 +38,7 @@ export function LeadershipSection() {
             if (!members.length) return null;
             return (
               <div key={group}>
-                <h3 className="font-inter text-xs font-semibold uppercase tracking-widest text-green">
+                <h3 className="font-inter text-xs font-semibold uppercase tracking-widest text-green-dark">
                   {groupLabels[group]}
                 </h3>
                 <ul className="mt-6 grid gap-8 sm:grid-cols-2">

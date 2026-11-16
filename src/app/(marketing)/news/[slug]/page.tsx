@@ -75,7 +75,7 @@ export default async function NewsArticlePage({ params }: Props) {
             ))}
           </div>
           <p className="mt-10 border-t border-border pt-8">
-            <Link href="/stories" className="font-inter text-sm font-semibold text-green hover:text-green-dark">
+            <Link href="/stories" className="font-inter text-sm font-semibold text-green-dark hover:underline">
               Field stories →
             </Link>
             <span className="mx-2 text-text-muted">·</span>

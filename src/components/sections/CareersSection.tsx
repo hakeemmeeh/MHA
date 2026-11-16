@@ -39,7 +39,7 @@ export function CareersSection() {
                   </div>
                   <a
                     href={`${applyHref}&body=${encodeURIComponent(`Re: ${role.title}`)}`}
-                    className="inline-flex shrink-0 rounded-full bg-green px-6 py-2.5 font-inter text-sm font-semibold text-white hover:bg-green-dark"
+                    className="inline-flex shrink-0 rounded-full bg-green-dark px-6 py-2.5 font-inter text-sm font-semibold text-white hover:bg-green-dark"
                   >
                     Apply
                   </a>

@@ -33,11 +33,11 @@ export function NewsGrid({ items }: { items?: NewsItem[] }) {
               <strong className="text-navy">News</strong> is for brief organizational
               announcements — site updates, new tools, and partnership notes. Programme work in
               communities is reported on{" "}
-              <Link href="/stories" className="font-semibold text-green hover:text-green-dark">
+              <Link href="/stories" className="font-semibold text-green-dark hover:underline">
                 Field stories
               </Link>{" "}
               and the{" "}
-              <Link href="/impact#project-log" className="font-semibold text-green hover:text-green-dark">
+              <Link href="/impact#project-log" className="font-semibold text-green-dark hover:underline">
                 activity log
               </Link>
               .
@@ -58,7 +58,7 @@ export function NewsGrid({ items }: { items?: NewsItem[] }) {
                       </div>
                     )}
                     <div className="flex flex-1 flex-col p-6">
-                      <p className="font-inter text-xs font-semibold uppercase tracking-wide text-green">
+                      <p className="font-inter text-xs font-semibold uppercase tracking-wide text-green-dark">
                         {categoryLabels[item.category]} · {formatDate(item.date)}
                       </p>
                       <h2 className="mt-2 font-playfair text-xl font-bold text-navy">
@@ -69,7 +69,7 @@ export function NewsGrid({ items }: { items?: NewsItem[] }) {
                       <p className="mt-3 flex-1 font-inter text-sm text-text-mid">{item.excerpt}</p>
                       <Link
                         href={`/news/${item.slug}`}
-                        className="mt-4 font-inter text-sm font-semibold text-green hover:text-green-dark"
+                        className="mt-4 font-inter text-sm font-semibold text-green-dark hover:underline"
                       >
                         Read announcement →
                       </Link>

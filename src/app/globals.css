@@ -58,6 +58,12 @@ body {
   line-height: 1.75;
 }
 
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-navy-dark);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #fff;
+}
+
 /** Field photos: full clarity — no filters or opacity (logos excluded). */
 .photo-brighten {
   filter: none;
@@ -120,7 +126,7 @@ h3 {
     justify-content: center;
     gap: 8px;
     border-radius: 9999px;
-    background: var(--color-green);
+    background: var(--color-green-dark);
     padding: 12px 28px;
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     font-size: 14px;
@@ -147,7 +153,7 @@ h3 {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--color-green);
+    color: var(--color-green-dark);
   }
 
   .link-cta::after {
@@ -178,7 +184,7 @@ h3 {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--color-green);
+  color: var(--color-green-dark);
   margin-bottom: 18px;
   text-rendering: geometricPrecision;
 }
@@ -188,7 +194,7 @@ h3 {
   display: block;
   width: 32px;
   height: 2px;
-  background: var(--color-green);
+  background: var(--color-green-dark);
 }
 
 @keyframes marquee {
@@ -216,6 +222,13 @@ h3 {
 
 .animate-bounce-scroll {
   animation: bounce-scroll 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-bounce-scroll {
+    animation: none !important;
+  }
 }
 
 /* --- View Transitions (marketing `template.tsx`) --- */

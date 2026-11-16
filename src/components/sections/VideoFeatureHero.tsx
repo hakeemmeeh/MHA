@@ -35,7 +35,7 @@ export function VideoFeatureHero({ videos }: { videos?: MediaVideo[] }) {
         <div className="mt-10 flex flex-wrap items-center gap-4">
           <a
             href="#watch"
-            className="inline-flex items-center gap-2 rounded-full bg-green px-7 py-3 font-inter text-sm font-semibold text-white transition hover:bg-green-dark"
+            className="inline-flex items-center gap-2 rounded-full bg-green-dark px-7 py-3 font-inter text-sm font-semibold text-white transition hover:bg-green-dark"
           >
             <Play className="h-5 w-5 fill-current" aria-hidden />
             Watch featured film

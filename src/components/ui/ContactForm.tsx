@@ -10,11 +10,11 @@ import { TurnstileWidget } from "@/components/ui/TurnstileWidget";
 const inquiryEnum = z.enum(inquiryTypes);
 
 const schema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Valid email required"),
-  phone: z.string().optional(),
+  name: z.string().trim().min(2, "Enter at least 2 characters").max(120, "Name is too long"),
+  email: z.string().trim().email("Valid email required").max(254, "Email is too long"),
+  phone: z.string().trim().max(80, "Phone number is too long").optional(),
   inquiry_type: inquiryEnum,
-  message: z.string().min(10, "Please write at least 10 characters"),
+  message: z.string().trim().min(10, "Please write at least 10 characters").max(5000, "Message is too long"),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -62,20 +62,26 @@ export function ContactForm({ simplified, defaultInquiryType, turnstileSiteKey }
       return;
     }
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...data, turnstileToken }),
-    });
-    const payload = (await res.json().catch(() => ({}))) as { error?: string };
-    if (res.ok) {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, turnstileToken }),
+      });
+      const payload = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        setStatus("err");
+        setErrorMessage(payload.error || "Something went wrong. Please try again or call us directly.");
+        return;
+      }
+
       setStatus("ok");
       reset();
       setTurnstileToken(null);
       setWidgetKey((k) => k + 1);
-    } else {
+    } catch {
       setStatus("err");
-      setErrorMessage(payload.error || "Something went wrong. Please try again or call us directly.");
+      setErrorMessage("Could not connect to MHA. Please try again or contact us directly.");
     }
   }
 
@@ -101,11 +107,14 @@ export function ContactForm({ simplified, defaultInquiryType, turnstileSiteKey }
         <input
           id="cf-name"
           {...register("name")}
+          required
           autoComplete="name"
+          aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? "cf-name-error" : undefined}
           className="w-full rounded-xl border border-border bg-white px-4 py-3 font-inter text-sm transition focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
         />
         {errors.name && (
-          <p className="mt-1 font-inter text-xs text-red-600">{errors.name.message}</p>
+          <p id="cf-name-error" className="mt-1 font-inter text-xs text-red-600">{errors.name.message}</p>
         )}
       </div>
       <div>
@@ -119,11 +128,14 @@ export function ContactForm({ simplified, defaultInquiryType, turnstileSiteKey }
           id="cf-email"
           type="email"
           {...register("email")}
+          required
           autoComplete="email"
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? "cf-email-error" : undefined}
           className="w-full rounded-xl border border-border bg-white px-4 py-3 font-inter text-sm transition focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
         />
         {errors.email && (
-          <p className="mt-1 font-inter text-xs text-red-600">{errors.email.message}</p>
+          <p id="cf-email-error" className="mt-1 font-inter text-xs text-red-600">{errors.email.message}</p>
         )}
       </div>
       <div>
@@ -138,8 +150,13 @@ export function ContactForm({ simplified, defaultInquiryType, turnstileSiteKey }
           type="tel"
           {...register("phone")}
           autoComplete="tel"
+          aria-invalid={Boolean(errors.phone)}
+          aria-describedby={errors.phone ? "cf-phone-error" : undefined}
           className="w-full rounded-xl border border-border bg-white px-4 py-3 font-inter text-sm transition focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
         />
+        {errors.phone && (
+          <p id="cf-phone-error" className="mt-1 font-inter text-xs text-red-600">{errors.phone.message}</p>
+        )}
       </div>
       {simplified ? (
         <input type="hidden" {...register("inquiry_type")} />
@@ -154,6 +171,9 @@ export function ContactForm({ simplified, defaultInquiryType, turnstileSiteKey }
           <select
             id="cf-type"
             {...register("inquiry_type")}
+            required
+          aria-invalid={Boolean(errors.inquiry_type)}
+          aria-describedby={errors.inquiry_type ? "cf-type-error" : undefined}
             className="w-full rounded-xl border border-border bg-white px-4 py-3 font-inter text-sm transition focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
           >
             {inquiryTypes.map((t) => (
@@ -163,7 +183,7 @@ export function ContactForm({ simplified, defaultInquiryType, turnstileSiteKey }
             ))}
           </select>
           {errors.inquiry_type && (
-            <p className="mt-1 font-inter text-xs text-red-600">
+            <p id="cf-type-error" className="mt-1 font-inter text-xs text-red-600">
               {errors.inquiry_type.message}
             </p>
           )}
@@ -179,11 +199,14 @@ export function ContactForm({ simplified, defaultInquiryType, turnstileSiteKey }
         <textarea
           id="cf-msg"
           {...register("message")}
+          required
           rows={5}
+          aria-invalid={Boolean(errors.message)}
+          aria-describedby={errors.message ? "cf-msg-error" : undefined}
           className="w-full resize-none rounded-xl border border-border bg-white px-4 py-3 font-inter text-sm transition focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
         />
         {errors.message && (
-          <p className="mt-1 font-inter text-xs text-red-600">{errors.message.message}</p>
+          <p id="cf-msg-error" className="mt-1 font-inter text-xs text-red-600">{errors.message.message}</p>
         )}
       </div>
       {turnstileEnabled ? (

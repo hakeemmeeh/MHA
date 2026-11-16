@@ -59,7 +59,13 @@ export default async function ProgramDetailPage({ params }: Props) {
           { name: area.title, path: `/programs/${area.slug}` },
         ]}
       />
-      <PageHero animate title={area.title} subtitle={area.shortDesc} image={area.image} />
+      <PageHero
+        animate
+        title={area.title}
+        subtitle={area.shortDesc}
+        image={area.image}
+        illustrativeImage={area.image.startsWith("https://images.unsplash.com/")}
+      />
 
       <article className="section-y bg-cream">
         <div className="page-x mx-auto max-w-3xl">

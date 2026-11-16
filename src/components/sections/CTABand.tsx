@@ -74,7 +74,7 @@ export function CTABand() {
           </p>
         </div>
         <div className="grid min-w-0 gap-5 sm:grid-cols-2">
-          <div data-cta-r className="rounded-3xl bg-green p-6 md:p-7">
+          <div data-cta-r className="rounded-3xl bg-green-dark p-6 md:p-7">
             <span className="inline-flex rounded-xl bg-white/20 p-3 text-white">
               <Mail className="h-5 w-5" aria-hidden />
             </span>
@@ -82,7 +82,7 @@ export function CTABand() {
             <div className="mt-5 flex flex-col gap-3">
               <Link
                 href="/donate"
-                className="inline-flex justify-center rounded-full bg-white px-6 py-3.5 font-inter text-sm font-normal uppercase tracking-[0.05em] text-green transition hover:bg-cream"
+                className="inline-flex justify-center rounded-full bg-white px-6 py-3.5 font-inter text-sm font-normal uppercase tracking-[0.05em] text-green-dark transition hover:bg-cream"
               >
                 Donate
               </Link>
@@ -98,7 +98,7 @@ export function CTABand() {
             data-cta-r
             className="rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-sm md:p-7"
           >
-            <span className="inline-flex rounded-xl bg-green p-3 text-white">
+            <span className="inline-flex rounded-xl bg-green-dark p-3 text-white">
               <Phone className="h-5 w-5" aria-hidden />
             </span>
             <p className="mt-5 font-inter text-sm text-white/60">Call Us</p>

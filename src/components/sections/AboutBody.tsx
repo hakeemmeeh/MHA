@@ -244,7 +244,7 @@ export function AboutBody() {
             </div>
             <p
               data-about-item
-              className="font-playfair text-4xl leading-none text-green"
+              className="font-playfair text-4xl leading-none text-green-dark"
               aria-hidden
             >
               &ldquo;
@@ -254,7 +254,7 @@ export function AboutBody() {
             </h2>
             <p
               data-about-item
-              className="mt-4 font-inter text-lg font-semibold leading-snug text-green md:text-xl"
+              className="mt-4 font-inter text-lg font-semibold leading-snug text-green-dark md:text-xl"
             >
               {ctaQuote}
             </p>
@@ -343,7 +343,7 @@ export function AboutBody() {
                   className="absolute -left-[1.9rem] top-1.5 h-3 w-3 rounded-full bg-green ring-4 ring-cream lg:left-0 lg:top-0 lg:-translate-y-1/2"
                   aria-hidden
                 />
-                <p className="font-inter text-xs font-semibold uppercase tracking-wider text-green">
+                <p className="font-inter text-xs font-semibold uppercase tracking-wider text-green-dark">
                   {m.year}
                 </p>
                 <h3 className="mt-2 font-playfair text-lg text-navy">{m.title}</h3>

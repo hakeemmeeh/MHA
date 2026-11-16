@@ -18,12 +18,13 @@ type PageHeroProps = {
   title: string;
   subtitle?: string;
   image?: string;
+  illustrativeImage?: boolean;
   id?: string;
   /** Cinematic intro: masked image + line-based type (Rhye-style editorial). */
   animate?: boolean;
 };
 
-export function PageHero({ title, subtitle, image, id, animate = false }: PageHeroProps) {
+export function PageHero({ title, subtitle, image, id, animate = false, illustrativeImage = false }: PageHeroProps) {
   const root = useRef<HTMLElement>(null);
   const maskRef = useRef<HTMLDivElement>(null);
   const imageLayerRef = useRef<HTMLDivElement>(null);
@@ -125,7 +126,7 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
             >
               <Image
                 src={image}
-                alt={`${title} — header image`}
+                alt={illustrativeImage ? `Illustrative photo for ${title}` : `${title} — header image`}
                 fill
                 priority
                 quality={85}
@@ -145,7 +146,7 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
         <div className="absolute inset-x-0 top-0 min-h-[118%] w-full">
           <Image
             src={image}
-            alt={`${title} — header image`}
+            alt={illustrativeImage ? `Illustrative photo for ${title}` : `${title} — header image`}
             fill
             priority
             quality={85}
@@ -160,6 +161,11 @@ export function PageHero({ title, subtitle, image, id, animate = false }: PageHe
       )}
       {!image && (
         <div className="absolute inset-0 bg-gradient-to-br from-navy to-navy-dark" />
+      )}
+      {illustrativeImage && (
+        <span className="absolute bottom-4 right-4 z-10 rounded bg-navy-dark/80 px-2.5 py-1.5 font-inter text-xs font-medium text-white">
+          Illustrative image
+        </span>
       )}
       <div className="relative z-10 mx-auto flex min-h-[42vh] max-w-5xl flex-col justify-end px-6 pb-10 pt-28 md:pb-12 md:pt-32 lg:min-h-[48vh]">
         <h1

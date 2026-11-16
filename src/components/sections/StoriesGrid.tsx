@@ -138,7 +138,7 @@ export function StoriesGrid({ stories }: { stories?: FieldStory[] }) {
               </p>
               <Link
                 href={`/stories/${s.slug}`}
-                className="mt-4 font-inter text-sm font-semibold text-green"
+                className="mt-4 font-inter text-sm font-semibold text-green-dark hover:underline"
               >
                 Read story →
               </Link>

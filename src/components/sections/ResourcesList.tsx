@@ -32,7 +32,7 @@ export function ResourcesList() {
             if (!docs.length) return null;
             return (
               <div key={cat}>
-                <h3 className="font-inter text-xs font-semibold uppercase tracking-wider text-green">
+                <h3 className="font-inter text-xs font-semibold uppercase tracking-wider text-green-dark">
                   {categoryLabels[cat]}
                 </h3>
                 <ul className="mt-5 divide-y divide-border border-y border-border">

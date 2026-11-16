@@ -58,7 +58,7 @@ export function MediaVideoHub({ videos }: { videos?: MediaVideo[] }) {
         <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-lg">
           <VideoEmbed video={selected} />
           <div className="border-t border-border p-6 sm:p-8">
-            <p className="font-inter text-xs font-semibold uppercase tracking-wide text-green">
+            <p className="font-inter text-xs font-semibold uppercase tracking-wide text-green-dark">
               Now playing
               {selected.durationLabel ? ` · ${selected.durationLabel}` : ""}
             </p>

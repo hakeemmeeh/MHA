@@ -124,7 +124,7 @@ export function HeroSection() {
             <Link
               href="/get-involved"
               data-hero-cta
-              className="group inline-flex items-center gap-2 rounded-full bg-green px-8 py-3 font-inter text-sm font-semibold uppercase tracking-[0.05em] text-white opacity-0 shadow-sm transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-green-dark hover:shadow-lg hover:shadow-green/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-dark active:translate-y-0"
+              className="group inline-flex items-center gap-2 rounded-full bg-green-dark px-8 py-3 font-inter text-sm font-semibold uppercase tracking-[0.05em] text-white opacity-0 shadow-sm transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-green-dark hover:shadow-lg hover:shadow-green/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-dark active:translate-y-0"
             >
               Get Involved
               <span

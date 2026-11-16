@@ -1,9 +1,7 @@
 import { AboutSection } from "@/components/sections/AboutSection";
 import { CTABand } from "@/components/sections/CTABand";
-import { DonateBand } from "@/components/sections/DonateBand";
 import { FieldStories } from "@/components/sections/FieldStories";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { HomeSectionNav } from "@/components/sections/HomeSectionNav";
 import { PartnersStrip } from "@/components/sections/PartnersStrip";
 import { StatsBar } from "@/components/sections/StatsBar";
 import { ThematicGrid } from "@/components/sections/ThematicGrid";
@@ -25,11 +23,9 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection />
-      <HomeSectionNav />
-      <StatsBar />
-      <DonateBand />
       <AboutSection />
       <ThematicGrid />
+      <StatsBar />
       <FieldStories stories={stories} />
       <WhereWeWork />
       <PartnersStrip />

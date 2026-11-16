@@ -91,7 +91,7 @@ export default async function StoryPage({ params }: Props) {
               ) : null}
               <Link
                 href="/contact"
-                className="rounded-full bg-green px-6 py-2.5 font-inter text-sm font-semibold text-white"
+                className="rounded-full bg-green-dark px-6 py-2.5 font-inter text-sm font-semibold text-white"
               >
                 Partner with MHA
               </Link>

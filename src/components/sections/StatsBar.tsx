@@ -9,6 +9,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function StatsBar() {
   const root = useRef<HTMLElement>(null);
+  const featuredStats = stats.filter((stat) =>
+    [
+      "Full-Time Staff",
+      "Field-Based Workforce",
+      "Counties Covered",
+      "Major Donors & Partners",
+      "Thematic Areas",
+    ].includes(stat.label),
+  );
 
   useLayoutEffect(() => {
     const section = root.current;
@@ -50,16 +59,15 @@ export function StatsBar() {
     <section
       ref={root}
       id="impact-stats"
-      className="scroll-mt-20 bg-navy pb-10 pt-12 sm:pb-12 sm:pt-14 lg:pb-14 lg:pt-16"
+      className="scroll-mt-20 bg-navy py-8 sm:py-10"
     >
-      <div className="page-x mx-auto grid max-w-7xl grid-cols-2 gap-8 sm:gap-10 md:grid-cols-3 lg:grid-cols-6 lg:gap-0">
-        {stats.map((s, i) => (
+      <div className="page-x mx-auto grid max-w-6xl grid-cols-2 gap-5 sm:grid-cols-3 sm:gap-8 lg:grid-cols-5 lg:gap-0">
+        {featuredStats.map((s, i) => (
           <div
             key={s.label}
-            className={`text-center font-playfair lg:border-r lg:border-white/15 lg:px-5 ${i === stats.length - 1 ? "lg:border-r-0" : ""}`}
+            className={`text-center font-playfair lg:border-r lg:border-white/15 lg:px-5 ${i === featuredStats.length - 1 ? "lg:border-r-0" : ""}`}
           >
-            {/* Light serif numerals with gold suffix — editorial display style */}
-            <div className="text-[2.75rem] font-light leading-none text-white md:text-[3.25rem]">
+            <div className="text-3xl font-light leading-none text-white sm:text-4xl">
               <span data-stat data-target={s.value}>
                 0
               </span>
@@ -67,7 +75,7 @@ export function StatsBar() {
                 <span className="text-[0.6em] text-gold">{s.suffix}</span>
               ) : null}
             </div>
-            <p className="mt-3 font-inter text-sm text-white/60">{s.label}</p>
+            <p className="mt-2 font-inter text-xs text-white/65 sm:text-sm">{s.label}</p>
           </div>
         ))}
       </div>
