@@ -1,4 +1,5 @@
 import { getSupabaseService } from "@/lib/supabase";
+import { getAdminDataError } from "@/lib/admin/error-message";
 
 export type DonorRow = {
   id: string;
@@ -27,17 +28,18 @@ export async function fetchDonors(limit = 100): Promise<{
     };
   }
 
-  const { data, error } = await supabase
-    .from("donors")
-    .select(
-      "id, name, email, organization, donor_type, status, total_given, currency, last_gift_at, country, created_at"
-    )
-    .order("total_given", { ascending: false })
-    .limit(limit);
+  try {
+    const { data, error } = await supabase
+      .from("donors")
+      .select(
+        "id, name, email, organization, donor_type, status, total_given, currency, last_gift_at, country, created_at"
+      )
+      .order("total_given", { ascending: false })
+      .limit(limit);
 
-  if (error) {
-    return { rows: [], error: error.message };
+    if (error) return { rows: [], error: getAdminDataError(error) };
+    return { rows: (data ?? []) as DonorRow[], error: null };
+  } catch (error) {
+    return { rows: [], error: getAdminDataError(error) };
   }
-
-  return { rows: (data ?? []) as DonorRow[], error: null };
 }

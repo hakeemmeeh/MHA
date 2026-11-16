@@ -1,4 +1,5 @@
 import { getSupabaseService } from "@/lib/supabase";
+import { getAdminDataError } from "@/lib/admin/error-message";
 
 export type DashboardStats = {
   new_inquiries: number;
@@ -35,14 +36,15 @@ export async function fetchDashboardStats(): Promise<{
     };
   }
 
-  const { data, error } = await supabase
-    .from("dashboard_stats")
-    .select("*")
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from("dashboard_stats")
+      .select("*")
+      .single();
 
-  if (error) {
-    return { stats: EMPTY, error: error.message };
+    if (error) return { stats: EMPTY, error: getAdminDataError(error) };
+    return { stats: (data ?? EMPTY) as DashboardStats, error: null };
+  } catch (error) {
+    return { stats: EMPTY, error: getAdminDataError(error) };
   }
-
-  return { stats: (data ?? EMPTY) as DashboardStats, error: null };
 }

@@ -1,4 +1,5 @@
 import { getSupabaseService } from "@/lib/supabase";
+import { getAdminDataError } from "@/lib/admin/error-message";
 
 export type VolunteerRow = {
   id: string;
@@ -26,17 +27,18 @@ export async function fetchVolunteers(limit = 100): Promise<{
     };
   }
 
-  const { data, error } = await supabase
-    .from("volunteers")
-    .select(
-      "id, name, email, phone, status, skills, availability, location, interest_area, applied_at"
-    )
-    .order("applied_at", { ascending: false })
-    .limit(limit);
+  try {
+    const { data, error } = await supabase
+      .from("volunteers")
+      .select(
+        "id, name, email, phone, status, skills, availability, location, interest_area, applied_at"
+      )
+      .order("applied_at", { ascending: false })
+      .limit(limit);
 
-  if (error) {
-    return { rows: [], error: error.message };
+    if (error) return { rows: [], error: getAdminDataError(error) };
+    return { rows: (data ?? []) as VolunteerRow[], error: null };
+  } catch (error) {
+    return { rows: [], error: getAdminDataError(error) };
   }
-
-  return { rows: (data ?? []) as VolunteerRow[], error: null };
 }

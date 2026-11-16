@@ -1,4 +1,5 @@
 import { getSupabaseService } from "@/lib/supabase";
+import { getAdminDataError } from "@/lib/admin/error-message";
 
 export type PartnerRow = {
   id: string;
@@ -26,17 +27,18 @@ export async function fetchPartners(limit = 100): Promise<{
     };
   }
 
-  const { data, error } = await supabase
-    .from("partners")
-    .select(
-      "id, name, partner_type, status, contact_name, contact_email, focus_areas, mou_signed_at, country, created_at"
-    )
-    .order("created_at", { ascending: false })
-    .limit(limit);
+  try {
+    const { data, error } = await supabase
+      .from("partners")
+      .select(
+        "id, name, partner_type, status, contact_name, contact_email, focus_areas, mou_signed_at, country, created_at"
+      )
+      .order("created_at", { ascending: false })
+      .limit(limit);
 
-  if (error) {
-    return { rows: [], error: error.message };
+    if (error) return { rows: [], error: getAdminDataError(error) };
+    return { rows: (data ?? []) as PartnerRow[], error: null };
+  } catch (error) {
+    return { rows: [], error: getAdminDataError(error) };
   }
-
-  return { rows: (data ?? []) as PartnerRow[], error: null };
 }

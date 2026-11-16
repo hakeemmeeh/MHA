@@ -1,4 +1,5 @@
 import { getSupabaseService } from "@/lib/supabase";
+import { getAdminDataError } from "@/lib/admin/error-message";
 
 export type InquiryRow = {
   id: string;
@@ -23,15 +24,16 @@ export async function fetchInquiries(limit = 100): Promise<{
     };
   }
 
-  const { data, error } = await supabase
-    .from("inquiries")
-    .select("id, name, email, phone, inquiry_type, message, status, created_at")
-    .order("created_at", { ascending: false })
-    .limit(limit);
+  try {
+    const { data, error } = await supabase
+      .from("inquiries")
+      .select("id, name, email, phone, inquiry_type, message, status, created_at")
+      .order("created_at", { ascending: false })
+      .limit(limit);
 
-  if (error) {
-    return { rows: [], error: error.message };
+    if (error) return { rows: [], error: getAdminDataError(error) };
+    return { rows: (data ?? []) as InquiryRow[], error: null };
+  } catch (error) {
+    return { rows: [], error: getAdminDataError(error) };
   }
-
-  return { rows: (data ?? []) as InquiryRow[], error: null };
 }
